@@ -1,0 +1,34 @@
+@keyframes menuSlideIn{
+	from {left: -250px;}
+	to {left: 0px;}
+}
+
+.menuBar{
+	height: 100%;
+	width: 250px;
+	position: absolute;
+	left: -250px;
+	z-index: 9999;
+	background-color: #fff;
+	box-sizing: border-box;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.menuBar.opened{
+	left: 0px;
+	animation-name: menuSlideIn;
+	animation-duration: 0.8s;
+}
+
+.menuBar.closed{
+	animation-name: menuSlideIn;
+	animation-duration: 5s;
+	animation-direction: reverse;
+}
+
+.menuBar.opened .userType{
+    position: absolute;
+    z-index: 999;
+    top: 155px;
+    left: 60px;
+}

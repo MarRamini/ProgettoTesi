@@ -1,0 +1,8 @@
+@import url("../default.css");
+@import url("../menuChoices.css");
+
+/*imports all widget css files*/
+@import url("../widgets/menuWidget.css");
+@import url("../widgets/quickSearchBar.css");
+@import url("../widgets/menuBar.css");
+@import url("../widgets/searchBoxWidget.css");
