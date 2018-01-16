@@ -42,11 +42,32 @@
 }
 
 .searchBox{
-	width: calc(100% - 40px);
+	width: calc(100% - 32px) !important;
 	height: 32px;
-	position: relative;
 	float: right;
-	align-items: center;
-	justify-content: center;
-	display: inline-flex;
+}
+
+.searchBox:focus{
+	outline: none;
+}
+
+.searchBox input{
+	border-bottom: 2px solid transparent !important;	
+}
+
+.searchBox input:focus{
+	outline: none;
+	border-color: #58aef3 !important;
+}
+
+.searchBox .esri-search__submit-button{
+	border: none !important;
+}
+
+.searchBox .esri-search__submit-button:focus{
+	outline: none;
+}
+
+.searchBox .esri-search__submit-button:hover{
+	background-color: #f2f2f2 !important;
 }

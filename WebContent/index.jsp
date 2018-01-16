@@ -19,29 +19,30 @@
 			<script src="https://js.arcgis.com/4.5/"></script>
 			<script>
 			/* TRACK WIDGET */
-				/*require([
+				require([
 				  "esri/widgets/Track",					 
 				  "esri/views/SceneView",
 				  "esri/Map",
 				  "dojo/domReady!",
 				 ], 
 				  function(Track, SceneView, Map){
-				      var map = new Map({
+					
+				      map = new Map({
 				        basemap: "topo"
 				   	  });
 				      
-				      var view = new SceneView({
+				      view = new SceneView({
 				        map: map,
 				        container: "mapPlaceHolder"
 				      });
-				      
+				     
 					  // Create an instance of the Track widget
 				      // and add it to the view's UI
 				      var track = new Track({
 				        view: view,
 				        goToLocationEnabled: true
 				      });
-					  
+					 
 				      view.ui.add(track, "top-left");
 					  						
 				      // The sample will start tracking your location
@@ -60,36 +61,9 @@
 				    	
 				        track.start();
 				      });
-				     });
-			*/
-			/* SEARCH WIDGET */
-				require([
-				  "esri/widgets/Track",					 
-				  "esri/views/SceneView",
-				  "esri/Map",
-				  "dojo/domReady!",
-				 ], 
-				  function(Search, SceneView, Map){
-				      var map = new Map({
-				        basemap: "topo"
-				   	  });
-				      
-				      var view = new SceneView({
-				        map: map,
-				        container: "mapPlaceHolder"
-				      });
-				      
-				      var searchWidget = new Search({
-				          view: view
-				      });
-		
-				      // Add the search widget to the top right corner of the view
-				      view.ui.add(searchWidget, {
-				        position: "top-right"
-				      });
-				 }); 
+				     });	
 			</script>
-			<div class="quickSearchContainer">
+			 <div class="quickSearchContainer">
 				<jsp:include page="quickSearchBar.jsp"/>
 			</div>
 		</div>

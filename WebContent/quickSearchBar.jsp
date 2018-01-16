@@ -7,8 +7,29 @@
 		<div class="menuIcon"></div>			
 	</div>
 	<div class="searchBox" id="searchBox">
-		<script type="text/javascript"></script>
-		<%-- <script type="text/javascript" src="scripts/widgets/searchBoxWidget.js" rootID="searchBox"></script>
-		--%>
+		<script>
+		/* SEARCH WIDGET*/
+			require([
+			  "esri/widgets/Search",					 
+			  "esri/views/SceneView",
+			  "esri/Map",
+			  "dojo/domReady!",
+			 ], 
+			  function(Search, SceneView, Map){		      
+				
+			      var searchWidget = new Search({
+			          view: view,
+			          container: "searchBox"
+			      });
+			      console.log(searchWidget);
+			      
+			      view.then(function() {
+			      	search.on("search-start", function(event){
+			      		console.log("search started")
+			      	})
+			      	
+			      });
+			 });  
+		</script>
 	</div>
 </div>
