@@ -16,18 +16,10 @@
 			  "dojo/domReady!",
 			 ], 
 			  function(Search, SceneView, Map){		      
-				
+					console.log(this.view)
 			      var searchWidget = new Search({
-			          view: view,
+			          view: this.view,
 			          container: "searchBox"
-			      });
-			      console.log(searchWidget);
-			      
-			      view.then(function() {
-			      	search.on("search-start", function(event){
-			      		console.log("search started")
-			      	})
-			      	
 			      });
 			 });  
 		</script>

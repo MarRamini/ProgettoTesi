@@ -6,3 +6,11 @@
 	padding: 5px;
 	font-size: 12px;
 }
+
+div.addressBar{
+	width: 100px;
+}
+
+.addressBar .esri-search__submit-button{
+	display: none !important;
+}

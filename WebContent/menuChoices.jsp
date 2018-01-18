@@ -8,11 +8,52 @@
 	<table>
 		<tr>
 			<td>Start: </td>
-			<td><input id="txtStart" name="txtStart" placeholder="Enter your address" size="18" onFocus="enableDisableInput(true)" type="text"></td>
+			<td>
+				<div id="startAddress" class="addressBar">		
+					<script>
+					/* SEARCH WIDGET */
+						require([
+						  "esri/widgets/Search",					 
+						  "esri/views/SceneView",
+						  "esri/Map",
+						  "dojo/domReady!",
+						 ], 
+						  function(Search, SceneView, Map){		      
+							 
+						      var searchWidget = new Search({
+						          view: this.view,
+						          container: "startAddress"
+						      });						      
+						 });  
+					</script>
+				</div>	
+				<%-- <input id="txtStart" name="txtStart" placeholder="Enter your address" size="18" onFocus="enableDisableInput(true)" type="text">--%>
+			</td>
 		</tr>
 		<tr>
 			<td>Destination: </td>
-			<td><input id="txtEnd" name="txtEnd" placeholder="Enter your address" size="18" type="text"></td>
+			<td>
+				<div id="destinationAddress" class="addressBar">
+					<script>
+					/* SEARCH WIDGET */
+						require([
+						  "esri/widgets/Search",					 
+						  "esri/views/SceneView",
+						  "esri/Map",
+						  "dojo/domReady!",
+						 ], 
+						  function(Search, SceneView, Map){		      
+							  
+						      var searchWidget = new Search({
+						          view: view,
+						          container: "destinationAddress"
+						      });					      
+						 });  
+					</script>
+				</div>			
+				<%-- <input id="txtEnd" name="txtEnd" placeholder="Enter your address" size="18" type="text">
+				--%>
+			</td>
 		</tr>
 		<tr>
 			<td>Mode: </td>
