@@ -14,10 +14,14 @@
 				require([
 					"esri/Map",
 					"esri/views/SceneView",
+					"esri/layers/GraphicsLayer",
 					"dojo/domReady!"
-				],function(Map, SceneView){
+				],function(Map, SceneView, GraphicsLayer){
+					  routeLayer = new GraphicsLayer();  
+					
 					  map = new Map({
-				        basemap: "topo"
+				        basemap: "topo",
+				        layers: [routeLayer]
 				   	  });
 				      
 				      view = new SceneView({
@@ -65,9 +69,13 @@
 		</div>
 		<div id="primaryMenu" class="menuBar">
 			<script type="text/javascript" src="scripts/widgets/menuWidget.js" rootId="primaryMenu" userPanel="true"></script>
-			<span class="userType">
+			<script>
+				var userSpan = document.getElementById("userType");
+				userSpan.textContent = "Benvenuto <%= ((User)session.getAttribute("user")).getUsername() %>";
+			</script>
+			<%--<span class="userType">
 				Benvenuto  <%= ((User)session.getAttribute("user")).getUsername() %>
-			</span>
+			</span>--%>
 			<jsp:include page="menuChoices.jsp"/>
 		</div>	
 		<div class="quickSearchContainer">

@@ -20,7 +20,7 @@
 	display: flex;
 	border-radius: 100%;
 	border: 1px solid dimgray;
-	top: 125px;
+	top: calc(100% - 60px);
 	background-image: url("../../images/default-avatar_50.png");
 	margin-left: 5px;
 }

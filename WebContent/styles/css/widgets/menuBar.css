@@ -28,9 +28,9 @@
 	animation-direction: reverse;
 }
 
-.menuBar.opened .userType{
-    position: absolute;
+.menuBar.opened #userType{
+    position: relative;
     z-index: 999;
-    top: 155px;
-    left: 60px;
+    top: calc(100% - 40px);
+    left: 10px;
 }

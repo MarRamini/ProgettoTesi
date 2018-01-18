@@ -1,5 +1,8 @@
 @import url("../default.css");
 
+/*template dojo/claro*/
+@import url("../templates/dojo/claro.css");
+
 /*import all widget css files*/
 @import url("../widgets/loginForm.css");
 

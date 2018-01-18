@@ -5,6 +5,37 @@
 		var container = getContentContainer();
 		container.appendChild(document.getElementById("menuChoices"));
 	</script>
+	<script>
+		require([
+			"esri/Map",
+		    "esri/views/SceneView",
+		    "esri/tasks/RouteTask",
+		    "esri/tasks/support/RouteParameters",
+		    "esri/tasks/support/FeatureSet",
+		    "esri/core/urlUtils",
+		    "dojo/on",
+		    "dojo/domReady!"
+		], function(Map, SceneView, RouteTask, RouteParameters, FeatureSet, urlUtils, on){
+			  //Point the URL to a valid route service
+	  	      routeTask = new RouteTask({
+	  	        url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
+	  	      });
+	  		  
+	  	   	  // Setup the route parameters
+	  	      routePoints = new RouteParameters({
+	  	        stops: new FeatureSet(),
+	  	        outSpatialReference: { // autocasts as new SpatialReference()
+	  	          wkid: 3857
+	  	        }
+	  	      });
+	  	   	  
+	  	      var routeSymbol = {
+	  	        type: "simple-line", // autocasts as SimpleLineSymbol()
+	  	        color: [0, 0, 255, 0.5],
+	  	        width: 5
+	  	      };
+		});
+	</script>
 	<table>
 		<tr>
 			<td>Start: </td>
@@ -18,12 +49,19 @@
 						  "esri/Map",
 						  "dojo/domReady!",
 						 ], 
-						  function(Search, SceneView, Map){		      
+						  function(Search, SceneView, Map){	
 							 
 						      var searchWidget = new Search({
 						          view: this.view,
 						          container: "startAddress"
-						      });						      
+						      });
+						      
+						      view.then(function(){
+						    	  searchWidget.on("select-result", function(){						    		  
+						    		  var startPoint = searchWidget.resultGraphic;
+						    		  routePoints.stops.features.push(startPoint);
+						    	  })
+						      });
 						 });  
 					</script>
 				</div>	
@@ -47,7 +85,23 @@
 						      var searchWidget = new Search({
 						          view: view,
 						          container: "destinationAddress"
-						      });					      
+						      });	
+						      
+						      view.then(function(){
+						    	  searchWidget.on("select-result", function(){	
+						    		  console.log(map)
+						    		  var stopPoint = searchWidget.resultGraphic;
+						    		  routePoints.stops.features.push(stopPoint);
+							    	  if (routePoints.stops.features.length >= 2) {
+							            routeTask.solve(routePoints).then(function(data){
+							            	var routeResult = data.routeResults[0].route;
+							                routeResult.symbol = routeSymbol;
+							                map.layers.items[0].add(routeResult);
+							            });
+							    		
+							          }
+						    	  });						    	  
+						      });
 						 });  
 					</script>
 				</div>			

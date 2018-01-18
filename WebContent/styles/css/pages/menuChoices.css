@@ -5,10 +5,30 @@
 .menuContent{
 	padding: 5px;
 	font-size: 12px;
+	width: calc(100% - 10px);
+}
+
+.menuContent table{
+	width: 100%;
 }
 
 div.addressBar{
-	width: 100px;
+	width: 100%;
+	
+}
+
+div.addressBar:focus{
+	outline: none;
+}
+
+.addressBar input{
+	font-size: 12px !important;
+	border-bottom: 1px solid transparent !important;
+}
+
+.addressBar input:focus{
+	outline: none;
+	border-color: #58aef3 !important;
 }
 
 .addressBar .esri-search__submit-button{

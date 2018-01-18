@@ -43,8 +43,12 @@ function buildUserPanel(){
 	
 	var avatar = document.createElement("div");
 	avatar.classList.add("avatar");
+	var userType = document.createElement("span");
+	userType.id = "userType";
+	userType.classList.add("userType");
 	
 	panel.appendChild(avatar);
+	panel.appendChild(userType);
 	container.appendChild(panel)
 	return container;
 }
