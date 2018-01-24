@@ -10,62 +10,8 @@
 	</head>
 	<body class="claro">
 		<div id="mapPlaceHolder" class="mapContainer">	
-			<script>
-				require([
-					"esri/Map",
-					"esri/views/SceneView",
-					"esri/layers/GraphicsLayer",
-					"dojo/domReady!"
-				],function(Map, SceneView, GraphicsLayer){
-					  routeLayer = new GraphicsLayer();  
-					
-					  map = new Map({
-				        basemap: "topo",
-				        layers: [routeLayer]
-				   	  });
-				      
-				      view = new SceneView({
-				        map: map,
-				        container: "mapPlaceHolder",
-				        id: "mapView"
-				      });
-				});
-			</script>
-			<script>
-			/* TRACK WIDGET */
-				require([
-				  "esri/widgets/Track",					 
-				  "esri/views/SceneView",
-				  "esri/Map",
-				  "dojo/domReady!",
-				 ], function(Track, SceneView, Map){				      
-					  // Create an instance of the Track widget
-				      // and add it to the view's UI
-				      var track = new Track({
-				        view: this.view,
-				        goToLocationEnabled: true
-				      });
-					 
-				      view.ui.add(track, "top-left");
-				      
-				      // The sample will start tracking your location
-				      // once the view becomes ready
-				      view.then(function() {
-				    	track.on("track", function(){
-				    		var location = track.graphic.geometry;
-	
-				            view.goTo({
-				              center: location,
-				              tilt: 60,
-				              scale: 2500,
-				              zoom: 18
-				            });
-				    	});
-				    	
-				        track.start();
-				      });
-				 });	
-			</script>			
+			<script type="text/javascript" src="scripts/widgets/mapWidget.js"></script>
+			<script type="text/javascript" src="scripts/widgets/trackWidget.js"></script>			
 		</div>
 		<div id="primaryMenu" class="menuBar">
 			<script type="text/javascript" src="scripts/widgets/menuWidget.js" rootId="primaryMenu" userPanel="true"></script>

@@ -7,21 +7,6 @@
 		<div class="menuIcon"></div>			
 	</div>
 	<div class="searchBox" id="searchBox">
-		<script>
-		/* SEARCH WIDGET*/
-			require([
-			  "esri/widgets/Search",					 
-			  "esri/views/SceneView",
-			  "esri/Map",
-			  "dojo/domReady!",
-			 ], 
-			  function(Search, SceneView, Map){		      
-					
-			      var searchWidget = new Search({
-			          view: this.view,
-			          container: "searchBox"
-			      });
-			 });  
-		</script>
+		<script type="text/javascript" src="scripts/widgets/searchWidget.js"></script>
 	</div>
 </div>
