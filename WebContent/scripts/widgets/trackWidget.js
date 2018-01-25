@@ -17,7 +17,7 @@ require([
 	  view.then(function() {
 		track.on("track", function(){
 			var location = track.graphic.geometry;
-	
+			
 	        view.goTo({
 	          center: location,
 	          tilt: 60,

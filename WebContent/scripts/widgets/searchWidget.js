@@ -9,5 +9,12 @@ require([
           view: this.view,
           container: "searchBox"
       });
+      
+      view.then(function(){
+    	  searchWidget.on("select-result", function(){						    		  
+    		  var startPoint = searchWidget.resultGraphic;
+    		  console.log(startPoint)
+    	  })
+      });
   }
 );  
