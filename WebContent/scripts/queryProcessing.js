@@ -58,7 +58,7 @@ function queryRequest(url){
 }
 
 function createPoiWidget(object){
-	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query
+	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query todo: metterci una variabile che restituisca il nome della classe dell'oggetto per la diversificazione dei poi
 	var nodes = object.results.bindings;
 	var pois = [];
 	
@@ -76,10 +76,7 @@ function createPoiWidget(object){
 				longitude: parseFloat(node.long.value)
 			});
 			
-			var markerSymbol = {
-			    type: "simple-marker",
-			    color: "green"
-			}
+			var markerSymbol = getUniqueValueSymbol("", "red");		//a seconda del tipo di poi costruisce il marker con l'icona adatta ed un colore per il pin	
 			
 			var poi = new Graphic({
 				attributes: attributes,
@@ -105,7 +102,7 @@ function getUniqueValueSymbol(name, color) {
 		symbolLayers: [{
 			type: "icon", // autocasts as new IconSymbol3DLayer()
 			resource: {
-				primitive: "circle"
+				href: "styles/icons/icons8-statue-16.png"
 			},
 			size: 20,
 			outline: {
