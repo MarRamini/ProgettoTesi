@@ -12,8 +12,19 @@ require([
       
       view.then(function(){
     	  searchWidget.on("select-result", function(){						    		  
-    		  var startPoint = searchWidget.resultGraphic;
-    		  console.log(startPoint)
+    		  var location = searchWidget.resultGraphic.geometry;
+    		  
+    		  view.goTo({
+    	          center: location,
+    	          tilt: 60,
+    	          scale: 2500,
+    	          zoom: 18
+    	        });
+    		  
+    		  var position = {latitude: location.latitude, longitude: location.longitude};
+  	          var filters;
+  	        
+  	          searchRevenues(position, filters);
     	  })
       });
   }

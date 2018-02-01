@@ -25,7 +25,7 @@ require([
 	          zoom: 18
 	        });
 	        
-	        var position;
+	        var position = {latitude: location.latitude, longitude: location.longitude};
 	        var filters;
 	        
 	        searchRevenues(position, filters);

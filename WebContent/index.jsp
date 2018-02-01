@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/css/pages/index.css"/>
 		<link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
 		<script src="https://js.arcgis.com/4.5/"></script>
-		<script type="text/javascript" src="scripts/queryProcessing.js"></script>
+		<script type="text/javascript" src="scripts/utilities/queryProcessing.js"></script>
 	</head>
 	<body class="claro">
 		<div id="mapPlaceHolder" class="mapContainer">			   

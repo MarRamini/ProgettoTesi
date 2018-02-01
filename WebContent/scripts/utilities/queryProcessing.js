@@ -1,18 +1,35 @@
+function addMetresToLatitude(latitude, metres){
+	var radiusOfEarth = 6378 * 1000 //in metri
+	var delta = (metres/radiusOfEarth) * (180/Math.PI);
+	var newLatitude = latitude + delta;
+	return newLatitude;
+}
+
+function addMetresToLongitude(longitude, metres){
+	var radiusOfEarth = 6378 * 1000 //in metri
+	var delta = (metres/radiusOfEarth) * (180/Math.PI) / Math.cos(longitude * Math.PI /180);
+	var newLongitude = longitude + delta;
+	return newLongitude;
+}
+
 function searchRevenues(position, filters){
 	//compone la query in base ai filtri e alla posizione
-	//valuta il json risultate con eval() e torna l'oggetto.
+	var maximumLatitude = addMetresToLatitude(position.latitude, 1000);
+	var minimumLatitude = addMetresToLatitude(position.latitude, -1000);
+	var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
+	var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
 	
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
 				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
 				"Select distinct ?obj ?class ?label ?lat ?long " +
 				"where { " +
-				"values(?class){(<http://linkedgeodata.org/ontology/HistoricThing>)} " +
+				"values(?class){(<http://linkedgeodata.org/ontology/HistoricThing>) (<http://linkedgeodata.org/ontology/Museum> )} " +
 				"?obj a ?class. " +
 				"?obj geo:lat ?lat. " +
 				"?obj geo:long ?long. " +
 				"?obj rdfs:label ?label " +
-				"FILTER(?lat <= 42 && ?lat >= 40 && ?long <= 13 && ?long >= 10) " +
+				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
 				"} " 
 	
 	var url = createURL(query);	
@@ -58,7 +75,7 @@ function queryRequest(url){
 }
 
 function createPoiWidget(object){
-	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query todo: metterci una variabile che restituisca il nome della classe dell'oggetto per la diversificazione dei poi
+	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query
 	var nodes = object.results.bindings;
 	var pois = [];
 	
@@ -75,8 +92,55 @@ function createPoiWidget(object){
 				latitude: parseFloat(node.lat.value),
 				longitude: parseFloat(node.long.value)
 			});
+			var poiClass;
+			var color;
+			switch(attributes.class){
+				case "http://linkedgeodata.org/ontology/HistoricThing" :
+					poiClass = "HistoricThing";
+					color = "#3498db";
+					break;
+				case "http://linkedgeodata.org/ontology/Museum" :
+					poiClass = "Museum";
+					color = "#16a085";
+					break;
+				case "sport" :
+					poiClass = "Sport";
+					color = "#d35400";
+					break;
+				case "nightlife" :
+					poiClass = "NightLife";
+					color = "#9b59b6";
+					break;
+				case "restaurant" :
+					poiClass = "Restaurant";
+					color = "#669999";
+					break;
+				case "shopping" :
+					poiClass = "shopping";
+					color = "#996633";
+					break;
+				case "arts" :
+					poiClass = "arts";
+					color = "#e74c3c";
+					break;
+				case "entertainement" :
+					poiClass = "Entertainement";
+					color = "#009999";
+					break;
+				case "church" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "Outdoors" :
+					poiClass = "Outdoors";
+					color = "#008000";
+					break;
+				default : 
+					poiClass = "GeneralThing";
+					color = "white"  //aggiungere casi per ogni poi trovato
+			}			
 			
-			var markerSymbol = getUniqueValueSymbol("", "red");		//a seconda del tipo di poi costruisce il marker con l'icona adatta ed un colore per il pin	
+			var markerSymbol = getUniqueValueSymbol(poiClass, color);		//a seconda del tipo di poi costruisce il marker con l'icona adatta ed un colore per il pin	
 			
 			var poi = new Graphic({
 				attributes: attributes,
@@ -93,7 +157,8 @@ function createPoiWidget(object){
 }
 
 //temporanea
-function getUniqueValueSymbol(name, color) {
+function getUniqueValueSymbol(poiClass, color) {
+	console.log("class: ", poiClass)
 	// The point symbol is visualized with an icon symbol. To clearly see the location of the point
 	// we displace the icon vertically and add a callout line. The line connects the offseted symbol with the location
 	// of the point feature.
@@ -102,11 +167,11 @@ function getUniqueValueSymbol(name, color) {
 		symbolLayers: [{
 			type: "icon", // autocasts as new IconSymbol3DLayer()
 			resource: {
-				href: "styles/icons/icons8-statue-16.png"
+				href: "styles/icons/poi/" + poiClass + ".png"
 			},
 			size: 20,
 			outline: {
-				color: "white",
+				color: color,
 				size: 2
 			}
 		}],
