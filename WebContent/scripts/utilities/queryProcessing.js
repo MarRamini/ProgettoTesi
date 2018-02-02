@@ -148,11 +148,6 @@ function createPoiWidget(object){
 				symbol: markerSymbol
 			});
 			
-			console.log(poi)
-			poi.addEventListener("click", function(event){
-				console.log("clicked")
-			});
-			
 			pois.push(poi);			
 		   }
 		);
@@ -234,9 +229,10 @@ var pointsRenderer = {
 function createFeatureLayer(revenues){
 	//crea il layer e ci appende i graphic dei revenues
 	require([
+		"esri/PopupTemplate",
 		"esri/layers/FeatureLayer",
 		"esri/layers/support/Field"	
-	], function(FeatureLayer, Field){
+	], function(PopupTemplate, FeatureLayer, Field){
 		 
 		 const fields = [
 			 new Field({
@@ -256,6 +252,20 @@ function createFeatureLayer(revenues){
 			 })
 		 ];
 		 
+		 var popupTemplate = new PopupTemplate({ // autocasts as new PopupTemplate()
+			title: "{label}",
+			//definire le informazioni da visualizzare nel content.
+			content: [{
+				type: "fields",
+				fieldInfos: [{
+                    fieldName: "class"
+                }, {
+                    fieldName: "obj"
+                }]
+			}]
+		});
+		 console.log(popupTemplate)
+		 
 		 var layer = new FeatureLayer({
 			 id: "revenuesLayer",
 			 source: revenues,
@@ -266,9 +276,11 @@ function createFeatureLayer(revenues){
 			 //renderer: pointsRenderer
 			 elevationInfo: {
 				 mode: "relative-to-scene"
-			 }
+			 },
+			 popupTemplate: popupTemplate
 		 });
-		 map.add(layer);
+		
+		 map.add(layer);		
 	   }
 	);
 }
