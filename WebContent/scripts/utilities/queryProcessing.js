@@ -147,7 +147,12 @@ function createPoiWidget(object){
 				geometry: point,
 				symbol: markerSymbol
 			});
-
+			
+			console.log(poi)
+			poi.addEventListener("click", function(event){
+				console.log("clicked")
+			});
+			
 			pois.push(poi);			
 		   }
 		);
@@ -158,7 +163,6 @@ function createPoiWidget(object){
 
 //temporanea
 function getUniqueValueSymbol(poiClass, color) {
-	console.log("class: ", poiClass)
 	// The point symbol is visualized with an icon symbol. To clearly see the location of the point
 	// we displace the icon vertically and add a callout line. The line connects the offseted symbol with the location
 	// of the point feature.
@@ -175,6 +179,12 @@ function getUniqueValueSymbol(poiClass, color) {
 				size: 2
 			}
 		}],
+		
+		verticalOffset: {
+			screenLength: 40,
+	        maxWorldLength: 200,
+	        minWorldLength: 35
+		},
 
 		callout: {
 			type: "line", // autocasts as new LineCallout3D()
@@ -254,6 +264,9 @@ function createFeatureLayer(revenues){
 			 geometryType: "point",
 			 spatialReference: {wkid: 3857},
 			 //renderer: pointsRenderer
+			 elevationInfo: {
+				 mode: "relative-to-scene"
+			 }
 		 });
 		 map.add(layer);
 	   }
