@@ -12,6 +12,7 @@
 	<body class="claro">
 		<div id="mapPlaceHolder" class="mapContainer">			   
 			<script type="text/javascript" src="scripts/widgets/mapWidget.js"></script>
+			<script type="text/javascript" src="scripts/widgets/basemapToggleWidget.js"></script>
 			<script type="text/javascript" src="scripts/widgets/trackWidget.js"></script>			
 		</div>
 		<div id="primaryMenu" class="menuBar">

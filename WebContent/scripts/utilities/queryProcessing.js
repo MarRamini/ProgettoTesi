@@ -264,7 +264,6 @@ function createFeatureLayer(revenues){
                 }]
 			}]
 		});
-		 console.log(popupTemplate)
 		 
 		 var layer = new FeatureLayer({
 			 id: "revenuesLayer",
