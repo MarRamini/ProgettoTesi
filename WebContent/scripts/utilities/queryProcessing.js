@@ -19,6 +19,9 @@ function searchRevenues(position, filters){
 	var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
 	var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
 	
+	//filter è un oggetto di tipo {museum: true/false, historic: true/false, church: true/false...}
+	
+	
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
 				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
