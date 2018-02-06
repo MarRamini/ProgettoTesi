@@ -7,6 +7,6 @@
 		<div class="menuIcon"></div>			
 	</div>
 	<div class="searchBox" id="searchBox">
-		<script type="text/javascript" src="scripts/widgets/searchWidget.js"></script>
+		<script type="text/javascript" src="scripts/widgets/quickSearchWidget.js"></script>
 	</div>
 </div>
