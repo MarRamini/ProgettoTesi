@@ -82,13 +82,14 @@ function createPoiWidget(object){
 	var nodes = object.results.bindings;
 	var pois = [];
 	
-	for(var i= 0 ; i< nodes.length ; i++){
-		require([
-			"esri/Graphic",
-			"esri/geometry/Geometry",
-			"esri/geometry/Point"
-		], function(Graphic, Geometry, Point){
-			
+	require([
+		"esri/Graphic",
+		"esri/geometry/Geometry",
+		"esri/geometry/Point"
+	], function(Graphic, Geometry, Point){
+		
+		for(var i= 0 ; i< nodes.length ; i++){
+					
 			var node = nodes[i];
 			var attributes = {class: node.class.value, obj: node.obj.value, label: node.label.value};			
 			var point = new Point({
@@ -153,8 +154,9 @@ function createPoiWidget(object){
 			
 			pois.push(poi);			
 		   }
-		);
-	}	
+		}
+	);
+		
 	
 	createFeatureLayer(pois);
 }
