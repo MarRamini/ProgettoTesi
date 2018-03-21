@@ -29,7 +29,7 @@
 	  	        }
 	  	      });
 	  	   	  
-	  	      var routeSymbol = {
+	  	      routeSymbol = {
 	  	        type: "simple-line", // autocasts as SimpleLineSymbol()
 	  	        color: [0, 0, 255, 0.5],
 	  	        width: 5
@@ -89,9 +89,9 @@
 						      
 						      view.then(function(){
 						    	  searchWidget.on("select-result", function(){	
-						    		  console.log(map)
 						    		  var stopPoint = searchWidget.resultGraphic;
 						    		  routePoints.stops.features.push(stopPoint);
+						    		  console.log("routePoints ", routePoints);
 							    	  if (routePoints.stops.features.length >= 2) {
 							            routeTask.solve(routePoints).then(function(data){
 							            	var routeResult = data.routeResults[0].route;
