@@ -26,7 +26,8 @@ require([
 	        });
 	        
 	        var position = {latitude: location.latitude, longitude: location.longitude};
-	        var filters;
+	        lastPositionSearched = position;
+	        var filters = [];
 	        
 	        searchRevenues(position, filters);
 	    });

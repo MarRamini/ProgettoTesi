@@ -12,22 +12,90 @@ function addMetresToLongitude(longitude, metres){
 	return newLongitude;
 }
 
+function applyFilters(filters){
+	var filteredClasses = "";
+	var museumClass = ""//"(<http://linkedgeodata.org/ontology/Museum>)";
+	var historicClass = ""//"(<http://linkedgeodata.org/ontology/HistoricThing>)";
+	var churchClass = ""/*"(<http://linkedgeodata.org/ontology/Church>) (<http://linkedgeodata.org/ontology/Abbey>) (<http://linkedgeodata.org/ontology/Chapel>) (<http://linkedgeodata.org/ontology/Monastery>) " +
+			"(<http://linkedgeodata.org/ontology/BuildingMonastery>) (<http://linkedgeodata.org/ontology/BuildingChapel>) (<http://linkedgeodata.org/ontology/BuildingChurch>) " + 
+			"(<http://linkedgeodata.org/ontology/BuildingChapel>) (<http://linkedgeodata.org/ontology/PlaceOfWorship>)";*/
+	var artsClass = ""/*"(<http://linkedgeodata.org/ontology/ArtGallery>) (<http://linkedgeodata.org/ontology/ArtGalleryShop>) (<http://linkedgeodata.org/ontology/ArtShop>) " + 
+			"(<http://linkedgeodata.org/ontology/ArtsCentre>) (<http://linkedgeodata.org/ontology/ArtWork>) (<http://linkedgeodata.org/ontology/FolkArt>) (<http://linkedgeodata.org/ontology/Gallery>) " + 
+			"(<http://linkedgeodata.org/ontology/GalleryShop>) (<http://linkedgeodata.org/ontology/Statue>) (<http://linkedgeodata.org/ontology/ManMadeStatue>)";*/
+	var entertainmentClass = "";
+	var outdoorsClass = "";
+	var foodClass = "";
+	var nightlifeClass = "";
+	var shopClass = "";
+	var sportClass = "";
+	
+	if(filters.length == 0){
+		filteredClasses = filteredClasses + museumClass + historicClass + churchClass + artsClass + entertainmentClass + outdoorsClass + foodClass + nightlifeClass 
+			+ shopClass + sportClass;
+	}
+	else{
+		filters.forEach(function(item){
+			switch(item.type){
+				case "museum" :
+					filteredClasses = filteredClasses + museumClass;
+					break;
+				case "historic" :
+					filteredClasses = filteredClasses + historicClass;
+					break;
+				case "church" :
+					filteredClasses = filteredClasses + churchClass;
+					break;
+				case "arts" :
+					filteredClasses = filteredClasses + artsClass;
+					break;
+				case "entertainment" :
+					filteredClasses = filteredClasses + entertainmentClass;
+					break;
+				case "outdoors" :
+					filteredClasses = filteredClasses + outdoorsClass;
+					break;
+				case "food" :
+					filteredClasses = filteredClasses + foodClass;
+					break;
+				case "nightlife" :
+					filteredClasses = filteredClasses + nightlifeClass;
+					break;
+				case "shop" :
+					filteredClasses = filteredClasses + shopClass;
+					break;
+				case "sport" :			
+					filteredClasses = filteredClasses + sportClass;
+					break;
+				default: 
+					filteredClasses = filteredClasses + "";
+			}
+		})
+	}
+	
+	return filteredClasses;
+}
+
 function searchRevenues(position, filters){
 	//compone la query in base ai filtri e alla posizione
-	var maximumLatitude = addMetresToLatitude(position.latitude, 1000);
-	var minimumLatitude = addMetresToLatitude(position.latitude, -1000);
-	var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
-	var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
+	//var maximumLatitude = addMetresToLatitude(position.latitude, 1000);
+	//var minimumLatitude = addMetresToLatitude(position.latitude, -1000);
+	//var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
+	//var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
 	
-	//filter è un oggetto di tipo {museum: true/false, historic: true/false, church: true/false...}
+	var maximumLatitude = 45;
+	var minimumLatitude = 40;
+	var maximumLongitude = 15;
+	var minimumLongitude = 10;
 	
+	var filtered = applyFilters(filters);
+	//console.log("filtered ", filtered)
 	
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
 				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
 				"Select distinct ?obj ?class ?label ?lat ?long " +
 				"where { " +
-				"values(?class){(<http://linkedgeodata.org/ontology/HistoricThing>) (<http://linkedgeodata.org/ontology/Museum> )} " +
+				"values(?class){" + filtered + "} " +
 				"?obj a ?class. " +
 				"?obj geo:lat ?lat. " +
 				"?obj geo:long ?long. " +
@@ -123,15 +191,83 @@ function createPoiWidget(object){
 					poiClass = "shopping";
 					color = "#996633";
 					break;
-				case "arts" :
-					poiClass = "arts";
+				case "http://linkedgeodata.org/ontology/ArtGallery" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/ArtGalleryShop" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/ArtShop" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case  "http://linkedgeodata.org/ontology/artsCentre" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/ArtWork" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/FolkArt" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/Gallery" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/GalleryShop" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/Statue" :
+					poiClass = "Arts";
+					color = "#e74c3c";
+					break;
+				case "http://linkedgeodata.org/ontology/ManMadeStatue" :
+					poiClass = "Arts";
 					color = "#e74c3c";
 					break;
 				case "entertainement" :
 					poiClass = "Entertainement";
 					color = "#009999";
 					break;
-				case "church" :
+				case "http://linkedgeodata.org/ontology/PlaceOfWorship" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/Chapel" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/BuildingChapel" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/Church" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/buildingChurch" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/Monastery" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/BuildingMonastery" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/Abbey" :
+					poiClass = "Church";
+					color = "#6600ff";
+					break;
+				case "http://linkedgeodata.org/ontology/BuildingAbbey" :
 					poiClass = "Church";
 					color = "#6600ff";
 					break;
@@ -232,6 +368,7 @@ var pointsRenderer = {
 };*/
 
 function createFeatureLayer(revenues){
+	console.log(revenues)
 	//crea il layer e ci appende i graphic dei revenues
 	require([
 		"esri/PopupTemplate",
@@ -269,6 +406,9 @@ function createFeatureLayer(revenues){
                 }]
 			}]
 		});
+		 
+		 var olderRevenuesLayer = map.findLayerById("revenuesLayer");
+		 map.remove(olderRevenuesLayer);
 		 
 		 var layer = new FeatureLayer({
 			 id: "revenuesLayer",
