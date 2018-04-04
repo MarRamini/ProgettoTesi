@@ -59,8 +59,8 @@ function createPoiWidget(XMLHttpResponse){
 					poiClass = "Arts";
 					color = "#e74c3c";
 					break;
-				case "entertainement" :
-					poiClass = "Entertainement";
+				case "entertainment" :
+					poiClass = "Entertainment";
 					color = "#009999";
 					break;
 				case "church" :
@@ -70,6 +70,9 @@ function createPoiWidget(XMLHttpResponse){
 				case "outdoors" :
 					poiClass = "Outdoors";
 					color = "#008000";
+					break;
+				case "food" :
+					poiClass = "Food";
 					break;
 				default : 
 					poiClass = "GeneralThing";
