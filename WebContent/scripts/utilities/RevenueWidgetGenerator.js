@@ -13,7 +13,7 @@ function createPoiWidget(XMLHttpResponse){
 	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query
 	var nodes = XMLHttpResponse.results.bindings;
 	var pois = [];
-	
+	console.log(nodes)
 	require([
 		"esri/Graphic",
 		"esri/geometry/Geometry",
@@ -81,13 +81,14 @@ function createPoiWidget(XMLHttpResponse){
 			
 			var markerSymbol = getUniqueValueSymbol(poiClass, color);		//a seconda del tipo di poi costruisce il marker con l'icona adatta ed un colore per il pin	
 			
-			var poi = new Graphic({
-				attributes: attributes,
-				geometry: point,
-				symbol: markerSymbol
-			});
-			
-			pois.push(poi);			
+			if(poiClass != "GeneralThing"){
+				var poi = new Graphic({
+					attributes: attributes,
+					geometry: point,
+					symbol: markerSymbol
+				});
+				pois.push(poi);
+			}						
 		   }
 		}
 	);

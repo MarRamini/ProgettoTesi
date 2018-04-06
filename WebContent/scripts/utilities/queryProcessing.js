@@ -37,17 +37,19 @@ function addMetresToLongitude(longitude, metres){
  */
 function applyFilters(filters){
 	var filteredClasses = "";
+	console.log("defining base classes...")
 	var museumClass = defineMuseumClasses();
 	var historicClass = defineHistoricClasses();
 	var churchClass = defineChurchClasses();
 	var artsClass = defineArtsClasses();
 	var entertainmentClass = defineEntertainmentClasses();
 	var outdoorsClass = defineOutdoorsClasses();
-	var foodClass = defineFoodClasses;
+	var foodClass = ""//defineFoodClasses();
 	var nightlifeClass = defineNightlifeClasses();
 	var shopClass = defineShopClasses();
 	var sportClass = defineSportClasses();
 	
+	console.log("filtering classes")
 	if(filters.length == 0){
 		filteredClasses = filteredClasses + museumClass + historicClass + churchClass + artsClass + entertainmentClass + outdoorsClass + foodClass + nightlifeClass 
 			+ shopClass + sportClass;
@@ -102,17 +104,17 @@ function applyFilters(filters){
  */
 function searchRevenues(position, filters){
 	//compone la query in base ai filtri e alla posizione
-	//var maximumLatitude = addMetresToLatitude(position.latitude, 1000);
-	//var minimumLatitude = addMetresToLatitude(position.latitude, -1000);
-	//var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
-	//var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
+	var maximumLatitude = addMetresToLatitude(position.latitude, 1000);
+	var minimumLatitude = addMetresToLatitude(position.latitude, -1000);
+	var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
+	var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
 	
-	var maximumLatitude = 45;
-	var minimumLatitude = 40;
-	var maximumLongitude = 15;
-	var minimumLongitude = 10;
-	
-	var filtered = applyFilters(filters);
+	//var maximumLatitude = 45;
+	//var minimumLatitude = 40;
+	//var maximumLongitude = 15;
+	//var minimumLongitude = 10;
+	console.log("begin searching...")
+	//var filtered = applyFilters(filters);
 	//console.log("filtered ", filtered)
 	
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
@@ -120,7 +122,7 @@ function searchRevenues(position, filters){
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
 				"Select distinct ?obj ?class ?label ?lat ?long " +
 				"where { " +
-				"values(?class){" + filtered + "} " +
+				"values(?class){" + defineClasses() + "} " +
 				"?obj a ?class. " +
 				"?obj geo:lat ?lat. " +
 				"?obj geo:long ?long. " +
