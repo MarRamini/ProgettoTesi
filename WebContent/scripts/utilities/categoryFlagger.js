@@ -9,7 +9,7 @@
  */
 function class2flag(revenueClass){
 	var flag;
-	
+
 	switch(revenueClass){
 		
 		/*Museum*/

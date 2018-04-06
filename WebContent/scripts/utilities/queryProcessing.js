@@ -120,16 +120,18 @@ function searchRevenues(position, filters){
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
 				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
-				"Select distinct ?obj ?class ?label ?lat ?long " +
+				"Select distinct ?obj ?class ?type ?label ?lat ?long " +
 				"where { " +
 				"values(?class){" + defineClasses() + "} " +
 				"?obj a ?class. " +
+				"?obj rdf:type ?type. " +
 				"?obj geo:lat ?lat. " +
 				"?obj geo:long ?long. " +
 				"?obj rdfs:label ?label " +
 				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
+				"FILTER(LANG(?label) = 'it' || LANG(?label) = '')" +
 				"} " 
-	
+	console.log(query)
 	var url = createURL(query);	
 	queryRequest(url);	
 }

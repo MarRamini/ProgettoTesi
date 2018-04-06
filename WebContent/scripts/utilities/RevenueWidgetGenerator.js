@@ -23,7 +23,7 @@ function createPoiWidget(XMLHttpResponse){
 		for(var i= 0 ; i< nodes.length ; i++){
 					
 			var node = nodes[i];
-			var attributes = {class: node.class.value, obj: node.obj.value, label: node.label.value, type: class2flag(node.class.value)};			
+			var attributes = {class: node.class.value, obj: node.obj.value, label: node.label.value, type: class2flag(node.type.value)};			
 			var point = new Point({
 				latitude: parseFloat(node.lat.value),
 				longitude: parseFloat(node.long.value)
@@ -201,6 +201,11 @@ function createFeatureLayer(revenues){
 				 name: "label",
 				 alias: "label",
 				 type: "string"
+			 }),
+			 new Field({
+				 name: "type",
+				 alias: "type",
+				 type: "string"
 			 })
 		 ];
 		 
@@ -213,6 +218,8 @@ function createFeatureLayer(revenues){
                     fieldName: "class"
                 }, {
                     fieldName: "obj"
+                },{
+                    fieldName: "type"
                 }]
 			}]
 		});
