@@ -9,11 +9,11 @@
  * @returns void
  * create esri/Graphic widgets from Json formatted revenues in the XMLHttpResponse
  */
-function createPoiWidget(XMLHttpResponse){
+function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query
 	var nodes = XMLHttpResponse.results.bindings;
 	var pois = [];
-	console.log(nodes)
+	
 	require([
 		"esri/Graphic",
 		"esri/geometry/Geometry",
@@ -47,7 +47,7 @@ function createPoiWidget(XMLHttpResponse){
 					poiClass = "NightLife";
 					color = "#9b59b6";
 					break;
-				case "restaurant" :
+				case "food" :
 					poiClass = "Restaurant";
 					color = "#669999";
 					break;
@@ -71,9 +71,6 @@ function createPoiWidget(XMLHttpResponse){
 					poiClass = "Outdoors";
 					color = "#008000";
 					break;
-				case "food" :
-					poiClass = "Food";
-					break;
 				default : 
 					poiClass = "GeneralThing";
 					color = "white";
@@ -93,8 +90,11 @@ function createPoiWidget(XMLHttpResponse){
 		}
 	);
 		
-	
 	createFeatureLayer(pois);
+	
+	if(routeFlag){
+		calculateRoute(startPoint, endPoint, pois)
+	}
 }
 
 /**
@@ -178,7 +178,6 @@ var pointsRenderer = {
  * create a esri/layers/FeatureLayer and appends given revenues
  */
 function createFeatureLayer(revenues){
-	console.log(revenues)
 	//crea il layer e ci appende i graphic dei revenues
 	require([
 		"esri/PopupTemplate",

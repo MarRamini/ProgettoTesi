@@ -37,7 +37,7 @@ function addMetresToLongitude(longitude, metres){
  */
 function applyFilters(filters){
 	var filteredClasses = "";
-	console.log("defining base classes...")
+	
 	var museumClass = defineMuseumClasses();
 	var historicClass = defineHistoricClasses();
 	var churchClass = defineChurchClasses();
@@ -49,7 +49,7 @@ function applyFilters(filters){
 	var shopClass = defineShopClasses();
 	var sportClass = defineSportClasses();
 	
-	console.log("filtering classes")
+
 	if(filters.length == 0){
 		filteredClasses = filteredClasses + museumClass + historicClass + churchClass + artsClass + entertainmentClass + outdoorsClass + foodClass + nightlifeClass 
 			+ shopClass + sportClass;
@@ -109,11 +109,6 @@ function searchRevenues(position, filters){
 	var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
 	var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
 	
-	//var maximumLatitude = 45;
-	//var minimumLatitude = 40;
-	//var maximumLongitude = 15;
-	//var minimumLongitude = 10;
-	console.log("begin searching...")
 	//var filtered = applyFilters(filters);
 	//console.log("filtered ", filtered)
 	
@@ -130,10 +125,48 @@ function searchRevenues(position, filters){
 				"?obj rdfs:label ?label " +
 				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
 				"FILTER(LANG(?label) = 'it' || LANG(?label) = '')" +
-				"} " 
-	console.log(query)
+				"} " ;
+				
 	var url = createURL(query);	
-	queryRequest(url);	
+	var routeFlag = false;
+	queryRequest(url);
+}
+
+/**
+ * @param startPoint: route's starting point
+ * @oaram endPoint: route's ending point
+ * @param filters
+ * @returns void
+ * creates a sparql query given routing startPoint and endPoint to be searched and category filters to be applied
+ */
+function searchRouteRevenues(startPoint, endPoint, filters){
+	//compone la query in base ai filtri e alla posizione
+	var maximumLatitude = Math.max(startPoint.geometry.latitude, endPoint.geometry.latitude);
+	var minimumLatitude = Math.min(startPoint.geometry.latitude, endPoint.geometry.latitude);
+	var maximumLongitude = Math.max(startPoint.geometry.longitude, endPoint.geometry.longitude);
+	var minimumLongitude = Math.min(startPoint.geometry.longitude, endPoint.geometry.longitude);
+	
+	//var filtered = applyFilters(filters);
+	//console.log("filtered ", filtered)
+	
+	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
+				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
+				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
+				"Select distinct ?obj ?class ?type ?label ?lat ?long " +
+				"where { " +
+				"values(?class){" + defineClasses() + "} " +
+				"?obj a ?class. " +
+				"?obj rdf:type ?type. " +
+				"?obj geo:lat ?lat. " +
+				"?obj geo:long ?long. " +
+				"?obj rdfs:label ?label " +
+				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
+				"FILTER(LANG(?label) = 'it' || LANG(?label) = '')" +
+				"} " ;
+				
+	var url = createURL(query);
+	var routeFlag = true;
+	queryRequest(url, startPoint, endPoint, routeFlag);
 }
 
 /**
@@ -164,7 +197,7 @@ function createURL(query){
  * @returns void
  * send a XMLHttpRequest to given url
  */
-function queryRequest(url){
+function queryRequest(url, startPoint, endPoint, routeFlag){
 	//get query preprocessata
 	if (window.XMLHttpRequest) {
 	  	var xmlHttp = new XMLHttpRequest();
@@ -176,7 +209,7 @@ function queryRequest(url){
 	 xmlHttp.onreadystatechange = function() { 
 	     if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
 	    	var xmlHttpResponse = JSON.parse(this.responseText);
-	    	createPoiWidget(xmlHttpResponse);
+	    	createPoiWidget(xmlHttpResponse, startPoint, endPoint, routeFlag);
 	     }
 	 };
 	 

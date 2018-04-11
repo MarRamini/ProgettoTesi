@@ -1,40 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<script type="text/javascript" src="scripts/utilities/route.js"></script>
 <div id="menuChoices" class="menuContent">
 	<script>
 		var container = getContentContainer();
 		container.appendChild(document.getElementById("menuChoices"));
-	</script>
-	<script>
-		require([
-			"esri/Map",
-		    "esri/views/SceneView",
-		    "esri/tasks/RouteTask",
-		    "esri/tasks/support/RouteParameters",
-		    "esri/tasks/support/FeatureSet",
-		    "esri/core/urlUtils",
-		    "dojo/on",
-		    "dojo/domReady!"
-		], function(Map, SceneView, RouteTask, RouteParameters, FeatureSet, urlUtils, on){
-			  //Point the URL to a valid route service
-	  	      routeTask = new RouteTask({
-	  	        url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
-	  	      });
-	  		  
-	  	   	  // Setup the route parameters
-	  	      routePoints = new RouteParameters({
-	  	        stops: new FeatureSet(),
-	  	        outSpatialReference: { // autocasts as new SpatialReference()
-	  	          wkid: 3857
-	  	        }
-	  	      });
-	  	   	  
-	  	      routeSymbol = {
-	  	        type: "simple-line", // autocasts as SimpleLineSymbol()
-	  	        color: [0, 0, 255, 0.5],
-	  	        width: 5
-	  	      };
-		});
 	</script>
 	<table>
 		<tr>
@@ -58,14 +28,12 @@
 						      
 						      view.then(function(){
 						    	  searchWidget.on("select-result", function(){						    		  
-						    		  var startPoint = searchWidget.resultGraphic;
-						    		  routePoints.stops.features.push(startPoint);
+						    		  startPoint = searchWidget.resultGraphic;
 						    	  })
 						      });
 						 });  
 					</script>
 				</div>	
-				<%-- <input id="txtStart" name="txtStart" placeholder="Enter your address" size="18" onFocus="enableDisableInput(true)" type="text">--%>
 			</td>
 		</tr>
 		<tr>
@@ -89,25 +57,22 @@
 						      
 						      view.then(function(){
 						    	  searchWidget.on("select-result", function(){	
-						    		  var stopPoint = searchWidget.resultGraphic;
-						    		  routePoints.stops.features.push(stopPoint);
-						    		  console.log("routePoints ", routePoints);
-							    	  if (routePoints.stops.features.length >= 2) {
-							            routeTask.solve(routePoints).then(function(data){
-							            	var routeResult = data.routeResults[0].route;
-							                routeResult.symbol = routeSymbol;
-							                map.layers.items[0].add(routeResult);
-							            });
-							    		
-							          }
+						    		  stopPoint = searchWidget.resultGraphic;	
 						    	  });						    	  
 						      });
 						 });  
 					</script>
-				</div>			
-				<%-- <input id="txtEnd" name="txtEnd" placeholder="Enter your address" size="18" type="text">
-				--%>
+				</div>
 			</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calcola rotta"></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
 		</tr>
 		<tr>
 			<td>Mode: </td>
@@ -211,7 +176,6 @@
 				}
 				
 				function filterPois(checkBoxElem){
-					//console.log(checkBoxElem.value);
 					switch(checkBoxElem.value){
 						case "1" :
 							var filter = {type: "museum"};
