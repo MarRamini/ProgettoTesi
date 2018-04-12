@@ -31,86 +31,16 @@ function addMetresToLongitude(longitude, metres){
 }
 
 /**
- * @param filters
- * @returns filteredClasses
- * apply filters in order to have linkedgeodata classes to be queried in a string of chosen classes
- */
-function applyFilters(filters){
-	var filteredClasses = "";
-	
-	var museumClass = defineMuseumClasses();
-	var historicClass = defineHistoricClasses();
-	var churchClass = defineChurchClasses();
-	var artsClass = defineArtsClasses();
-	var entertainmentClass = defineEntertainmentClasses();
-	var outdoorsClass = defineOutdoorsClasses();
-	var foodClass = ""//defineFoodClasses();
-	var nightlifeClass = defineNightlifeClasses();
-	var shopClass = defineShopClasses();
-	var sportClass = defineSportClasses();
-	
-
-	if(filters.length == 0){
-		filteredClasses = filteredClasses + museumClass + historicClass + churchClass + artsClass + entertainmentClass + outdoorsClass + foodClass + nightlifeClass 
-			+ shopClass + sportClass;
-	}
-	else{
-		filters.forEach(function(item){
-			switch(item.type){
-				case "museum" :
-					filteredClasses = filteredClasses + museumClass;
-					break;
-				case "historic" :
-					filteredClasses = filteredClasses + historicClass;
-					break;
-				case "church" :
-					filteredClasses = filteredClasses + churchClass;
-					break;
-				case "arts" :
-					filteredClasses = filteredClasses + artsClass;
-					break;
-				case "entertainment" :
-					filteredClasses = filteredClasses + entertainmentClass;
-					break;
-				case "outdoors" :
-					filteredClasses = filteredClasses + outdoorsClass;
-					break;
-				case "food" :
-					filteredClasses = filteredClasses + foodClass;
-					break;
-				case "nightlife" :
-					filteredClasses = filteredClasses + nightlifeClass;
-					break;
-				case "shop" :
-					filteredClasses = filteredClasses + shopClass;
-					break;
-				case "sport" :			
-					filteredClasses = filteredClasses + sportClass;
-					break;
-				default: 
-					filteredClasses = filteredClasses + "";
-			}
-		})
-	}
-	
-	return filteredClasses;
-}
-
-/**
  * @param position
  * @param filters
  * @returns void
  * creates a sparql query given position of the revenues to be searched and category filters to be applied
  */
 function searchRevenues(position, filters){
-	//compone la query in base ai filtri e alla posizione
 	var maximumLatitude = addMetresToLatitude(position.latitude, 1000);
 	var minimumLatitude = addMetresToLatitude(position.latitude, -1000);
 	var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
 	var minimumLongitude = addMetresToLongitude(position.longitude, -1000);
-	
-	//var filtered = applyFilters(filters);
-	//console.log("filtered ", filtered)
 	
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
 				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
@@ -140,7 +70,6 @@ function searchRevenues(position, filters){
  * creates a sparql query given routing startPoint and endPoint to be searched and category filters to be applied
  */
 function searchRouteRevenues(startPoint, endPoint, filters){
-	//compone la query in base ai filtri e alla posizione
 	var maximumLatitude = Math.max(startPoint.geometry.latitude, endPoint.geometry.latitude);
 	var minimumLatitude = Math.min(startPoint.geometry.latitude, endPoint.geometry.latitude);
 	var maximumLongitude = Math.max(startPoint.geometry.longitude, endPoint.geometry.longitude);

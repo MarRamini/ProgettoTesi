@@ -84,12 +84,24 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 					geometry: point,
 					symbol: markerSymbol
 				});
-				pois.push(poi);
+				if(filters){ //se esistono filtri filtra le classi e inserisce i poi corrispondenti nella collezione
+					if(filters.length > 0){
+						var filteringFlag = true;
+						filters.forEach(function(filter){
+							if(filter.type == attributes.type && filteringFlag){
+								pois.push(poi);
+								filteringFlag = false;
+							}
+						})
+					}
+					else{
+						pois.push(poi);
+					}
+				}
 			}						
-		   }
+		  }
 		}
 	);
-		
 	createFeatureLayer(pois);
 	
 	if(routeFlag){
@@ -240,7 +252,7 @@ function createFeatureLayer(revenues){
 			 popupTemplate: popupTemplate
 		 });
 		
-		 map.add(layer);		
+		 map.add(layer);
 	   }
 	);
 }

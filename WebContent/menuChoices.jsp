@@ -182,7 +182,7 @@
 							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);							
 							break;
 						case "2" :
-							var filter = {type: "historic"};
+							var filter = {type: "historicThing"};
 							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
 							break;
 						case "3" :
