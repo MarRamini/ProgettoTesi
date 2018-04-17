@@ -26,6 +26,11 @@ function calculateRoute(startPoint, endPoint, pois){
 	          wkid: 3857
 	        }
 	      });
+	     
+	     routePoints.findBestSequence = true;
+	     routePoints.preserveFirstStop = true;
+	     routePoints.preserveLastStop = true;
+	     routePoints.returnStops = true;
 	   	  
 	      var routeSymbol = {
 	        type: "simple-line", // autocasts as SimpleLineSymbol()
@@ -35,7 +40,7 @@ function calculateRoute(startPoint, endPoint, pois){
 	      
 	      routePoints.stops.features.push(startPoint);
 	      
-	      pois.sort(function(startPoint, point){ //ordino pois in base alla vicinanza con il punto di start
+	    /*  pois.sort(function(startPoint, point){ //ordino pois in base alla vicinanza con il punto di start
 	    	  var latitudeA = startPoint.geometry.latitude;
 	    	  var longitudeA = startPoint.geometry.longitude;
 	    	  var latitudeB = point.geometry.latitude;
@@ -43,7 +48,7 @@ function calculateRoute(startPoint, endPoint, pois){
 	    	  
 	    	  var distance = Math.sqrt(Math.pow(latitudeB - latitudeA, 2) - Math.pow(longitudeB - longitudeA, 2));
 	    	  return distance;
-	      });
+	      });*/
 	     
 	      pois.forEach(function(poi){
 	    	  routePoints.stops.features.push(poi)

@@ -6,10 +6,9 @@
 		var container = getContentContainer();
 		container.appendChild(document.getElementById("menuChoices"));
 	</script>
-	<table>
-		<tr>
-			<td>Start: </td>
-			<td>
+	<div class="routingForm">
+		<div class="routingRow">
+			<span>Start:</span>
 				<div id="startAddress" class="addressBar">		
 					<script>
 					/* SEARCH WIDGET */
@@ -33,12 +32,10 @@
 						      });
 						 });  
 					</script>
-				</div>	
-			</td>
-		</tr>
-		<tr>
-			<td>Destination: </td>
-			<td>
+				</div>
+			</div>
+			<div class="routingRow">
+				<span>Destination:</span>
 				<div id="destinationAddress" class="addressBar">
 					<script>
 					/* SEARCH WIDGET */
@@ -63,17 +60,11 @@
 						 });  
 					</script>
 				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">&nbsp;</td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calcola rotta"></td>
-		</tr>
-		<tr>
-			<td colspan="2">&nbsp;</td>
-		</tr>
+			</div>
+			<input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calcola rotta">
+	</div>
+		<table>
+		
 		<tr>
 			<td>Mode: </td>
 			<td><select name="ddlMode">

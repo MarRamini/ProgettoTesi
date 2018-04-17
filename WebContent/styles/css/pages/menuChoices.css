@@ -34,3 +34,27 @@ div.addressBar:focus{
 .addressBar .esri-search__submit-button{
 	display: none !important;
 }
+
+.routingForm span{
+	display: inline-flex;
+	padding: 0px 5px 0px 5px;
+}
+
+.routingForm div.addressBar{
+	display: inline-flex;
+	width: 150px;
+	float: right;
+}
+
+.routingRow{
+	padding: 3px 0px 3px 0px;
+}
+
+.routingForm input{
+	cursor: pointer;
+	/*border: 1px solid lightslategray;*/
+	/*background: white;*/
+	margin: 5px 5px 5px 5px;
+	height: 20px;
+	/*border-radius: 5%;*/
+}
