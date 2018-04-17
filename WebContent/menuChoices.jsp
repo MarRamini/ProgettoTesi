@@ -64,7 +64,7 @@
 			<input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calcola rotta">
 	</div>
 		<table>
-		
+		<%-- 
 		<tr>
 			<td>Mode: </td>
 			<td><select name="ddlMode">
@@ -73,6 +73,7 @@
 		  		</select>
 		  	</td>
 		</tr>
+		--%>
 		<tr>
 			<td>Max N° of Venues: </td>
 			<td><input id="txtMaxWayPoints" name="txtMaxWayPoints" type="text" size="3"></td>
