@@ -22,15 +22,14 @@ function calculateRoute(startPoint, endPoint, pois){
 	   	  // Setup the route parameters
 	     var routePoints = new RouteParameters({
 	        stops: new FeatureSet(),
+	        findBestSequence: true,
+	        preserveFirstStop: true,
+	        preserveLastStop: true,
+	        returnStops: true,
 	        outSpatialReference: { // autocasts as new SpatialReference()
 	          wkid: 3857
 	        }
 	      });
-	     
-	     routePoints.findBestSequence = true;
-	     routePoints.preserveFirstStop = true;
-	     routePoints.preserveLastStop = true;
-	     routePoints.returnStops = true;
 	   	  
 	      var routeSymbol = {
 	        type: "simple-line", // autocasts as SimpleLineSymbol()

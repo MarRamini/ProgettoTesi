@@ -23,22 +23,27 @@
 		</script>
 		<div class="loginContainer">
 			<div class="loginRow">
-				<span valign="top">Nome Utente:</span>
-				<input type="text" required="true" name="txtUsername" id="username" placeholder="Inserisci Nome Utente"
+				<span valign="top">Username:</span>
+				<input type="text" required="true" name="txtUsername" id="username" placeholder="Insert username"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Inserisci un nome utente" class="textBox"/>
 			</div>
 			<div class="loginRow">
 				<span valign="top">Password:</span>
-				<input type="password" required="true" name="txtPassword" id="password" placeholder="Inserisci Password"
+				<input type="password" required="true" name="txtPassword" id="password" placeholder="Insert Password"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Inserire una password valida" class="textBox"/>
 			</div>			
 		</div>
 		
 		<!-- submit buttons -->
 		<div class="submitButtons">
-			<input type="submit" value="Login" name="btnLogin" label="Accedi" id="submitButton" data-dojo-type="dijit/form/Button" style="float: left;"/>
-			<input type="submit" value="Login as a guest" name="btnLogin" id="busyButton" data-dojo-type="dojox/form/BusyButton"
-			   label="Accedi come Ospite" busyLabel="Loggin in..." timeout="2000" style="float:right;">
+			<input type="submit" value="Sign in" name="btnLogin" label="Sign in" id="submitButton" data-dojo-type="dijit/form/Button"/>
+			<input type="submit" value="Sign up" name="btnLogin" label="Sign up" id="registerButton" data-dojo-type="dijit/form/Button">
+				<script event="onclick">
+					document.getElementsByTagName("form").loginForm.setAttribute("skipValidation", true)
+				</script>
+			</input>
+			<input type="submit" value="Sign in as a guest" name="btnLogin" id="busyButton" data-dojo-type="dojox/form/BusyButton"
+			   label="Sign in as a Guest" busyLabel="Loggin in..." timeout="2000">
 				<script event="onClick">
 					document.getElementsByTagName("form").loginForm.setAttribute("skipValidation", true)
 				</script>

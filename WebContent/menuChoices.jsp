@@ -6,141 +6,34 @@
 		var container = getContentContainer();
 		container.appendChild(document.getElementById("menuChoices"));
 	</script>
-	<div class="routingForm">
-		<div class="routingRow">
-			<span>Start:</span>
-				<div id="startAddress" class="addressBar">		
-					<script>
-					/* SEARCH WIDGET */
-						require([
-						  "esri/widgets/Search",					 
-						  "esri/views/SceneView",
-						  "esri/Map",
-						  "dojo/domReady!",
-						 ], 
-						  function(Search, SceneView, Map){	
-							 
-						      var searchWidget = new Search({
-						          view: this.view,
-						          container: "startAddress"
-						      });
-						      
-						      view.then(function(){
-						    	  searchWidget.on("select-result", function(){						    		  
-						    		  startPoint = searchWidget.resultGraphic;
-						    	  })
-						      });
-						 });  
-					</script>
-				</div>
-			</div>
-			<div class="routingRow">
-				<span>Destination:</span>
-				<div id="destinationAddress" class="addressBar">
-					<script>
-					/* SEARCH WIDGET */
-						require([
-						  "esri/widgets/Search",					 
-						  "esri/views/SceneView",
-						  "esri/Map",
-						  "dojo/domReady!",
-						 ], 
-						  function(Search, SceneView, Map){		      
-							  
-						      var searchWidget = new Search({
-						          view: view,
-						          container: "destinationAddress"
-						      });	
-						      
-						      view.then(function(){
-						    	  searchWidget.on("select-result", function(){	
-						    		  stopPoint = searchWidget.resultGraphic;	
-						    	  });						    	  
-						      });
-						 });  
-					</script>
-				</div>
-			</div>
-			<input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calcola rotta">
+	<div class="menuVoice">
+		<span onclick="showRoutingForm()">Routing</span>
+		<jsp:include page="routingForm.jsp"/>
+		<script>
+			function showRoutingForm(){
+				var form = document.getElementById("routingForm");
+				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
+			}
+		</script>
 	</div>
-	<div class="searchParameters">
-		<div class="paramRow">
-			<span>Max N° of Venues:</span>
-			<input id="txtMaxWayPoints" name="txtMaxWayPoints" type="text" size="3">
-		</div>
-		<div class="paramRow">
-			<script>
-				filters = [];
-				
-				function removeElement(element){
-					filters.forEach(function(item, index){
-						if(item.type === element.type)
-							filters.splice(index, 1);
-					})
-				}
-				
-				function filterPois(checkBoxElem){
-					switch(checkBoxElem.value){
-						case "1" :
-							var filter = {type: "museum"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);							
-							break;
-						case "2" :
-							var filter = {type: "historicThing"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "3" :
-							var filter = {type: "church"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "4" :
-							var filter = {type: "arts"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "5" :
-							var filter = {type: "entertainment"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "6" :
-							var filter = {type: "outdoors"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "7" :
-							var filter = {type: "food"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "8" :
-							var filter = {type: "nightlife"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "9" :
-							var filter = {type: "shop"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-						case "10" :
-							var filter = {type: "sport"};
-							checkBoxElem.checked ? filters.push(filter) : removeElement(filter);
-							break;
-					    default : console.log("error");
-					}
-				}
-			</script>
-			<div class="filters">
-				<span>What categories are you interested in?</span>
-				<input type="checkbox" name="cbCategories" value="1" onchange="filterPois(this)"/> Museum <br>
-				<input type="checkbox" name="cbCategories" value="2" onchange="filterPois(this)"/> History &amp; Monuments <br>
-				<input type="checkbox" name="cbCategories" value="3" onchange="filterPois(this)"/> Church <br>
-				<input type="checkbox" name="cbCategories" value="4" onchange="filterPois(this)"/> Arts <br>
-				<input type="checkbox" name="cbCategories" value="5" onchange="filterPois(this)"/> Entertainment <br>
-				<input type="checkbox" name="cbCategories" value="6" onchange="filterPois(this)"/> Outdoors &amp; Recreation <br>				
-				<input type="checkbox" name="cbCategories" value="7" onchange="filterPois(this)"/> Food <br>
-				<input type="checkbox" name="cbCategories" value="8" onchange="filterPois(this)"/> Nightlife Spot <br>
-				<input type="checkbox" name="cbCategories" value="9" onchange="filterPois(this)"/> Shop &amp; Service <br>
-				<input type="checkbox" name="cbCategories" value="10" onchange="filterPois(this)"/> Athletics &amp; Sports <br>
-			</div>
-			<input type="button" id="btnSearch" onclick="searchRevenues(lastPositionSearched, filters)" value="Filtra Risultati">
-		</div>
+	<div class="menuVoice">
+		<span onclick="showFiltersForm()">Set Filters</span>
+		<jsp:include page="filtersOptions.jsp"/>
+		<script>
+			function showFiltersForm(){
+				var form = document.getElementById("filtersForm");
+				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
+			}
+		</script>
 	</div>
+	<div class="menuVoice">
+		<span>Personalization</span>
+	</div>
+	<div class="menuVoice">
+		<span>Options</span>
+	</div>
+	
+	
 			<%-- <table>
 	
 		<tr>

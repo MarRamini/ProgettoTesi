@@ -4,6 +4,9 @@
  * then appends the layer to the map
  */
 
+var backupPois = []; //backup variable that stores all pois found in order to backtrace when filtering
+
+
 /**
  * @param XMLHttpResponse
  * @returns void
@@ -13,10 +16,8 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query
 	var nodes = XMLHttpResponse.results.bindings;
 	var pois = [];
-	var limitNodes = document.getElementById("txtMaxWayPoints").value;
-	
-	if(!limitNodes){
-		limitNodes = nodes.length;
+	if(backupPois.length > 0){
+		backupPois.splice(0, backupPois.length);
 	}
 	
 	require([
@@ -25,7 +26,7 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 		"esri/geometry/Point"
 	], function(Graphic, Geometry, Point){
 		
-		for(var i= 0 ; i<limitNodes ; i++){
+		for(var i= 0 ; i<nodes.length ; i++){
 					
 			var node = nodes[i];
 			var attributes = {class: node.class.value, obj: node.obj.value, label: node.label.value, type: class2flag(node.type.value)};			
@@ -89,26 +90,13 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 					geometry: point,
 					symbol: markerSymbol
 				});
-				if(filters){ //se esistono filtri filtra le classi e inserisce i poi corrispondenti nella collezione
-					if(filters.length > 0){
-						var filteringFlag = true;
-						filters.forEach(function(filter){
-							if(filter.type == attributes.type && filteringFlag){
-								pois.push(poi);
-								filteringFlag = false;
-							}
-						})
-					}
-					else{
-						pois.push(poi);
-					}
-				}
-			}						
+				pois.push(poi);
+				backupPois.push(poi);
+			}				
 		  }
 		}
 	);
 	createFeatureLayer(pois);
-	
 	if(routeFlag){
 		calculateRoute(startPoint, endPoint, pois)
 	}

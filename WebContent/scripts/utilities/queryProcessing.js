@@ -36,7 +36,7 @@ function addMetresToLongitude(longitude, metres){
  * @returns void
  * creates a sparql query given position of the revenues to be searched and category filters to be applied
  */
-function searchRevenues(position, filters){
+function searchRevenues(position, filters, maxVenues){
 	var maximumLatitude = addMetresToLatitude(position.latitude, 1000);
 	var minimumLatitude = addMetresToLatitude(position.latitude, -1000);
 	var maximumLongitude = addMetresToLongitude(position.longitude, 1000);
@@ -56,6 +56,10 @@ function searchRevenues(position, filters){
 				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
 				"FILTER(LANG(?label) = 'it' || LANG(?label) = '')" +
 				"} " ;
+	
+	if(maxVenues){
+		query = query.concat("LIMIT ", maxVenues);
+	}		
 				
 	var url = createURL(query);	
 	var routeFlag = false;

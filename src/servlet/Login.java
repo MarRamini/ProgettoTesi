@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
 		User user;
 		HttpSession session = request.getSession(false);
 		try {
-			if (request.getParameter("btnLogin").equals("Login as a guest")) {
+			if (request.getParameter("btnLogin").equals("Sign in as a guest")) {
 				user = new User();
 				user.setUsername("guest");
 				user.setPassword("guest");
@@ -56,6 +56,13 @@ public class Login extends HttpServlet {
 				session = request.getSession();
 				session.setAttribute("user", user);
 				prossimaPagina = "/index.jsp";
+			}
+			else if(request.getParameter("btnLogin").equals("Sign up")) {
+				if(session != null)
+					session.invalidate();
+				session = request.getSession();
+				session.setAttribute("user", "guest");
+				prossimaPagina = "/register.jsp";
 			}
 			else {
 				String username = request.getParameter("txtUsername");
