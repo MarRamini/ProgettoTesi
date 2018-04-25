@@ -1,0 +1,73 @@
+.quickSearchContainer{
+	position: absolute;
+	top: 15px;
+	width: 100%;
+	height: auto;
+	background-color: transparent;
+}
+
+.quickSearch{
+	position: relative;
+	width: 60%;
+	height: 32px;
+	background-color: #fff;
+	box-sizing: border-box;
+	margin: auto;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.menuToggle{
+	position: relative;
+	display: inline-flex;
+	width: 32px;
+	height: 32px;
+	background: transparent;
+	left: 0px;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+}
+
+.menuToggle:hover{
+	background-color: #f2f2f2;
+}
+
+.menuIcon{
+	position:relative;
+	display: block;
+	height: 14px;
+	width: 14px;
+	cursor: pointer;
+	background-image: url("../../icons/hamburgerMenu_14.png");
+}
+
+.searchBox{
+	width: calc(100% - 32px) !important;
+	height: 32px;
+	float: right;
+}
+
+.searchBox:focus{
+	outline: none;
+}
+
+.searchBox input{
+	border-bottom: 2px solid transparent !important;	
+}
+
+.searchBox input:focus{
+	outline: none;
+	border-color: #58aef3 !important;
+}
+
+.searchBox .esri-search__submit-button{
+	border: none !important;
+}
+
+.searchBox .esri-search__submit-button:focus{
+	outline: none;
+}
+
+.searchBox .esri-search__submit-button:hover{
+	background-color: #f2f2f2 !important;
+}

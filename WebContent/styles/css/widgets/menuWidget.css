@@ -1,0 +1,26 @@
+.menuContainer{
+	background: transparent;	
+}
+
+.userMenuPanelContainer{	
+	background-image: url("../../images/background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.userMenuPanel{
+	background: linear-gradient(to bottom, transparent, white);
+}
+	
+.userMenuPanel .avatar{
+	width: 50px;
+	height: 50px;
+	float: left;
+	position: relative;
+	display: flex;
+	border-radius: 100%;
+	border: 1px solid dimgray;
+	top: calc(100% - 60px);
+	background-image: url("../../images/default-avatar_50.png");
+	margin-left: 5px;
+}

@@ -1,0 +1,86 @@
+.formContainer{
+	width: 450px;
+	height: 500px;
+	margin: auto;
+	background-color: white;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+	display: flex;
+	align-items: center;
+}
+
+.headerMessage{
+	font-size: 24px;
+	font-weight: 400;
+	padding: 0px 5px 0px 5px;
+}
+
+.loginForm{
+	margin: auto;
+	height: 250px;
+	width: auto;
+}
+
+.loginContainer{
+	height: auto;
+	width: 100%;
+}
+
+.loginRow{
+	height: 20px;
+	padding: 10px 0 10px 0;
+}
+
+.submitButtons{
+	padding-top: 20px;
+}
+
+.submitButtons .dijitButton .dijitButtonNode{
+	border: none;
+	color: white;
+	background-color: #4285f4;
+	height: 30px;
+	display: flex;
+	align-items: center;
+}
+
+.loginRow span{
+	vertical-align: bottom;
+	padding-right: 10px;
+}
+
+.loginRow .textBox{
+	border: none;
+	border-bottom: 1px solid #b5bcc7;
+	background-color: transparent;
+	float: right;
+}
+
+.loginRow .dijitTextBoxError{
+	border-color: red;
+	background-color: transparent;
+}
+
+.loginRow .dijitTextBoxError .dijitInputContainer{
+	background-color: transparent;
+}
+
+.loginRow .dijitTextBoxFocused{
+	outline: none;
+	border-bottom-color: #4285f4;
+}
+
+.loginRow .dijitTextBoxError .dijitValidationContainer{
+	display: none;
+}
+
+.dijitTextBoxFocused .dijitPlaceHolder{
+	color: #4285f4 !important;
+}
+
+.dijitTextBoxError .dijitPlaceHolder{
+	color: red;
+}
+
+.dijitTooltip, .dijitTooltipConnector{
+	display: none;
+}
