@@ -11,6 +11,10 @@ public class User {
 	private String gender;
 	private int age;
 	private String role;
+	private String nationality;
+	private String name;
+	private String surname;
+	private String email;
 	private List<Integer> friends;
 	private List<Checkin> checkins;
 	private double[] weigths;
@@ -112,6 +116,38 @@ public class User {
 	public void setWeight(int i, double d) {
 		if (i < this.weigths.length)
 			this.weigths[i] = d;
+	}
+	
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

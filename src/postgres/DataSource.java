@@ -5,17 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataSource {
-	private String dbURI = "jdbc:mysql://localhost:3306/gscorrdata_new";
-	//private String dbURI = "jdbc:postgresql://localhost/gScorrData";
-	private String userName = "root";
-	//private String userName = "postgres";
-	private String password = "topos89";
+	//private String dbURI = "jdbc:mysql://localhost:3306/gscorrdata_new";
+	private String dbURI = "jdbc:postgresql://localhost:5432/postgres";
+	//private String userName = "root";
+	private String userName = "postgres";
+	private String password = "";
 
 	public Connection getConnection() throws PersistenceException {
 		Connection connection;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		    //Class.forName("org.postgresql.Driver");		//driver class loading
+			//Class.forName("com.mysql.jdbc.Driver");
+		    Class.forName("org.postgresql.Driver");		//driver class loading
 		    /*
 		     * Now the driver is registered at DriverManager (postgreSQL driver automatically
 		     * registers itself at DriverManager once his class is loaded).
@@ -23,7 +23,7 @@ public class DataSource {
 		     */
 			connection = DriverManager.getConnection(dbURI, userName, password);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
+			System.out.println("Where is your PostgresSQL JDBC Driver?");
 			e.printStackTrace();
 			throw new PersistenceException(e.getMessage());
 		} catch(SQLException e) {

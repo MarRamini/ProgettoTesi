@@ -68,6 +68,7 @@ public class Login extends HttpServlet {
 				String username = request.getParameter("txtUsername");
 				String password = request.getParameter("txtPassword");
 				user = UserPostgres.RetrieveUserByUsernameAndPassword(username, password);
+				System.out.println(user.getName());
 				if (user != null) {
 					UserPostgres.RetrieveFriends(user);
 					
@@ -75,7 +76,7 @@ public class Login extends HttpServlet {
 					session.invalidate();
 					session = request.getSession();
 					session.setAttribute("user", user);
-					prossimaPagina = "/findTopKPopularRoutes1.jsp";
+					prossimaPagina = "/index.jsp";
 				} else {
 					prossimaPagina = "/login.jsp";
 					request.setAttribute("error", "Failed login: wrong username or password");

@@ -68,14 +68,18 @@ public class UserPostgres {
 	
 	
 	public static User RetrieveUserByUsernameAndPassword(String username, String password) throws PersistenceException {
+		System.out.println("beginning dbConnection");
 		User user = null;
 		DataSource datasource = new DataSource();
+		System.out.println("dataSource created");
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
+			System.out.println("asking for connection");
 			connection = datasource.getConnection();
-			String query = "select * from users where username = '" + username.replace("'", "''") + "' and password = '" + password.replace("'", "''") + "'";
+			System.out.println("qua ci siamo");
+			String query = "select * from UTENTI where username = '" + username.replace("'", "''") + "' and password = '" + password.replace("'", "''") + "'";
 			statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
 			if (result.next()) {
