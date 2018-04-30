@@ -15,8 +15,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="json-20120521.jar"/>
 	<classpathentry kind="lib" path="mysql-connector-java-5.1.29-bin.jar"/>
-	<classpathentry kind="lib" path="postgresql-9.3-1100.jdbc41.jar"/>
 	<classpathentry kind="lib" path="foursquare-api-1.0.2.jar"/>
 	<classpathentry kind="lib" path="OWM_JAPIs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Cerberus 2.0/Downloads/postgresql-42.2.2.jre7.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

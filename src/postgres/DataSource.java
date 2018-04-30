@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class DataSource {
 	//private String dbURI = "jdbc:mysql://localhost:3306/gscorrdata_new";
-	private String dbURI = "jdbc:postgresql://localhost:5432/postgres";
+	private String dbURI = "jdbc:postgresql://localhost:5432/TesiDB";
 	//private String userName = "root";
 	private String userName = "postgres";
-	private String password = "";
+	private String password = "postgres";
 
 	public Connection getConnection() throws PersistenceException {
 		Connection connection;

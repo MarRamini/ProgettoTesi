@@ -79,15 +79,15 @@ public class UserPostgres {
 			System.out.println("asking for connection");
 			connection = datasource.getConnection();
 			System.out.println("qua ci siamo");
-			String query = "select * from UTENTI where username = '" + username.replace("'", "''") + "' and password = '" + password.replace("'", "''") + "'";
+			String query = "select * from utenti where username = '" + username.replace("'", "''") + "' and password = '" + password.replace("'", "''") + "'";
 			statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
 			if (result.next()) {
 				user = new User();
-				user.setId(result.getInt("id"));
+				//user.setId(result.getInt("id"));
 				user.setUsername(username);
 				user.setPassword(password);
-				user.setWeight(1, result.getDouble("1"));
+				/*user.setWeight(1, result.getDouble("1"));
 				user.setWeight(2, result.getDouble("2"));
 				user.setWeight(3, result.getDouble("3"));
 				user.setWeight(4, result.getDouble("4"));
@@ -96,7 +96,7 @@ public class UserPostgres {
 				user.setWeight(7, result.getDouble("7"));
 				user.setWeight(8, result.getDouble("8"));
 				user.setWeight(9, result.getDouble("9"));
-				user.setWeight(10, result.getDouble("10"));
+				user.setWeight(10, result.getDouble("10"));*/
 			}			
 		} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
