@@ -68,7 +68,6 @@ public class Login extends HttpServlet {
 				String username = request.getParameter("txtUsername");
 				String password = request.getParameter("txtPassword");
 				user = UserPostgres.RetrieveUserByUsernameAndPassword(username, password);
-				System.out.println(user.getUsername());
 				if (user != null) {
 					//UserPostgres.RetrieveFriends(user);
 					

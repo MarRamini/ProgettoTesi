@@ -49,15 +49,15 @@
 				</script>
 			</input>
 	    </div>
-	</form>
+	</form>	
+	<%-- 
+	<span class="registerSuccededMessage">
+		    <%if (request.getAttribute("registerSucceded") != null){ 
+			 	 if (request.getAttribute("registerSucceded").equals("true")) { %>
+			   		 your registration is complete, please sign in with your data
+			<%    } 
+		 	 }%>
+	    </span>--%>	    
 </div>
-<%-- s
-<form data-dojo-type="dijit/form/Form" method="post">
-	
-	<table cellpadding="0" cellspacing="2">
-		
-
-	
-</form>--%>
 
 

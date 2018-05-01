@@ -13,52 +13,59 @@
 		"dojo/dom"]);
 </script>
 <div class="formContainer">
-	<form data-dojo-type="dijit/form/Form" method="post" id="registerForm" class="registerForm" action="">
+	<form data-dojo-type="dijit/form/Form" method="post" id="registerForm" class="registerForm" action="Register">
 		<script type="dojo/method" event="onSubmit">
 			if(!this.validate()){
-				alert('dati non validi, correggere i campi evidenziati');
+				alert('i campi in rosso sono obbligatori');
 				return false;
 			}
 			return true;
 		</script>
 		<div class="registerContainer">
 			<div class="registerRow">
-				<span valign="top">Username:</span>
+				<span valign="top">Username:</span><%--obbligatorio--%>
 				<input type="text" required="true" name="txtUsername" id="usernameInput" placeholder="Insert username"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Username is required" class="textBox"/>
+				<% if (request.getAttribute("error") != null) { %>
+					<script>
+						var input = document.getElementById("usernameInput")
+						input.className += "dijitTextBoxError";
+						input.placeholder = <%=request.getAttribute("error")%>
+					</script>
+				<% } %>
 			</div>
 			<div class="registerRow">
-				<span valign="top">Password:</span>
+				<span valign="top">Password:</span><%--obbligatorio--%>
 				<input type="text" required="true" name="txtPassword" id="passwordInput" placeholder="Insert Password"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Password is required" class="textBox"/>
 			</div>
 			<div class="registerRow">
-				<span valign="top">Name:</span>
+				<span valign="top">Name:</span><%--obbligatorio--%>
 				<input type="text" required="true" name="txtName" id="nameInput" placeholder="Insert your Name"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Name is required" class="textBox"/>
 			</div>
 			<div class="registerRow">
 				<span valign="top">Surname:</span>
-				<input type="text" required="true" name="txtSurname" id="surnameInput" placeholder="Insert your Surname"
+				<input type="text" required="false" name="txtSurname" id="surnameInput" placeholder="Insert your Surname"
 					   data-dojo-type="dijit/form/ValidationTextBox" class="textBox"/>
 			</div>
 			<div class="registerRow">
 				<span valign="top">Gender:</span>
-				<input type="text" required="true" name="txtGender" id="genderInput" placeholder="Insert your Gender"
+				<input type="text" required="false" name="txtGender" id="genderInput" placeholder="Insert your Gender"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Gender is required" class="textBox"/>
 			</div>
 			<div class="registerRow">
 				<span valign="top">Nationality:</span>
-				<input type="text" required="true" name="txtNationality" id="nationalityInput" placeholder="Insert your Nationality"
+				<input type="text" required="false" name="txtNationality" id="nationalityInput" placeholder="Insert your Nationality"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Nationality is required" class="textBox"/>
 			</div>
 			<div class="registerRow">
 				<span valign="top">Age:</span>
-				<input type="text" required="true" name="txtAge" id="ageInput" placeholder="Insert your Age"
+				<input type="text" required="false" name="txtAge" id="ageInput" placeholder="Insert your Age"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Age is required" class="textBox"/>
 			</div>
 			<div class="registerRow">
-				<span valign="top">e-mail:</span>
+				<span valign="top">e-mail:</span><%--obbligatorio--%>
 				<input type="text" required="true" name="txtEmail" id="emailInput" placeholder="Insert your e-mail"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="e-mail is required" class="textBox"/>
 			</div>

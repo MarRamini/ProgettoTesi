@@ -84,3 +84,12 @@
 .dijitTooltip, .dijitTooltipConnector{
 	display: none;
 }
+
+.registerSuccededMessage{
+	padding-top: 20px;
+    display: block;
+    color: #769dc0;
+    word-wrap: break-word;
+    word-break: break-word;
+    width: 55%;
+}

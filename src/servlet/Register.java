@@ -46,24 +46,32 @@ public class Register extends HttpServlet {
 		
 		String username = request.getParameter("txtUsername");
 		String password = request.getParameter("txtPassword");
+		int id = username.hashCode();
 		
 		try {
-			if (UserPostgres.RetrieveUserByUsernameAndPassword(username, password) != null) {
-				prossimaPagina = "/register1.jsp";
+			if (UserPostgres.RetrieveUserById(id) != null) { 
+				prossimaPagina = "/register.jsp";
 				request.setAttribute("error", "User already exists");
 			}
 			else {
-				String gender = request.getParameter("rdGender");
+				String gender = request.getParameter("txtGender");
 				int age = Integer.parseInt(request.getParameter("txtAge"));
-				String role = request.getParameter("ddlRole");
+				String name = request.getParameter("txtName");
+				String surname = request.getParameter("txtSurname");
+				String email = request.getParameter("txtEmail");
+				String nationality = request.getParameter("txtNationality");
 				
 				User user = new User();
+				user.setId(username.hashCode());
 				user.setUsername(username);
 				user.setPassword(password);
 				user.setGender(gender);
 				user.setAge(age);
-				user.setRole(role);
-				user.setWeight(1, Double.valueOf(request.getParameter("txtArts")));
+				user.setName(name);
+				user.setEmail(email);
+				user.setSurname(surname);
+				user.setNationality(nationality);
+				/*user.setWeight(1, Double.valueOf(request.getParameter("txtArts")));
 				user.setWeight(2, Double.valueOf(request.getParameter("txtEntertainment")));
 				user.setWeight(3, Double.valueOf(request.getParameter("txtMuseum")));
 				user.setWeight(4, Double.valueOf(request.getParameter("txtHistory")));				
@@ -72,14 +80,15 @@ public class Register extends HttpServlet {
 				user.setWeight(7, Double.valueOf(request.getParameter("txtOutdoors")));
 				user.setWeight(8, Double.valueOf(request.getParameter("txtAthletics")));
 				user.setWeight(9, Double.valueOf(request.getParameter("txtChurch")));
-				user.setWeight(10, Double.valueOf(request.getParameter("txtShop")));
+				user.setWeight(10, Double.valueOf(request.getParameter("txtShop")));*/
 				
 				
-				user.setId(retrieveMostSmilarUser(user));
+				//user.setId(retrieveMostSmilarUser(user));
 				
 				UserPostgres.persistUser(user);
-				prossimaPagina = "/register2.jsp";
+				prossimaPagina = "/login.jsp";
 				request.setAttribute("user", user);
+				request.setAttribute("registerSucceded", "true");
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();

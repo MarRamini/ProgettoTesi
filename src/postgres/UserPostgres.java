@@ -1,5 +1,6 @@
 package postgres;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,26 +69,22 @@ public class UserPostgres {
 	
 	
 	public static User RetrieveUserByUsernameAndPassword(String username, String password) throws PersistenceException {
-		System.out.println("beginning dbConnection");
 		User user = null;
 		DataSource datasource = new DataSource();
-		System.out.println("dataSource created");
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
-			System.out.println("asking for connection");
 			connection = datasource.getConnection();
-			System.out.println("qua ci siamo");
-			String query = "select * from utenti where username = '" + username.replace("'", "''") + "' and password = '" + password.replace("'", "''") + "'";
+			String query = "select * from users where username = '" + username.replace("'", "''") + "' and password = '" + password.replace("'", "''") + "'";
 			statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
 			if (result.next()) {
 				user = new User();
-				//user.setId(result.getInt("id"));
+				user.setId(result.getInt("id"));
 				user.setUsername(username);
 				user.setPassword(password);
-				/*user.setWeight(1, result.getDouble("1"));
+				user.setWeight(1, result.getDouble("1"));
 				user.setWeight(2, result.getDouble("2"));
 				user.setWeight(3, result.getDouble("3"));
 				user.setWeight(4, result.getDouble("4"));
@@ -96,7 +93,7 @@ public class UserPostgres {
 				user.setWeight(7, result.getDouble("7"));
 				user.setWeight(8, result.getDouble("8"));
 				user.setWeight(9, result.getDouble("9"));
-				user.setWeight(10, result.getDouble("10"));*/
+				user.setWeight(10, result.getDouble("10"));
 			}			
 		} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
@@ -548,14 +545,25 @@ public class UserPostgres {
 		PreparedStatement statement = null;
 		try {
 			connection = datasource.getConnection();
-			String insert = "insert into users (username, password, gender, age, role, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, id_padre) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String insert = "insert into users (id, username, password, gender, age, role, nationality, name, surname, email, friends, weights) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			statement = connection.prepareStatement(insert);
-			statement.setString(1, user.getUsername());
-			statement.setString(2, user.getPassword());
-			statement.setString(3, user.getGender());
-			statement.setInt(4, user.getAge());
-			statement.setString(5, user.getRole());
-			statement.setFloat(6, (float)user.getWeigth(1));
+			statement.setInt(1, user.getId());
+			statement.setString(2, user.getUsername());
+			statement.setString(3, user.getPassword());
+			statement.setString(4, user.getGender());
+			statement.setInt(5, user.getAge());
+			statement.setString(6, user.getRole());
+			statement.setString(7, user.getNationality());
+			statement.setString(8, user.getName());
+			statement.setString(9, user.getSurname());
+			statement.setString(10, user.getEmail());
+			Integer[] friends = new Integer[10];
+			Array friendsArray = connection.createArrayOf("Integer", friends);
+			statement.setArray(11, friendsArray);
+			Double[] weights = new Double[10];
+			Array weightsArray = connection.createArrayOf("NUMERIC", weights);
+			statement.setArray(12, weightsArray);
+			/*statement.setFloat(6, (float)user.getWeigth(1));
 			statement.setFloat(7, (float)user.getWeigth(2));
 			statement.setFloat(8, (float)user.getWeigth(3));
 			statement.setFloat(9, (float)user.getWeigth(4));
@@ -564,8 +572,7 @@ public class UserPostgres {
 			statement.setFloat(12, (float)user.getWeigth(7));
 			statement.setFloat(13, (float)user.getWeigth(8));
 			statement.setFloat(14, (float)user.getWeigth(9));
-			statement.setFloat(15, (float)user.getWeigth(10));
-			statement.setInt(16, user.getId());
+			statement.setFloat(15, (float)user.getWeigth(10));*/
 			statement.executeUpdate();						
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
