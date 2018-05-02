@@ -7,27 +7,37 @@
 		container.appendChild(document.getElementById("menuChoices"));
 	</script>
 	<div class="menuVoice">
-		<span onclick="showRoutingForm()">Routing</span>
+		<span onclick="showRoutingForm(this)">Routing</span>
 		<jsp:include page="routingForm.jsp"/>
 		<script>
-			function showRoutingForm(){
+			function showRoutingForm(elem){
 				var form = document.getElementById("routingForm");
 				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
+				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
 		</script>
 	</div>
 	<div class="menuVoice">
-		<span onclick="showFiltersForm()">Set Filters</span>
+		<span onclick="showFiltersForm(this)">Set Filters</span>
 		<jsp:include page="filtersOptions.jsp"/>
 		<script>
-			function showFiltersForm(){
+			function showFiltersForm(elem){
 				var form = document.getElementById("filtersForm");
 				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
+				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
 		</script>
 	</div>
 	<div class="menuVoice">
-		<span>Personalization</span>
+		<span onclick="showPersonalizationForm(this)">Personalization</span>
+		<jsp:include page="personalizationForm.jsp"/>
+		<script>
+			function showPersonalizationForm(elem){
+				var form = document.getElementById("personalizationForm");
+				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
+				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+			}
+		</script>
 	</div>
 	<div class="menuVoice">
 		<span>Options</span>

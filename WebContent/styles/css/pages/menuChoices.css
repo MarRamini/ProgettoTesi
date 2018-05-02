@@ -90,6 +90,19 @@ div.addressBar:focus{
 	border-bottom: 1px dotted #e6e6e6;
 }
 
-.menuVoice span:hover{
-	color: #58aef3;
+.menuVoice span:hover, .menuVoice span.focused, .link:hover{
+	color: #58aef3 !important;
+}
+
+.personalizationContainer .menuVoice:nth-child(1){
+	padding-top: 10px;
+}
+
+.personalizationContainer .menuVoice{
+	border: none;
+}
+
+.link{
+	text-decoration: none;
+	color: black;
 }
