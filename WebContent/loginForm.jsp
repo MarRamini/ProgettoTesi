@@ -14,13 +14,36 @@
 <div class="formContainer">
 	<form data-dojo-type="dijit/form/Form" method="post" id="loginForm" class="loginForm" action="Login">
 		<script type="dojo/method" event="onSubmit">
-			console.log(this)
-			if(!this.validate() && !this.attribute("skipvalidation")){
-				alert('dati non validi, correggere i campi evidenziati');
-				return false;
+			if(this.domNode.attributes.skipValidation.value == "false"){
+				if(!this.validate()){
+					var error = "one or more fields are empty";
+					document.getElementById("validationFailure").innerHTML = error;
+					return false;
+				}
 			}
 			return true;
 		</script>
+		<div class="errorContainer">
+			<span class="validationError" id="validationFailure"></span>
+			<span class="validationError" id="incorrectAccountData">
+				<script>
+					var error = "<%= request.getAttribute("error") %>";
+					console.log("controllo richiesta")
+					console.log(error)
+					if(error == "null"){
+						console.log("richiesta nulla")
+						document.getElementById("incorrectAccountData").innerHTML = "";
+					}
+					else{
+						console.log("richiesta non nulla")
+						document.getElementById("incorrectAccountData").innerHTML = error;
+						<% request.setAttribute("error", null); 
+							System.out.println(request.getAttribute("error"));
+						%>
+					}
+				</script>
+			</span>
+		</div>
 		<div class="loginContainer">
 			<div class="loginRow">
 				<span valign="top">Username:</span>
@@ -36,18 +59,19 @@
 		
 		<!-- submit buttons -->
 		<div class="submitButtons">
-			<input type="submit" value="Sign in" name="btnLogin" label="Sign in" id="submitButton" data-dojo-type="dijit/form/Button"/>
-			<input type="submit" value="Sign up" name="btnLogin" label="Sign up" id="registerButton" data-dojo-type="dijit/form/Button">
-				<script event="onclick">
-					document.getElementsByTagName("form").loginForm.setAttribute("skipValidation", true)
-				</script>
-			</input>
-			<input type="submit" value="Sign in as a guest" name="btnLogin" id="busyButton" data-dojo-type="dojox/form/BusyButton"
-			   label="Sign in as a Guest" busyLabel="Loggin in..." timeout="2000">
-				<script event="onClick">
-					document.getElementsByTagName("form").loginForm.setAttribute("skipValidation", true)
-				</script>
-			</input>
+			<input type="submit" value="Sign in" name="btnLogin" label="Sign in" id="loginButton" data-dojo-type="dijit/form/Button" onclick="skipValidation(this.params)"/>
+			<input type="submit" value="Sign up" name="btnLogin" label="Sign up" id="registerButton" data-dojo-type="dijit/form/Button" onclick="skipValidation(this.params)"/>
+			<input type="submit" value="Sign in as a guest" name="btnLogin" label="Sign in as a Guest" id="guestButton" data-dojo-type="dijit/form/Button" onclick="skipValidation(this.params)"/>
+			<script>
+				function skipValidation(params){
+					if(params.id == "loginButton"){
+						dojo.byId("loginForm").setAttribute("skipValidation", false);
+					}
+					else{
+						dojo.byId("loginForm").setAttribute("skipValidation", true);
+					}
+				}
+			</script>
 	    </div>
 	</form>	
 	<%-- 
