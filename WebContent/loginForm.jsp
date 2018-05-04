@@ -18,6 +18,7 @@
 				if(!this.validate()){
 					var error = "one or more fields are empty";
 					document.getElementById("validationFailure").innerHTML = error;
+					document.getElementById("incorrectAccountData").innerHTML = "";
 					return false;
 				}
 			}
@@ -28,18 +29,13 @@
 			<span class="validationError" id="incorrectAccountData">
 				<script>
 					var error = "<%= request.getAttribute("error") %>";
-					console.log("controllo richiesta")
-					console.log(error)
+					
 					if(error == "null"){
-						console.log("richiesta nulla")
 						document.getElementById("incorrectAccountData").innerHTML = "";
 					}
 					else{
-						console.log("richiesta non nulla")
-						document.getElementById("incorrectAccountData").innerHTML = error;
-						<% request.setAttribute("error", null); 
-							System.out.println(request.getAttribute("error"));
-						%>
+						document.getElementById("validationFailure").innerHTML = "";
+						document.getElementById("incorrectAccountData").innerHTML = error;						
 					}
 				</script>
 			</span>
