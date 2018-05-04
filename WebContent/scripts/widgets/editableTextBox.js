@@ -18,14 +18,14 @@ function buildContainer(){
 	containerDiv.style.borderBottom = "1px solid black";
 	containerDiv.style.display = "flex";
 	containerDiv.style.float = "right";
-	containerDiv.style.marginRight = "2px";
+	containerDiv.style.marginRight = "5px";
 	var widthDefect = parseInt(containerDiv.style.marginRight.replace("px", "")) + parseInt(labelMargin.replace("px", ""));
 	containerDiv.style.width = "calc(100% - " + widthDefect + "px)";
 	return containerDiv;
 }
 
 function buildTextBox(){
-	var textBox = document.createElement("input");
+	var textBox = document.createElement("span");
 	textBox.className = "editableTextBox";
 	textBox.style.width = "100%";
 	textBox.style.border = "none";

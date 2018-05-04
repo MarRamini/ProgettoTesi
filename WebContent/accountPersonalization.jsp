@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,13 +10,18 @@
 		<link rel="stylesheet" type="text/css" href="styles/css/pages/index.css"/>
 		<link rel="stylesheet" type="text/css" href="styles/css/pages/accountPersonalization.css"/>
 	</head>
-	<body>
+	<body class="claro">
 		<div id="accountPersonalizationForm" class="formContainer">
 		<div id="usernamePersonalization" class="personalizationRow">
 			<span>username</span>
-			<%-- modificare, qua devo mettere tasti per modificare 
 			<script type="text/javascript" src="scripts/widgets/editableTextBox.js" rootId="usernamePersonalization" labelMargin="100px"></script>
-			--%>
+			<script>
+				<%User user = (User) session.getAttribute("user");%>
+				var elem = document.getElementById("usernamePersonalization");
+				elem.childNodes[4].firstChild.innerHTML = "<%=user.getUsername()%>";
+				console.log(elem.childNodes[4].firstChild)
+				
+			</script>
 		</div>
 		<div class="personalizationRow">
 			<span>password</span>

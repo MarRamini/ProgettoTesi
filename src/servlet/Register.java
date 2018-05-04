@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import postgres.CheckinPostgres;
 import postgres.PersistenceException;
@@ -47,6 +48,7 @@ public class Register extends HttpServlet {
 		String username = request.getParameter("txtUsername");
 		String password = request.getParameter("txtPassword");
 		int id = username.hashCode();
+		HttpSession session = request.getSession(false);
 		
 		try {
 			if (UserPostgres.RetrieveUserById(id) != null) { 
@@ -87,7 +89,15 @@ public class Register extends HttpServlet {
 				
 				UserPostgres.persistUser(user);
 				prossimaPagina = "/login.jsp";
-				request.setAttribute("user", user);
+				session = request.getSession();
+				session.setAttribute("user", user);
+				request.setAttribute("username", username);
+				request.setAttribute("name", name);
+				request.setAttribute("surname", surname);
+				request.setAttribute("gender", gender);
+				request.setAttribute("nationality", nationality);
+				request.setAttribute("age", age);
+				request.setAttribute("email", email);
 				request.setAttribute("registerSucceded", "true");
 			}
 		} catch (PersistenceException e) {

@@ -1,7 +1,12 @@
 .formContainer{
-	display: block;
+    display: block;
 }
 
 .formContainer .personalizationRow{
-	padding: 10px 0 10px 10px;
+    padding: 10px 0 10px 10px;
+}
+
+.editableTextBoxContainer{
+	border-bottom-style: dotted !important;
+	border-bottom-color: #e6e6e6 !important;
 }
