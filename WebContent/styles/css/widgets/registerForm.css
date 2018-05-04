@@ -83,3 +83,26 @@
 .dijitTooltip, .dijitTooltipConnector{
 	display: none;
 }
+
+.selection{
+	width: calc(100% - 74px);
+}
+
+.selection:hover, .selectionOption:hover{
+	cursor: pointer;
+}
+
+.selection, .selectionOption{
+	color: #AAAAAA;
+    font-style: italic;
+}
+
+.errorContainer{
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.validationError{
+	color: red;
+}

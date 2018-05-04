@@ -16,11 +16,15 @@
 	<form data-dojo-type="dijit/form/Form" method="post" id="registerForm" class="registerForm" action="Register">
 		<script type="dojo/method" event="onSubmit">
 			if(!this.validate()){
-				alert('i campi in rosso sono obbligatori');
+				var error = "one or more mandatory fields are empty";
+				document.getElementById("validationFailure").innerHTML = error;
 				return false;
 			}
 			return true;
 		</script>
+		<div class="errorContainer">
+			<span class="validationError" id="validationFailure"></span>
+		</div>
 		<div class="registerContainer">
 			<div class="registerRow">
 				<span valign="top">Username:</span><%--obbligatorio--%>
@@ -51,8 +55,12 @@
 			</div>
 			<div class="registerRow">
 				<span valign="top">Gender:</span>
-				<input type="text" required="false" name="txtGender" id="genderInput" placeholder="Insert your Gender"
-					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Gender is required" class="textBox"/>
+				<select name="txtGender" id="genderInput" class="selection textBox">
+					<option class="selectionOption" value="male">male</option>
+					<option class="selectionOption" value="female">female</option>
+				</select>
+				<%--<input type="text" required="false" name="txtGender" id="genderInput" placeholder="Insert your Gender"
+					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Gender is required" class="textBox"/> --%>
 			</div>
 			<div class="registerRow">
 				<span valign="top">Nationality:</span>
