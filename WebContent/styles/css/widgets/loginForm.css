@@ -51,6 +51,8 @@
 	height: 30px;
 	display: flex;
 	align-items: center;
+	width: fit-content;
+	margin:	auto;
 }
 
 .loginRow span{

@@ -9,4 +9,23 @@
 .editableTextBoxContainer{
 	border-bottom-style: dotted !important;
 	border-bottom-color: #e6e6e6 !important;
+	font-style: oblique;
+}
+
+.editableTextBoxEditButton{
+	border: 1px solid transparent;
+	border-radius: 50%;
+	width: 16px !important;
+	height: 16px !important;
+	cursor: pointer;
+	background-image: url("../../icons/edit_16.png");
+}
+
+.editableTextBoxEditButton:hover{
+	border: 1px solid transparent;
+	border-radius: 50%;
+}
+
+.obscured, .obscured *{
+	background-color: lightgray;
 }
