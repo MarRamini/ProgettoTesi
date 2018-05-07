@@ -9,6 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="styles/css/pages/login.css"/>
 		<link rel="stylesheet" type="text/css" href="styles/css/pages/index.css"/>
 		<link rel="stylesheet" type="text/css" href="styles/css/pages/accountPersonalization.css"/>
+		<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async: false, parseOnLoad: true"></script>
+		<script type="text/javascript" src="scripts/utilities/passwordVisibilityToggle.js"></script>
 	</head>
 	<body class="claro">
 		<div id="accountPersonalizationForm" class="formContainer">
@@ -97,7 +99,7 @@
 			<span>avatar</span>
 		</div>
 		<div class="submitButtons">
-			<button data-dojo-type="dijit/form/Button" action="Update">Save Changes</button>
+			<span data-dojo-type="dijit/form/Button" action="Update">Save Changes</span>
 		</div>	
 	</div>
 	

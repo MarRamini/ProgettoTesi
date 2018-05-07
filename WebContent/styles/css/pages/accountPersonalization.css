@@ -11,6 +11,10 @@
 	border-bottom-color: #e6e6e6 !important;
 	font-style: oblique;
 }
+.editableTextBoxContainer:focus, .editableTextBox:focus{
+	outline: none;
+	border-bottom: 1px dotted #3498db !important;
+}
 
 .editableTextBoxEditButton{
 	border: 1px solid transparent;
@@ -28,4 +32,9 @@
 
 .obscured, .obscured *{
 	background-color: lightgray;
+}
+
+.submitButtons{
+	width: fit-content;
+	margin: auto;
 }

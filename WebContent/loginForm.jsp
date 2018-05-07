@@ -50,6 +50,7 @@
 				<span valign="top">Password:</span>
 				<input type="password" required="true" name="txtPassword" id="password" placeholder="Insert Password"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Inserire una password valida" class="textBox"/>
+					   <script type="text/javascript" src="scripts/utilities/passwordVisibilityToggle.js" referredId="password"></script>
 			</div>			
 		</div>
 		

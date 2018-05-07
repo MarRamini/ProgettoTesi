@@ -45,23 +45,32 @@ function buildEditButton(textBox, container){
 	button.style.height = "10px";
 	button.style.display = "inline-flex";
 	button.style.float = "right";
-	console.log(isPassword, rootId)
-	if(isPassword == "true"){
-		button.onclick = function(){
-			var newTextBox = document.createElement("input");
-			newTextBox.className = "editableTextBox";
-			newTextBox.style.width = "100%";
-			newTextBox.style.border = "none";			
-			newTextBox.style.webkitTextSecurity = "disc";
-			//aggiungere iconcina occhietto per vedere password
-			console.log(newTextBox.style)
-			newTextBox.onblur = function(){
-				textBox.innerHTML = newTextBox.value;
-				container.replaceChild(textBox, newTextBox);
+	var newTextBox = document.createElement("input");
+	newTextBox.className = "editableTextBox";
+	newTextBox.id = "editablePasswordTextBox";
+	newTextBox.style.width = "100%";
+	newTextBox.style.border = "none";		
+	newTextBox.type = "password";	
+	
+	newTextBox.onblur = function(){
+		textBox.innerHTML = newTextBox.value;
+		container.replaceChild(textBox, newTextBox);
+		var containerChildren = container.children;
+		for(var i=0 ; i<containerChildren.length ; i++){
+			if(containerChildren[i].className === "visibilityToggleWidget"){
+				container.removeChild(containerChildren[i]);
 			}
-			
+		}
+	}
+	if(isPassword == "true"){
+		button.onclick = function(event){
+			event.preventDefault();
 			newTextBox.value = textBox.innerHTML;
 			container.replaceChild(newTextBox, textBox);
+			var visibilityWidget = buildVisibilityWidget(newTextBox);
+			visibilityWidget.style.right = "15px";
+			visibilityWidget.style.bottom = "-4px";
+			container.focus();
 			newTextBox.focus();
 		}
 	}
@@ -79,6 +88,7 @@ function buildEditButton(textBox, container){
 		
 			newTextBox.value = textBox.innerHTML;
 			container.replaceChild(newTextBox, textBox);
+			container.focus();
 			newTextBox.focus();
 		}
 	}
