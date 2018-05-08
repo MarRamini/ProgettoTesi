@@ -18,6 +18,7 @@ public class User {
 	private List<Integer> friends;
 	private List<Checkin> checkins;
 	private double[] weigths;
+	private String avatar;
 	
 	public User() {
 		this.checkins = new ArrayList<Checkin>();
@@ -148,6 +149,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 }

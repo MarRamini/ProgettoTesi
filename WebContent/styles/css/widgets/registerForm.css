@@ -52,6 +52,7 @@
 	border-bottom: 1px solid #b5bcc7;
 	background-color: transparent;
 	float: right;
+	width: calc(100% - 100px);
 }
 
 .registerRow .dijitTextBoxError{

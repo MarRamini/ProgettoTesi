@@ -62,6 +62,8 @@ public class Register extends HttpServlet {
 				String surname = request.getParameter("txtSurname");
 				String email = request.getParameter("txtEmail");
 				String nationality = request.getParameter("txtNationality");
+				String avatar = request.getParameter("txtAvatar");
+				System.out.println(avatar);
 				
 				User user = new User();
 				user.setId(username.hashCode());
@@ -73,6 +75,8 @@ public class Register extends HttpServlet {
 				user.setEmail(email);
 				user.setSurname(surname);
 				user.setNationality(nationality);
+				user.setAvatar(avatar);
+				
 				/*user.setWeight(1, Double.valueOf(request.getParameter("txtArts")));
 				user.setWeight(2, Double.valueOf(request.getParameter("txtEntertainment")));
 				user.setWeight(3, Double.valueOf(request.getParameter("txtMuseum")));
@@ -98,6 +102,7 @@ public class Register extends HttpServlet {
 				request.setAttribute("nationality", nationality);
 				request.setAttribute("age", age);
 				request.setAttribute("email", email);
+				request.setAttribute("avatar", avatar);
 				request.setAttribute("registerSucceded", "true");
 			}
 		} catch (PersistenceException e) {

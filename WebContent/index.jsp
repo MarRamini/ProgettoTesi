@@ -23,6 +23,13 @@
 			<script>
 				var userSpan = document.getElementById("userType");
 				userSpan.textContent = "Welcome <%= ((User)session.getAttribute("user")).getUsername() %>";
+				var userAvatar = "<%= ((User)session.getAttribute("user")).getAvatar()%>";
+				console.log("da db: ",userAvatar)
+				if(userAvatar && userAvatar != "" || userAvatar != "null"){
+					var url = "url('" + userAvatar + "')";
+					console.log(url)
+					document.getElementById("userAvatar").style.backgroundImage = url;
+				}
 			</script>
 			<%--<span class="userType">
 				Benvenuto  <%= ((User)session.getAttribute("user")).getUsername() %>

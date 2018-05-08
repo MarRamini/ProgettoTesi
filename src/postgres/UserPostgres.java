@@ -91,6 +91,7 @@ public class UserPostgres {
 				user.setName(result.getString("name"));
 				user.setSurname(result.getString("surname"));
 				user.setEmail(result.getString("email"));
+				user.setAvatar(result.getString("avatar"));
 				/*user.setWeight(1, result.getDouble("1"));
 				user.setWeight(2, result.getDouble("2"));
 				user.setWeight(3, result.getDouble("3"));
