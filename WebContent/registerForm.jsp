@@ -13,7 +13,7 @@
 		"dojo/dom"]);
 </script>
 <div class="formContainer">
-	<form data-dojo-type="dijit/form/Form" method="post" id="registerForm" class="registerForm" action="Register">
+	<form data-dojo-type="dijit/form/Form" method="post" id="registerForm" class="registerForm" action="Register" enctype="multipart/form-data">
 		<script type="dojo/method" event="onSubmit">
 			if(!this.validate()){
 				var error = "one or more mandatory fields are empty";
@@ -79,8 +79,9 @@
 			</div>			
 			<div class="registerRow">
 				<span valign="top">Avatar:</span>
-				<input type="file" required="false" name="txtAvatar" id="avatarInput" placeholder="Insert your avatar"
+				<input type="file" required="false" name="avatar" id="avatarInput" placeholder="Insert your avatar"
 					   data-dojo-type="dijit/form/ValidationTextBox" class="textBox"/>
+					   <%-- 
 					   <script>
 					   		var input = document.getElementById("avatarInput");
 					   		document.getElementById("avatarInput").onchange = function(event){
@@ -97,7 +98,7 @@
 					   		    
 					   		    fileReader.readAsDataURL(file);	   
 					   		}
-					   </script>
+					   </script>--%>
 			</div>
 			<div class="submitButtons">
 				<span type="submit" value="Sign up" name="btnLogin" label="Sign up" id="submitButton" data-dojo-type="dijit/form/Button"></span>

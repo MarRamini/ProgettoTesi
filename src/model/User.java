@@ -1,5 +1,6 @@
 package model;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class User {
 	private List<Integer> friends;
 	private List<Checkin> checkins;
 	private double[] weigths;
-	private String avatar;
+	private InputStream avatar;
 	
 	public User() {
 		this.checkins = new ArrayList<Checkin>();
@@ -151,11 +152,11 @@ public class User {
 		this.email = email;
 	}
 	
-	public String getAvatar() {
+	public InputStream getAvatar() {
 		return avatar;
 	}
 
-	public void setAvatar(String avatar) {
+	public void setAvatar(InputStream avatar) {
 		this.avatar = avatar;
 	}
 

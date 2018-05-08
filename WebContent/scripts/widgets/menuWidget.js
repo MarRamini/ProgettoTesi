@@ -43,7 +43,9 @@ function buildUserPanel(){
 	
 	var avatar = document.createElement("div");
 	avatar.classList.add("avatar");
-	avatar.id="userAvatar";
+	avatar.id = "userAvatar";
+	avatar.style.backgroundImage = "url('ImageHandler')"; //chiamo la servlet che trasforma l'immagine InputStream dell'utente in immagine
+	
 	var userType = document.createElement("span");
 	userType.id = "userType";
 	userType.classList.add("userType");

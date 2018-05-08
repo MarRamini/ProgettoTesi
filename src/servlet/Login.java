@@ -1,6 +1,8 @@
 package servlet;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import model.User;
 import postgres.PersistenceException;
 import postgres.UserPostgres;
@@ -75,6 +76,7 @@ public class Login extends HttpServlet {
 					session.invalidate();
 					session = request.getSession();
 					session.setAttribute("user", user);
+					
 					prossimaPagina = "/index.jsp";
 				} else {
 					prossimaPagina = "/login.jsp";

@@ -1,16 +1,20 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import postgres.CheckinPostgres;
 import postgres.PersistenceException;
@@ -21,6 +25,7 @@ import model.User;
  * Servlet implementation class Register
  */
 @WebServlet("/Register")
+@MultipartConfig
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -62,8 +67,9 @@ public class Register extends HttpServlet {
 				String surname = request.getParameter("txtSurname");
 				String email = request.getParameter("txtEmail");
 				String nationality = request.getParameter("txtNationality");
-				String avatar = request.getParameter("txtAvatar");
-				System.out.println(avatar);
+				Part filePart = request.getPart("avatar"); // Retrieves <input type="file" name="avatar">
+				System.out.println(this.getSubmittedFileName(filePart));
+			    InputStream fileContent = filePart.getInputStream();
 				
 				User user = new User();
 				user.setId(username.hashCode());
@@ -75,7 +81,7 @@ public class Register extends HttpServlet {
 				user.setEmail(email);
 				user.setSurname(surname);
 				user.setNationality(nationality);
-				user.setAvatar(avatar);
+				user.setAvatar(fileContent);
 				
 				/*user.setWeight(1, Double.valueOf(request.getParameter("txtArts")));
 				user.setWeight(2, Double.valueOf(request.getParameter("txtEntertainment")));
@@ -102,7 +108,7 @@ public class Register extends HttpServlet {
 				request.setAttribute("nationality", nationality);
 				request.setAttribute("age", age);
 				request.setAttribute("email", email);
-				request.setAttribute("avatar", avatar);
+				request.setAttribute("avatar", fileContent);
 				request.setAttribute("registerSucceded", "true");
 			}
 		} catch (PersistenceException e) {
@@ -155,6 +161,16 @@ public class Register extends HttpServlet {
 		}
 		
 		return id;
+	}
+	
+	private static String getSubmittedFileName(Part part) {
+	    for (String cd : part.getHeader("content-disposition").split(";")) {
+	        if (cd.trim().startsWith("filename")) {
+	            String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+	            return fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1); // MSIE fix.
+	        }
+	    }
+	    return null;
 	}
 
 }
