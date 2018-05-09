@@ -12,7 +12,11 @@ buildWidget(root);
 
 function buildWidget(root){	
 	var container = buildContainer();
-	root.appendChild(container);
+	console.log(root)
+	if(root != null){
+		console.log("diverso")
+		root.appendChild(container);
+	}
 	
 	if(userPanel == "true"){
 		var panel = buildUserPanel();
@@ -44,7 +48,6 @@ function buildUserPanel(){
 	var avatar = document.createElement("div");
 	avatar.classList.add("avatar");
 	avatar.id = "userAvatar";
-	avatar.style.backgroundImage = "url('ImageHandler')"; //chiamo la servlet che trasforma l'immagine InputStream dell'utente in immagine
 	
 	var userType = document.createElement("span");
 	userType.id = "userType";

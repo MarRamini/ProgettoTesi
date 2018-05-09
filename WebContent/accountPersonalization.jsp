@@ -97,6 +97,13 @@
 		</div>
 		<div class="personalizationRow">
 			<span>avatar</span>
+			<div class="avatar" id="personalizationAvatar">
+				<script type="text/javascript" src="scripts/utilities/retrieveAvatarImage.js"></script>
+				<script>
+					document.getElementById("personalizationAvatar").style.backgroundImage = getAvatar();
+				</script>
+			</div>
+			<input type="file" name="avatarPersonalization" class="textBox"/> 
 		</div>
 		<div class="submitButtons">
 			<span data-dojo-type="dijit/form/Button" action="Update">Save Changes</span>

@@ -1,3 +1,5 @@
+@import url("../widgets/menuWidget.css");
+
 .formContainer{
     display: block;
 }
@@ -37,4 +39,24 @@
 .submitButtons{
 	width: fit-content;
 	margin: auto;
+}
+
+.personalizationRow .textBox{
+	border: none;
+	border-bottom: 1px solid #b5bcc7;
+	background-color: transparent;
+	float: right;
+	width: calc(100% - 200px);
+}
+
+.personalizationRow .avatar{
+	width: 50px;
+	height: 50px;
+	position: relative;
+	display: inline-flex;
+	border-radius: 100%;
+	border: 1px solid dimgray;
+	top: calc(100% - 60px);
+	background-image: url("../../images/default-avatar_50.png");
+	margin-left: 5px;
 }

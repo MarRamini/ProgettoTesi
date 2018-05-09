@@ -20,9 +20,11 @@
 		</div>
 		<div id="primaryMenu" class="menuBar">
 			<script type="text/javascript" src="scripts/widgets/menuWidget.js" rootId="primaryMenu" userPanel="true"></script>
+			<script type="text/javascript" src="scripts/utilities/retrieveAvatarImage.js" rootId="primaryMenu" userPanel="true"></script>
 			<script>
 				var userSpan = document.getElementById("userType");
 				userSpan.textContent = "Welcome <%= ((User)session.getAttribute("user")).getUsername() %>";
+				document.getElementById("userAvatar").style.backgroundImage = getAvatar();
 			</script>
 			<%--<span class="userType">
 				Benvenuto  <%= ((User)session.getAttribute("user")).getUsername() %>
