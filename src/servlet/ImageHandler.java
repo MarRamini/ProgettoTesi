@@ -35,19 +35,18 @@ public class ImageHandler extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
-		System.out.println(user.getUsername());
+
 		if(user != null){
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 			int cont;
 			byte[] imageBytes = new byte[2048];
 			InputStream data = user.getAvatar();
 			
-			while((cont = data.read(imageBytes, 0, imageBytes.length)) != -1){
-				System.out.println(cont);
+			while((cont = data.read(imageBytes, 0, imageBytes.length)) != -1){	
 				buffer.write(imageBytes, 0, cont);
 			}
 			
-			
+			data.reset();
 			buffer.flush();
 		    byte[] byteArray = buffer.toByteArray();
 	
