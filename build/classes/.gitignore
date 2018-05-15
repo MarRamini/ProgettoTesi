@@ -1,6 +1,5 @@
-/logic/
-/model/
-/postgres/
 /servlet/
 /socialAndServices/
 /util/
+/postgres/
+/model/

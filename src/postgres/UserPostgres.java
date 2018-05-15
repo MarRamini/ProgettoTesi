@@ -1,5 +1,6 @@
 package postgres;
 
+import java.io.IOException;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,7 +69,7 @@ public class UserPostgres {
 	
 	
 	
-	public static User RetrieveUserByUsernameAndPassword(String username, String password) throws PersistenceException {
+	public static User RetrieveUserByUsernameAndPassword(String username, String password) throws PersistenceException, IOException {
 		User user = null;
 		DataSource datasource = new DataSource();
 		Connection connection = null;
@@ -571,7 +572,7 @@ public class UserPostgres {
 			Double[] weights = new Double[10];
 			Array weightsArray = connection.createArrayOf("NUMERIC", weights);
 			statement.setArray(12, weightsArray);
-			statement.setBinaryStream(13, user.getAvatar());
+			statement.setBytes(13, user.getAvatar());
 			/*statement.setFloat(6, (float)user.getWeigth(1));
 			statement.setFloat(7, (float)user.getWeigth(2));
 			statement.setFloat(8, (float)user.getWeigth(3));
@@ -656,7 +657,7 @@ public class UserPostgres {
 			Double[] weights = new Double[10];
 			Array weightsArray = connection.createArrayOf("NUMERIC", weights);
 			statement.setArray(12, weightsArray);
-			statement.setBinaryStream(13, updatedUser.getAvatar());		
+			statement.setBytes(13, updatedUser.getAvatar());		
 			statement.setInt(14, user.getId());			
 			statement.executeUpdate();
 		} catch (SQLException e) {

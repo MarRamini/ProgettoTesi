@@ -1,5 +1,7 @@
 package model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class User {
 	private List<Integer> friends;
 	private List<Checkin> checkins;
 	private double[] weigths;
-	private InputStream avatar;
+	private byte[] avatar;
 	
 	public User() {
 		this.checkins = new ArrayList<Checkin>();
@@ -152,12 +154,28 @@ public class User {
 		this.email = email;
 	}
 	
-	public InputStream getAvatar() {
+	public byte[] getAvatar() {
 		return avatar;
 	}
 
-	public void setAvatar(InputStream avatar) {
-		this.avatar = avatar;
+	public void setAvatar(InputStream avatarStream) throws IOException {
+		try{
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			int cont;
+			byte[] avatarBytes = new byte[2048];							
+			
+			while((cont = avatarStream.read(avatarBytes, 0, avatarBytes.length)) != -1){				
+				buffer.write(avatarBytes, 0, cont);
+			}				
+			
+			buffer.flush();
+		    this.avatar = buffer.toByteArray();
+		    
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			avatarStream.close();
+		}
 	}
 
 }
