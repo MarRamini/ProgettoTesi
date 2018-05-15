@@ -68,7 +68,6 @@ public class Register extends HttpServlet {
 				String email = request.getParameter("txtEmail");
 				String nationality = request.getParameter("txtNationality");
 				Part filePart = request.getPart("avatar"); // Retrieves <input type="file" name="avatar">
-				System.out.println(this.getSubmittedFileName(filePart));
 			    InputStream fileContent = filePart.getInputStream();
 				
 				User user = new User();

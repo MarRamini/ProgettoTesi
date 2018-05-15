@@ -5,7 +5,8 @@
 }
 
 .formContainer .personalizationRow{
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 0 10px;
+    height: 30px;
 }
 
 .editableTextBoxContainer{
@@ -52,11 +53,12 @@
 .personalizationRow .avatar{
 	width: 50px;
 	height: 50px;
-	position: relative;
+	position: absolute;
 	display: inline-flex;
 	border-radius: 100%;
 	border: 1px solid dimgray;
-	top: calc(100% - 60px);
+	top: calc(100% - 205px);
+	left: 220px;
 	background-image: url("../../images/default-avatar_50.png");
 	margin-left: 5px;
 }

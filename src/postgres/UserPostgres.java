@@ -138,7 +138,7 @@ public class UserPostgres {
 				user.setId(id);
 				user.setUsername(result.getString("username"));
 				user.setPassword(result.getString("password"));
-				user.setWeight(1, result.getDouble("1"));
+			/*	user.setWeight(1, result.getDouble("1"));
 				user.setWeight(2, result.getDouble("2"));
 				user.setWeight(3, result.getDouble("3"));
 				user.setWeight(4, result.getDouble("4"));
@@ -147,7 +147,7 @@ public class UserPostgres {
 				user.setWeight(7, result.getDouble("7"));
 				user.setWeight(8, result.getDouble("8"));
 				user.setWeight(9, result.getDouble("9"));
-				user.setWeight(10, result.getDouble("10"));
+				user.setWeight(10, result.getDouble("10"));*/
 			}			
 		} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
@@ -631,7 +631,49 @@ public class UserPostgres {
 		}
 	}
 	
-	
+	public static void updateUser(User user, User updatedUser) throws PersistenceException {
+		DataSource datasource = new DataSource();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try{
+			connection = datasource.getConnection();
+			String update = "UPDATE users SET id=?, username=?, password=?, gender=?, age=?, role=?, nationality=?, name=?, surname=?, email=?, friends=?, weights=?, avatar=?	WHERE id=?";
+			statement = connection.prepareStatement(update);
+			statement.setInt(1, updatedUser.getId());
+			statement.setString(2, updatedUser.getUsername());
+			statement.setString(3, updatedUser.getPassword());
+			statement.setString(4, updatedUser.getGender());
+			statement.setInt(5, updatedUser.getAge());
+			statement.setString(6, updatedUser.getRole());
+			statement.setString(7, updatedUser.getNationality());
+			statement.setString(8, updatedUser.getName());
+			statement.setString(9, updatedUser.getSurname());
+			statement.setString(10, updatedUser.getEmail());
+			Integer[] friends = new Integer[10];
+			Array friendsArray = connection.createArrayOf("Integer", friends);
+			statement.setArray(11, friendsArray);
+			Double[] weights = new Double[10];
+			Array weightsArray = connection.createArrayOf("NUMERIC", weights);
+			statement.setArray(12, weightsArray);
+			statement.setBinaryStream(13, updatedUser.getAvatar());		
+			statement.setInt(14, user.getId());			
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} catch (PersistenceException e) {
+			throw e;
+		} finally {
+			try {
+				if (statement != null) 
+					statement.close();
+				if (connection!= null)
+					connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
 
 	public static void updateIdPadre(User user, int idPadre) throws PersistenceException {
 		

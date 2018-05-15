@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,26 +36,39 @@ public class ImageHandler extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
+		BufferedInputStream data = null;
 
 		if(user != null){
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			int cont;
-			byte[] imageBytes = new byte[2048];
-			InputStream data = user.getAvatar();
-			
-			while((cont = data.read(imageBytes, 0, imageBytes.length)) != -1){	
-				buffer.write(imageBytes, 0, cont);
+			try{
+				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+				int cont;
+				byte[] imageBytes = new byte[2048];
+				data = new BufferedInputStream(user.getAvatar());
+				System.out.println(data.markSupported());
+				boolean isMarkSupported = data.markSupported();
+				
+				if(isMarkSupported)
+					
+				
+				while((cont = data.read(imageBytes, 0, imageBytes.length)) != -1){	
+					buffer.write(imageBytes, 0, cont);
+				}
+				
+				if(isMarkSupported)
+					data.reset();			
+				
+				
+				buffer.flush();
+			    byte[] byteArray = buffer.toByteArray();
+		
+				response.setContentType("image/jpeg");
+		
+				response.setContentLength(byteArray.length);
+		
+				response.getOutputStream().write(byteArray);
+			}catch(Exception e){
+				e.printStackTrace();
 			}
-			
-			data.reset();
-			buffer.flush();
-		    byte[] byteArray = buffer.toByteArray();
-	
-			response.setContentType("image/jpeg");
-	
-			response.setContentLength(byteArray.length);
-	
-			response.getOutputStream().write(byteArray);
 		}
 	}
 

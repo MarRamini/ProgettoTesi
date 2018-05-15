@@ -81,24 +81,6 @@
 				<span valign="top">Avatar:</span>
 				<input type="file" required="false" name="avatar" id="avatarInput" placeholder="Insert your avatar"
 					   data-dojo-type="dijit/form/ValidationTextBox" class="textBox"/>
-					   <%-- 
-					   <script>
-					   		var input = document.getElementById("avatarInput");
-					   		document.getElementById("avatarInput").onchange = function(event){
-					   			console.log(event)
-					   			var file = event.target.files[0];
-
-					   		    var fileReader = new FileReader();
-					   		    
-					   		    fileReader.onload = function(event2) {
-					   		        var imageURL = event2.target.result;
-					   		        //input.value = imageURL;
-					   		        console.log(imageURL)					
-					   		    };
-					   		    
-					   		    fileReader.readAsDataURL(file);	   
-					   		}
-					   </script>--%>
 			</div>
 			<div class="submitButtons">
 				<span type="submit" value="Sign up" name="btnLogin" label="Sign up" id="submitButton" data-dojo-type="dijit/form/Button"></span>

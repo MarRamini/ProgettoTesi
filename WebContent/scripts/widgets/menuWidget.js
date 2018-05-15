@@ -12,9 +12,7 @@ buildWidget(root);
 
 function buildWidget(root){	
 	var container = buildContainer();
-	console.log(root)
 	if(root != null){
-		console.log("diverso")
 		root.appendChild(container);
 	}
 	

@@ -3,16 +3,17 @@ var rootId = document.currentScript.getAttribute("rootId");
 var root = document.getElementById(rootId);
 var labelMargin = document.currentScript.getAttribute("labelMargin");
 var isPassword = document.currentScript.getAttribute("isPassword");
+var name = document.currentScript.getAttribute("name");
+var type = document.currentScript.getAttribute("barType");
 
 buildWidget(root);
 
 function buildWidget(root){
 	var container = buildContainer();
 	root.appendChild(container);
-	var textBox = buildTextBox();
-	container.appendChild(textBox);
-	var editButton = buildEditButton(textBox, container);
-	container.appendChild(editButton);
+	var textBox = buildTextBox(container);
+	//var editButton = buildEditButton(textBox, container);
+	//container.appendChild(editButton);
 }
 
 function buildContainer(){
@@ -27,15 +28,33 @@ function buildContainer(){
 	return containerDiv;
 }
 
-function buildTextBox(){
-	var textBox = document.createElement("span");
+function buildTextBox(container){
+	var textBox = document.createElement("input");
+	textBox.setAttribute("name", name);
+	textBox.setAttribute("type", type);
 	if(isPassword == "true"){
-		textBox.style.webkitTextSecurity = "disc";
+		textBox.type = "password";
+		textBox.id = "editablePasswordTextBox";
+		textBox.onfocus = function(){	
+			console.log("focus")
+			var visibilityWidget = buildVisibilityWidget(textBox);
+			visibilityWidget.style.right = "15px";
+			visibilityWidget.style.bottom = "-4px";
+		}
+		
+		textBox.onblur = function(){
+			var containerChildren = container.children;
+			for(var i=0 ; i<containerChildren.length ; i++){
+				if(containerChildren[i].className === "visibilityToggleWidget"){
+					container.removeChild(containerChildren[i]);
+				}
+			}
+		}
 	}
 	textBox.className = "editableTextBox";
 	textBox.style.width = "100%";
 	textBox.style.border = "none";
-	return textBox;
+	container.appendChild(textBox);
 }
 
 function buildEditButton(textBox, container){
@@ -46,6 +65,8 @@ function buildEditButton(textBox, container){
 	button.style.display = "inline-flex";
 	button.style.float = "right";
 	var newTextBox = document.createElement("input");
+	newTextBox.setAttribute("name", name);
+	newTextBox.setAttribute("type", type);
 	newTextBox.className = "editableTextBox";
 	newTextBox.id = "editablePasswordTextBox";
 	newTextBox.style.width = "100%";
@@ -77,7 +98,10 @@ function buildEditButton(textBox, container){
 	else{
 		button.onclick = function(){
 			var newTextBox = document.createElement("input");
+			newTextBox.setAttribute("name", name);
+			newTextBox.setAttribute("type", type);
 			newTextBox.className = "editableTextBox";
+			newTextBox.type = type;
 			newTextBox.style.width = "100%";
 			newTextBox.style.border = "none";
 			newTextBox.onblur = function(){

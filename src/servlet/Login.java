@@ -73,7 +73,7 @@ public class Login extends HttpServlet {
 					//UserPostgres.RetrieveFriends(user);
 					
 					if (session != null)
-					session.invalidate();
+						session.invalidate();
 					session = request.getSession();
 					session.setAttribute("user", user);
 					
