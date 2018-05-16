@@ -9,4 +9,8 @@
 	<div class="searchBox" id="searchBox">
 		<script type="text/javascript" src="scripts/widgets/quickSearchWidget.js"></script>
 	</div>
+	<div class="preferredSearches" onclick="togglePreferred()">
+		<script type="text/javascript" src="scripts/utilities/togglePreferred.js"></script>
+		<div class="preferredIcon"></div>			
+	</div>
 </div>

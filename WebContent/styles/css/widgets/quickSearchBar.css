@@ -41,8 +41,34 @@
 	background-image: url("../../icons/hamburgerMenu_14.png");
 }
 
+.preferredSearches{
+	position: relative;
+	display: inline-flex;
+	width: 32px;
+	height: 32px;
+	background: transparent;
+	right: 0px;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	float: right;
+}
+
+.preferredSearches:hover{
+	background-color: #f2f2f2;
+}
+
+.preferredIcon{
+	position:relative;
+	display: block;
+	height: 14px;
+	width: 14px;
+	cursor: pointer;
+	background-image: url("../../icons/preferred_searches_14.png");
+}
+
 .searchBox{
-	width: calc(100% - 32px) !important;
+	width: calc(100% - 64px) !important;
 	height: 32px;
 	float: right;
 }

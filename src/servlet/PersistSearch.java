@@ -6,11 +6,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import model.Search;
+import model.User;
+import postgres.PersistenceException;
+import postgres.SearchPostgres;
 
 /**
  * Servlet implementation class PersistSearch
@@ -42,22 +46,26 @@ public class PersistSearch extends HttpServlet {
 		// TODO Auto-generated method stub
 		String jsonString = request.getParameter("search");
 		Search search = null;
+		HttpSession session = request.getSession(false);
+		User user = (User) session.getAttribute("user");
+		
 		try {
 			search = this.decodeJson(jsonString);
+			
+			if(search != null && user != null){
+				SearchPostgres.persistSearch(search, user);
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		if(search != null){
-			//persistSearch
-		}
+		} catch (PersistenceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
 	private Search decodeJson(String json) throws JSONException{
 		Search search = new Search();
-		
-		System.out.println(json);
 		
 		try{
 			JSONObject obj = new JSONObject(json);
