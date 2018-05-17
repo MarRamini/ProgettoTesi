@@ -6,17 +6,10 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.TimeZone;
-
 import javax.xml.parsers.*;
 
 import org.xml.sax.*;
@@ -25,11 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import socialAndServices.Foursquare;
-import socialAndServices.Google;
-import util.GeoLocation;
-import fi.foyt.foursquare.api.FoursquareApiException;
-import logic.LatLngSquare;
 import model.MacroCategory;
 import model.User;
 import model.Venue;

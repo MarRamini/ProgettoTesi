@@ -5,7 +5,7 @@ require([
   "dojo/domReady!",
 ], 
   function(Search, SceneView, Map){			
-      var searchWidget = new Search({
+      searchWidget = new Search({
           view: this.view,
           container: "searchBox"
       });

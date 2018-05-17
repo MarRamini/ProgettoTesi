@@ -58,7 +58,7 @@
 	border-radius: 100%;
 	border: 1px solid dimgray;
 	top: calc(100% - 205px);
-	left: 220px;
+	left: 560px;
 	background-image: url("../../images/default-avatar_50.png");
 	margin-left: 5px;
 }

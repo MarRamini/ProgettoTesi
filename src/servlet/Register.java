@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -161,7 +160,7 @@ public class Register extends HttpServlet {
 		
 		return id;
 	}
-	
+	/*
 	private static String getSubmittedFileName(Part part) {
 	    for (String cd : part.getHeader("content-disposition").split(";")) {
 	        if (cd.trim().startsWith("filename")) {
@@ -170,6 +169,6 @@ public class Register extends HttpServlet {
 	        }
 	    }
 	    return null;
-	}
+	}*/
 
 }

@@ -23,6 +23,8 @@ function buildWidget(root){
 	
 	contentContainer = buildContentPanel();
 	container.appendChild(contentContainer);
+	var closeMenu = buildClosureIcon();
+	container.appendChild(closeMenu);
 }
 
 function buildContainer(){
@@ -62,7 +64,7 @@ function buildContentPanel(){
 	container.classList.add("contentContainer");
 	container.style.width = "100%";
 	if(userPanel == "true"){
-		container.style.height = "70%"
+		container.style.height = "calc(70% - 32px)"
 	}
 	else{
 		container.style.height = "100%";	
@@ -72,4 +74,16 @@ function buildContentPanel(){
 
 function getContentContainer(){
 	return contentContainer;
+}
+
+function buildClosureIcon(){	
+	var div = document.createElement("div");
+	div.className = "closeMenu";
+	div.onclick = function(){
+		toggleMenu();
+	}
+	var icon = document.createElement("div");
+	icon.className = "closeMenuIcon"
+	div.appendChild(icon);
+	return div;
 }

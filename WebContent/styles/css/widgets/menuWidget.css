@@ -24,3 +24,28 @@
 	background-image: url("../../images/default-avatar_50.png");
 	margin-left: 5px;
 }
+
+.closeMenu{
+	height: 32px;
+	width: 32px;
+	position: relative;
+	display: flex;
+	margin-right: 10px;
+	bottom: 0px;
+	float: right;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+}
+
+.closeMenu:hover{
+	background-color: #f2f2f2;
+}
+
+.closeMenu .closeMenuIcon{
+	position: relative;
+    display: block;
+	height: 14px;
+	width: 14px;
+	background-image: url(../../icons/backwards_14.png);
+}

@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
-
 import model.Search;
 import model.User;
 import postgres.PersistenceException;
@@ -58,23 +55,19 @@ public class RetrievePreferredSearches extends HttpServlet {
 		
 		try {
 			searches = SearchPostgres.retrieveSearchesByUser(user);
-			int positiveCounter = 0;
-			int totalCounter = 0;
 			Iterator<Search> iter = searches.iterator();
-			
 			while(iter.hasNext()){
-				Search currentSearch = iter.next();
-				for(Search search : searches){
-					if(search.equals(currentSearch)){
-						positiveCounter ++;
-						searches.remove(search);
+				int positiveCounter = 0;
+				Search currentSearch = iter.next();	
+				if(!location2weight.containsKey(currentSearch.getAddress())){
+					for(Search search : searches){
+						if(search.equals(currentSearch))
+							positiveCounter ++;
 					}
-					totalCounter ++;
+					double weight = (double)positiveCounter / (double)searches.size();
+					location2weight.put(currentSearch.getAddress(), weight);
 				}
-				double weight = positiveCounter / totalCounter;
-				location2weight.put(currentSearch.getAddress(), weight);
 			}
-			
 			String jsonString = this.encodeJson(location2weight);
 			response.setContentType("application/json");
 			response.getWriter().write(jsonString);
