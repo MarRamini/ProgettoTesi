@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String prossimaPagina = null;
 		
-		User user;
+		User user = null;
 		HttpSession session = request.getSession(false);
 		try {
 			if (request.getParameter("btnLogin").equals("Sign in as a guest")) {

@@ -10,6 +10,14 @@ function buildContainer(anchor){
 	return container;
 }
 
+function buildErrorRow(container){
+	var div = document.createElement("div");
+	div.className = "preferredVoice";
+	container.appendChild(div);
+	var span = appendRowText("error");
+	div.appendChild(span);
+}
+
 function buildRows(response, container){
 	var arrayResults = toArrayResults(response);
 	console.log(arrayResults);
@@ -18,18 +26,23 @@ function buildRows(response, container){
 		var div = document.createElement("div");
 		div.className = "preferredVoice";
 		container.appendChild(div);
-		var span = appendRowText(search);
+		var span = appendRowText(search.address);
 		div.appendChild(span);
 	}	
 }
 
-function appendRowText(search){
+function appendRowText(address){
 	var addressSpan = document.createElement("span");
 	addressSpan.className = "preferredVoiceText";
-	addressSpan.innerHTML = search.address;
-	addressSpan.onclick = function(event){
-		searchWidget.searchTerm = event.srcElement.textContent;
+	if(address != "error"){
+		addressSpan.innerHTML = address;
+		addressSpan.onclick = function(event){
+			searchWidget.searchTerm = event.srcElement.textContent;
+		}
+	}else{
+		addressSpan.innerHTML = "preferred searches functionality is not available for user guest";
 	}
+	
 	return addressSpan;
 }
 
@@ -41,8 +54,15 @@ var xmlHttpRequest = new XMLHttpRequest();
 	
 	xmlHttpRequest.onreadystatechange = function(){
 		 if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
-		    	var xmlHttpResponse = JSON.parse(this.responseText);
-		    	buildRows(xmlHttpResponse, container);
+			 	if(this.responseText != ""){
+			 		var xmlHttpResponse = JSON.parse(this.responseText);
+			 		buildRows(xmlHttpResponse, container);
+			 	}
+			 	else{
+			 		buildErrorRow(container);
+			 	}
+			 		
+		    	
 		 }
 	}
 	

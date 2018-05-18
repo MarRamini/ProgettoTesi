@@ -49,34 +49,35 @@ public class RetrievePreferredSearches extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(false);
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("user");		
 		List<Search> searches = null;
 		Map<String, Double> location2weight = new HashMap<String, Double>();
 		
-		try {
-			searches = SearchPostgres.retrieveSearchesByUser(user);
-			Iterator<Search> iter = searches.iterator();
-			while(iter.hasNext()){
-				int positiveCounter = 0;
-				Search currentSearch = iter.next();	
-				if(!location2weight.containsKey(currentSearch.getAddress())){
-					for(Search search : searches){
-						if(search.equals(currentSearch))
-							positiveCounter ++;
+		if(!user.getUsername().equals("guest")){
+			try {
+				searches = SearchPostgres.retrieveSearchesByUser(user);
+				Iterator<Search> iter = searches.iterator();
+				while(iter.hasNext()){
+					int positiveCounter = 0;
+					Search currentSearch = iter.next();	
+					if(!location2weight.containsKey(currentSearch.getAddress())){
+						for(Search search : searches){
+							if(search.equals(currentSearch))
+								positiveCounter ++;
+						}
+						double weight = (double)positiveCounter / (double)searches.size();
+						location2weight.put(currentSearch.getAddress(), weight);
 					}
-					double weight = (double)positiveCounter / (double)searches.size();
-					location2weight.put(currentSearch.getAddress(), weight);
 				}
+				String jsonString = this.encodeJson(location2weight);
+				response.setContentType("application/json");
+				response.getWriter().write(jsonString);
+				
+			} catch (PersistenceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			String jsonString = this.encodeJson(location2weight);
-			response.setContentType("application/json");
-			response.getWriter().write(jsonString);
-			
-		} catch (PersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	private String encodeJson(Map<String,Double> map){

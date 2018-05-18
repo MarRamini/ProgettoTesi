@@ -32,16 +32,15 @@ public class ImageHandler extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
-
-		if(user != null){
+		
+		if(!user.getUsername().equals("guest")){
 			response.setContentType("image/jpeg");
 			
 			response.setContentLength(user.getAvatar().length);
 
 			response.getOutputStream().write(user.getAvatar());
-		}		
+		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -1,4 +1,4 @@
-function togglePreferred(anchor){	
+function togglePreferred(anchor){
 	var preferredSearchesElement = document.getElementById("preferredSearchToolbar")
 	if(preferredSearchesElement == undefined){		
 		var container = buildContainer(anchor);

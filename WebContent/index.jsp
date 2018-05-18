@@ -23,8 +23,13 @@
 			<script type="text/javascript" src="scripts/utilities/retrieveAvatarImage.js"></script>
 			<script>
 				var userSpan = document.getElementById("userType");
-				userSpan.textContent = "Welcome <%= ((User)session.getAttribute("user")).getUsername() %>";
-				document.getElementById("userAvatar").style.backgroundImage = getAvatar();
+				var username = "<%= ((User)session.getAttribute("user")).getUsername() %>";
+				
+				userSpan.textContent = "Welcome " + username;
+				
+				if(username != "guest"){
+					document.getElementById("userAvatar").style.backgroundImage = getAvatar();
+				}
 			</script>
 			<%--<span class="userType">
 				Benvenuto  <%= ((User)session.getAttribute("user")).getUsername() %>
