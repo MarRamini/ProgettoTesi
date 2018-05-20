@@ -52,7 +52,7 @@ function searchRevenues(position, filters, maxVenues){
 				"?obj rdf:type ?type. " +
 				"?obj geo:lat ?lat. " +
 				"?obj geo:long ?long. " +
-				"?obj rdfs:label ?label " +
+				"?obj rdfs:label ?label. " +
 				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
 				"FILTER(LANG(?label) = 'it' || LANG(?label) = '')" +
 				"} " ;

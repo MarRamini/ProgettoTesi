@@ -48,20 +48,21 @@ public class PersistSearch extends HttpServlet {
 		Search search = null;
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
-		
-		try {
-			search = this.decodeJson(jsonString);
-			
-			if(search != null && user != null){
-				SearchPostgres.persistSearch(search, user);
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (PersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		if(!user.getUsername().equals("guest")){
+			try {
+				search = this.decodeJson(jsonString);
+				
+				if(search != null && user != null){
+					SearchPostgres.persistSearch(search, user);
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (PersistenceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
 	}
 	
 	private Search decodeJson(String json) throws JSONException{

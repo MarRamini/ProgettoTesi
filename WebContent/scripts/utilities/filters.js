@@ -43,6 +43,22 @@ function applyFilters(filters, maxVenues){
 		
 		createFeatureLayer(newRevenues);
 	}	
+}
+
+function filterSingleRevenue(revenueGraphic, pois){
+	if(!pois){
+		alert("sorry, no point of interest has been searched")
+	}
+	else{		
+		var newPois = [];
+		
+		pois.forEach(function(item){
+			if(item.attributes.obj != revenueGraphic.attributes.obj){
+				newPois.push(item);
+			}
+		});
+		createFeatureLayer(newPois);
+	}
 }
 /*var edits = {
 deleteFeatures: deleteFeatures

@@ -90,6 +90,7 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 					geometry: point,
 					symbol: markerSymbol
 				});
+				
 				pois.push(poi);
 				backupPois.push(poi);
 			}				
@@ -210,7 +211,12 @@ function createFeatureLayer(revenues){
 				 name: "type",
 				 alias: "type",
 				 type: "string"
-			 })
+			 }),
+			 /*new Field({
+				 name: "feature",
+				 alias: "feature",
+				 type: "string"
+			 })*/
 		 ];
 		 
 		 var popupTemplate = new PopupTemplate({ // autocasts as new PopupTemplate()
@@ -220,13 +226,42 @@ function createFeatureLayer(revenues){
 				type: "fields",
 				fieldInfos: [{
                     fieldName: "class"
-                }, {
+                },{
                     fieldName: "obj"
                 },{
                     fieldName: "type"
-                }]
-			}]
-		});
+                },/*{
+                	fieldName: "feature"
+                }*/]
+			}],
+			actions: []
+		 });
+		 
+		 var thumbUpAction = {
+			 title: "Mantain revenue",
+			 id: "thumb_up",
+			 className: "popupActionThumbUp"
+		 };
+		 popupTemplate.actions.push(thumbUpAction);
+		 
+		 var thumbDownAction = {
+				 title: "Remove revenue",
+				 id: "thumb_down",
+				 className: "popupActionThumbDown"
+		 };
+		 popupTemplate.actions.push(thumbDownAction);
+		
+		 view.popup.on("trigger-action", function(event){
+			  // If the zoom-out action is clicked, the following code executes
+			  if(event.action.id === "thumb_down"){
+				  filterSingleRevenue(event.target.content.graphic, revenues);
+				  if(typeof routeCalculated != "undefined" && routeCalculated){
+					calculateRoute(startPoint, stopPoint, revenues)
+			      }
+			  }
+			  //view.popup.blur();
+		 });
+		 
 		 
 		 var olderRevenuesLayer = map.findLayerById("revenuesLayer");
 		 map.remove(olderRevenuesLayer);

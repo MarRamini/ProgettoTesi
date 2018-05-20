@@ -14,12 +14,14 @@ function calculateRoute(startPoint, endPoint, pois){
 	    "dojo/on",
 	    "dojo/domReady!"
 	], function(Map, SceneView, RouteTask, RouteParameters, FeatureSet, urlUtils, on){
-		  //Point the URL to a valid route service
-	      var routeTask = new RouteTask({
-	        url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
-	      });
+		
+		 console.log(map.layers.items[0])
+		 //Point the URL to a valid route service
+	     var routeTask = new RouteTask({
+	       url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
+	     });
 		  
-	   	  // Setup the route parameters
+	   	 // Setup the route parameters
 	     var routePoints = new RouteParameters({
 	        stops: new FeatureSet(),
 	        findBestSequence: true,
@@ -38,16 +40,6 @@ function calculateRoute(startPoint, endPoint, pois){
 	      };   
 	      
 	      routePoints.stops.features.push(startPoint);
-	      
-	    /*  pois.sort(function(startPoint, point){ //ordino pois in base alla vicinanza con il punto di start
-	    	  var latitudeA = startPoint.geometry.latitude;
-	    	  var longitudeA = startPoint.geometry.longitude;
-	    	  var latitudeB = point.geometry.latitude;
-	    	  var longitudeB = point.geometry.longitude;
-	    	  
-	    	  var distance = Math.sqrt(Math.pow(latitudeB - latitudeA, 2) - Math.pow(longitudeB - longitudeA, 2));
-	    	  return distance;
-	      });*/
 	     
 	      pois.forEach(function(poi){
 	    	  routePoints.stops.features.push(poi)
@@ -56,9 +48,12 @@ function calculateRoute(startPoint, endPoint, pois){
 	      routePoints.stops.features.push(endPoint);
 	      
 	      routeTask.solve(routePoints).then(function(data){
+	    	map.layers.items[0].removeAll() 
 	  		var routeResult = data.routeResults[0].route;
 	  	    routeResult.symbol = routeSymbol;
+	  	    routeResult.id = "routeResult";
 	  	    map.layers.items[0].add(routeResult);
-	  	  });
+	      });
+	      routeCalculated = true;
 	});
 }

@@ -6,6 +6,11 @@ function buildContainer(anchor){
 	var computedStyle = window.getComputedStyle(anchor, null);
 	container.style.top = computedStyle.height;
 	container.style.left = "0px";
+	container.onblur = function(evt){
+		if(container != undefined){
+			container.parentNode.removeChild(container);
+		}
+	}
 	requestSearches(container);	
 	return container;
 }
