@@ -6,8 +6,8 @@ import java.util.List;
 public class Venue {
 	
 	private int id;
-	private String latitude;
-	private String longitude;
+	private double latitude;
+	private double longitude;
 	//private int checkinsNumber;
 	private String name_fq;
 	private String category_fq;
@@ -16,7 +16,9 @@ public class Venue {
 	private String foursquare_id;
 	private String link_fq;
 	private List<Checkin> checkins;
-	
+	private String label;	
+	private String identifier;
+	private boolean likeFlag;
 	
 	public Venue() {
 		this.checkins = new ArrayList<Checkin>();
@@ -30,19 +32,19 @@ public class Venue {
 		this.id = id;
 	}
 	
-	public String getLatitude() {
+	public double getLatitude() {
 		return this.latitude;
 	}
 	
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 	
-	public String getLongitude() {
+	public double getLongitude() {
 		return this.longitude;
 	}
 	
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 	
@@ -108,6 +110,30 @@ public class Venue {
 	
 	public void addCheckin(Checkin c) {
 		this.checkins.add(c);
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	public boolean getLikeFlag() {
+		return likeFlag;
+	}
+
+	public void setLikeFlag(boolean likeFlag) {
+		this.likeFlag = likeFlag;
 	}
 	
 }

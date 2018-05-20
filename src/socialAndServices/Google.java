@@ -60,8 +60,8 @@ public class Google {
                 String lng = results.getJSONObject(0).getJSONObject("geometry").getJSONObject("location").get("lng").toString();
                 String formattedAddress = results.getJSONObject(0).getString("formatted_address");
                 
-                venue.setLatitude(lat);
-                venue.setLongitude(lng);
+                venue.setLatitude(Double.valueOf(lat));
+                venue.setLongitude(Double.valueOf(lng));
                 venue.setStatus(status);
                 venue.setName_fq(formattedAddress);	// escamotage: name_fq contains the address
             }

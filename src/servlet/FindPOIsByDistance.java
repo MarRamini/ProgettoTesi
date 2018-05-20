@@ -45,8 +45,8 @@ public class FindPOIsByDistance extends HttpServlet {
 		
 		Venue addressedVenue = google.getCoordinatesFromAddress(address);
 		if (addressedVenue.getStatus().equals("OK")) {
-			double lat = Double.parseDouble(addressedVenue.getLatitude());
-			double lng = Double.parseDouble(addressedVenue.getLongitude());
+			double lat = addressedVenue.getLatitude();
+			double lng = addressedVenue.getLongitude();
 			try {
 				venues = VenuePostgres.RetrieveVenuesByDistance(km, lat, lng);
 				//venuesMap = GeoLocation.orderVenuesByDistance(addressedVenue.getLatitude(), addressedVenue.getLongitude(), venues, 15);

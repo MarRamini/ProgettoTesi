@@ -126,7 +126,7 @@ public class GeoLocation {
 		Map<Double, Venue> venuesMapTemp = new TreeMap<Double, Venue>();
 		double distance;
 		for(Venue v: venues) {
-			distance = getDistanceBetweenTwoPointsMorePerformant(lat, lng, v.getLatitude(), v.getLongitude());
+			distance = getDistanceBetweenTwoPointsMorePerformant(String.valueOf(lat), String.valueOf(lng), String.valueOf(v.getLatitude()), String.valueOf(v.getLongitude()));
 			venuesMapTemp.put(distance, v);
 		}
 		
@@ -159,7 +159,7 @@ public class GeoLocation {
 			venueTemp = venues.get(i);
 			if (venueTemp.getCheckinsNumber() < 1)
 				continue;
-			distanceAndPopularityTemp = getDistanceBetweenTwoPointsMorePerformant(lat, lng, venueTemp.getLatitude(), venueTemp.getLongitude()) - venueTemp.getCheckinsNumber();
+			distanceAndPopularityTemp = getDistanceBetweenTwoPointsMorePerformant(String.valueOf(lat), String.valueOf(lng), String.valueOf(venueTemp.getLatitude()), String.valueOf(venueTemp.getLongitude())) - venueTemp.getCheckinsNumber();
 			if (distanceAndPopularityTemp < distanceAndPopularity) {
 				distanceAndPopularity = distanceAndPopularityTemp;
 				venue = venues.get(i);
@@ -185,7 +185,7 @@ public class GeoLocation {
 			venueTemp = venues.get(i);
 			if (venueTemp.getCheckinsNumber() < 1)
 				continue;
-			distanceAndPopularityTemp = getDistanceBetweenTwoPointsMorePerformant(lat, lng, venueTemp.getLatitude(), venueTemp.getLongitude()) - venueTemp.getCheckinsNumber();
+			distanceAndPopularityTemp = getDistanceBetweenTwoPointsMorePerformant(String.valueOf(lat), String.valueOf(lng), String.valueOf(venueTemp.getLatitude()), String.valueOf(venueTemp.getLongitude())) - venueTemp.getCheckinsNumber();
 			if (distanceAndPopularityTemp < distanceAndPopularity && Utilities.isOpen(venueTemp)) {
 				distanceAndPopularity = distanceAndPopularityTemp;
 				venue = venues.get(i);

@@ -36,7 +36,7 @@ public class Utilities {
 		double distance;
 		
 		for (Venue v: list) {
-			distance = GeoLocation.getDistanceBetweenTwoPoints(lat, lng, v.getLatitude(), v.getLongitude());
+			distance = GeoLocation.getDistanceBetweenTwoPoints(String.valueOf(lat), String.valueOf(lng), String.valueOf(v.getLatitude()), String.valueOf(v.getLongitude()));
 			map.put(distance, v);
 		}
 		
@@ -159,7 +159,7 @@ public class Utilities {
 		if (availableTime >= 200)
 			limit = 3;
 		try {
-			ForecastWeatherData fwd = opw.forecastWeatherByCoordinates(Float.valueOf(v.getLatitude()), Float.valueOf(v.getLongitude()));
+			ForecastWeatherData fwd = opw.forecastWeatherByCoordinates(Float.valueOf(String.valueOf(v.getLatitude())), Float.valueOf(String.valueOf(v.getLongitude())));
 			Weather w;
 			for (int i=1; i<=limit; i++) {
 				w = fwd.getForecast_List().get(i).getWeather_List().get(0);

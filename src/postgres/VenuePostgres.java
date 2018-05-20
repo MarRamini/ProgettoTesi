@@ -13,6 +13,7 @@ import fi.foyt.foursquare.api.FoursquareApiException;
 import fi.foyt.foursquare.api.entities.CompactVenue;
 import logic.LatLngSquare;
 import model.MacroCategory;
+import model.User;
 import model.Venue;
 
 public class VenuePostgres {
@@ -39,8 +40,8 @@ public class VenuePostgres {
 				venues = new LinkedList<Venue>();
 				venue = new Venue();
 				venue.setId(result.getInt("id"));
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venue.setName_fq(result.getString("name_fq"));
 				venue.setCategory_fq(result.getString("category_fq"));				
 				venues.add(venue);				
@@ -48,8 +49,8 @@ public class VenuePostgres {
 			while (result.next()) {
 				venue = new Venue();
 				venue.setId(result.getInt("id"));
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venue.setName_fq(result.getString("name_fq"));
 				venue.setCategory_fq(result.getString("category_fq"));				
 				venues.add(venue);
@@ -89,16 +90,16 @@ public class VenuePostgres {
 				venues = new LinkedList<Venue>();
 				venue = new Venue();
 				venue.setId(result.getInt("id"));				
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venue.setName_fq(result.getString("name_fq"));
 				venues.add(venue);				
 			}
 			while (result.next()) {
 				venue = new Venue();
 				venue.setId(result.getInt("id"));
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venue.setName_fq(result.getString("name_fq"));
 				venues.add(venue);
 			} 
@@ -211,8 +212,8 @@ public class VenuePostgres {
 				venues = new LinkedList<Venue>();
 				venue = new Venue();
 				venue.setId(result.getInt("id"));
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				//venue.setName_fq(result.getString("name_fq"));
 				//venue.setName_fq(result.getString("category_fq"));
 				venues.add(venue);				
@@ -220,8 +221,8 @@ public class VenuePostgres {
 			while (result.next()) {
 				venue = new Venue();
 				venue.setId(result.getInt("id"));
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				//venue.setName_fq(result.getString("name_fq"));
 				//venue.setName_fq(result.getString("category_fq"));
 				venues.add(venue);
@@ -266,15 +267,15 @@ public class VenuePostgres {
 			venues = new LinkedList<Venue>();
 			venue = new Venue();
 			venue.setId(result.getInt("id"));
-			venue.setLatitude(result.getString("latitude_or"));
-			venue.setLongitude(result.getString("longitude_or"));
+			venue.setLatitude(result.getDouble("latitude_or"));
+			venue.setLongitude(result.getDouble("longitude_or"));
 			venues.add(venue);
 		}
 		while (result.next()) {
 			venue = new Venue();
 			venue.setId(result.getInt("id"));
-			venue.setLatitude(result.getString("latitude_or"));
-			venue.setLongitude(result.getString("longitude_or"));
+			venue.setLatitude(result.getDouble("latitude_or"));
+			venue.setLongitude(result.getDouble("longitude_or"));
 			venues.add(venue);		
 		} 
 	} catch (SQLException e) {
@@ -329,8 +330,8 @@ public class VenuePostgres {
 				venues = new LinkedList<Venue>();
 				venue = new Venue();				 
 				venue.setId(result.getInt("v.id"));
-				venue.setLatitude(result.getString("v.latitude"));
-				venue.setLongitude(result.getString("v.longitude"));
+				venue.setLatitude(result.getDouble("v.latitude"));
+				venue.setLongitude(result.getDouble("v.longitude"));
 				venue.setName_fq(result.getString("v.name_fq"));
 				venue.setCategory_fq(result.getString("c.category_fq"));
 				venue.setFoursquare_id(result.getString("foursquare_id"));
@@ -344,8 +345,8 @@ public class VenuePostgres {
 			while (result.next()) {
 				venue = new Venue();				 
 				venue.setId(result.getInt("v.id"));
-				venue.setLatitude(result.getString("v.latitude"));
-				venue.setLongitude(result.getString("v.longitude"));
+				venue.setLatitude(result.getDouble("v.latitude"));
+				venue.setLongitude(result.getDouble("v.longitude"));
 				venue.setName_fq(result.getString("v.name_fq"));
 				venue.setCategory_fq(result.getString("c.category_fq"));
 				venue.setFoursquare_id(result.getString("foursquare_id"));
@@ -413,8 +414,8 @@ public class VenuePostgres {
 				venues = new LinkedList<Venue>();
 				venue = new Venue();				 
 				venue.setId(result.getInt("v.id"));
-				venue.setLatitude(result.getString("v.latitude"));
-				venue.setLongitude(result.getString("v.longitude"));
+				venue.setLatitude(result.getDouble("v.latitude"));
+				venue.setLongitude(result.getDouble("v.longitude"));
 				venue.setName_fq(result.getString("v.name_fq"));
 				venue.setCategory_fq(result.getString("c.category_fq"));
 				venue.setFoursquare_id(result.getString("foursquare_id"));
@@ -428,8 +429,8 @@ public class VenuePostgres {
 			while (result.next()) {
 				venue = new Venue();				 
 				venue.setId(result.getInt("v.id"));
-				venue.setLatitude(result.getString("v.latitude"));
-				venue.setLongitude(result.getString("v.longitude"));
+				venue.setLatitude(result.getDouble("v.latitude"));
+				venue.setLongitude(result.getDouble("v.longitude"));
 				venue.setName_fq(result.getString("v.name_fq"));
 				venue.setCategory_fq(result.getString("c.category_fq"));
 				venue.setFoursquare_id(result.getString("foursquare_id"));
@@ -506,7 +507,38 @@ public class VenuePostgres {
 		}
 	}
 	
-	
+	public static void persistVenue(Venue venue, User user) throws PersistenceException{
+		DataSource datasource = new DataSource();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = datasource.getConnection();
+			String insert = "insert into revenues (object, label, latitude, longitude, userid, likeflag) values (?, ?, ?, ?, ?, ?)";
+			statement = connection.prepareStatement(insert);
+			
+			statement.setString(1, venue.getIdentifier());
+			statement.setString(2, venue.getLabel());
+			statement.setDouble(3, venue.getLatitude());
+			statement.setDouble(4, venue.getLongitude());	
+			statement.setInt(5, user.getId());
+			statement.setBoolean(6, venue.getLikeFlag());
+			statement.executeUpdate();						
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} catch (PersistenceException e) {
+			throw e;
+		} finally {
+			try {
+				if (statement != null) 
+					statement.close();
+				if (connection!= null)
+					connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
 	
 
 

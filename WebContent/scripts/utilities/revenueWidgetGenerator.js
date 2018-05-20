@@ -252,14 +252,14 @@ function createFeatureLayer(revenues){
 		 popupTemplate.actions.push(thumbDownAction);
 		
 		 view.popup.on("trigger-action", function(event){
-			  // If the zoom-out action is clicked, the following code executes
+			  // If the thumb_down action is clicked, the following code executes
 			  if(event.action.id === "thumb_down"){
 				  filterSingleRevenue(event.target.content.graphic, revenues);
 				  if(typeof routeCalculated != "undefined" && routeCalculated){
 					calculateRoute(startPoint, stopPoint, revenues)
 			      }
 			  }
-			  //view.popup.blur();
+			  persistLikeAction(event);
 		 });
 		 
 		 
@@ -283,5 +283,32 @@ function createFeatureLayer(revenues){
 		 map.add(layer);
 	   }
 	);
+}
+
+function persistLikeAction(actionEvent){
+	var obj = actionEvent.target.features[0];
+	var likeFlag;
+	if(actionEvent.action.id == "thumb_up"){
+		likeFlag = true; //user has liked the revenue
+	}
+	else if(actionEvent.action.id == "thumb_down"){
+		likeFlag = false;
+	}
+	
+	if(likeFlag != undefined){
+		var revenueObj = {
+				obj: obj.attributes.obj,
+				label: obj.attributes.label,
+				latitude: obj.geometry.latitude,
+				longitude: obj.geometry.longitude,
+				likeFlag: likeFlag
+		};
+		var jsonObj = JSON.stringify(revenueObj);
+		var xmlHttpRequest = new XMLHttpRequest();
+		xmlHttpRequest.open("POST", "http://localhost:8080/ProgettoTesi/PersistRevenue");
+		xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlHttpRequest.send("venue=" + encodeURIComponent(jsonObj));
+		
+	}
 }
 

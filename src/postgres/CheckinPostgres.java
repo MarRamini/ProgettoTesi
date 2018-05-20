@@ -44,8 +44,8 @@ public class CheckinPostgres {
 			if (result.next()) {
 				checkins = new LinkedList<Checkin>();
 				venue = new Venue();
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venue.setName_fq(result.getString("name_fq"));
 				venue.setCategory_fq(result.getString("category_fq"));				
 				checkin = new Checkin();
@@ -56,8 +56,8 @@ public class CheckinPostgres {
 			}
 			while (result.next()) {
 				venue = new Venue();
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venue.setName_fq(result.getString("name_fq"));
 				venue.setCategory_fq(result.getString("category_fq"));				
 				checkin = new Checkin();
@@ -137,16 +137,16 @@ public class CheckinPostgres {
 				venues = new LinkedList<Venue>();
 				venue = new Venue();
 				venue.setId(i);
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));				
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));				
 				venues.add(venue);
 				i++;
 			}
 			while (result.next()) {
 				venue = new Venue();
 				venue.setId(i);
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));				
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));				
 				venues.add(venue);
 				i++;				
 			} 
@@ -317,15 +317,15 @@ public class CheckinPostgres {
 				venues = new LinkedList<Venue>();
 				venue = new Venue();
 				venue.setId(result.getInt("id"));	//id del checkin
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venues.add(venue);
 			}
 			while (result.next()) {
 				venue = new Venue();
 				venue.setId(result.getInt("id"));
-				venue.setLatitude(result.getString("latitude"));
-				venue.setLongitude(result.getString("longitude"));
+				venue.setLatitude(result.getDouble("latitude"));
+				venue.setLongitude(result.getDouble("longitude"));
 				venues.add(venue);
 			} 
 		} catch (SQLException e) {
