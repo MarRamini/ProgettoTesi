@@ -61,6 +61,8 @@ public class Register extends HttpServlet {
 			}
 			else {
 				String gender = request.getParameter("txtGender");
+				String education = request.getParameter("txtEducation");
+				String profession = request.getParameter("txtProfession");
 				int age = Integer.parseInt(request.getParameter("txtAge"));
 				String name = request.getParameter("txtName");
 				String surname = request.getParameter("txtSurname");
@@ -80,6 +82,8 @@ public class Register extends HttpServlet {
 				user.setSurname(surname);
 				user.setNationality(nationality);
 				user.setAvatar(fileContent);
+				user.setEducation(education);
+				user.setProfession(profession);
 				
 				/*user.setWeight(1, Double.valueOf(request.getParameter("txtArts")));
 				user.setWeight(2, Double.valueOf(request.getParameter("txtEntertainment")));

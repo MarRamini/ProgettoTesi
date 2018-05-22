@@ -554,7 +554,7 @@ public class UserPostgres {
 		PreparedStatement statement = null;
 		try {
 			connection = datasource.getConnection();
-			String insert = "insert into users (id, username, password, gender, age, role, nationality, name, surname, email, friends, weights, avatar) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String insert = "insert into users (id, username, password, gender, age, role, nationality, name, surname, education, profession, email, friends, weights, avatar) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			statement = connection.prepareStatement(insert);
 			statement.setInt(1, user.getId());
 			statement.setString(2, user.getUsername());
@@ -565,14 +565,16 @@ public class UserPostgres {
 			statement.setString(7, user.getNationality());
 			statement.setString(8, user.getName());
 			statement.setString(9, user.getSurname());
-			statement.setString(10, user.getEmail());
+			statement.setString(10, user.getEducation());
+			statement.setString(11, user.getProfession());
+			statement.setString(12, user.getEmail());
 			Integer[] friends = new Integer[10];
 			Array friendsArray = connection.createArrayOf("Integer", friends);
-			statement.setArray(11, friendsArray);
+			statement.setArray(13, friendsArray);
 			Double[] weights = new Double[10];
 			Array weightsArray = connection.createArrayOf("NUMERIC", weights);
-			statement.setArray(12, weightsArray);
-			statement.setBytes(13, user.getAvatar());
+			statement.setArray(14, weightsArray);
+			statement.setBytes(15, user.getAvatar());
 			/*statement.setFloat(6, (float)user.getWeigth(1));
 			statement.setFloat(7, (float)user.getWeigth(2));
 			statement.setFloat(8, (float)user.getWeigth(3));

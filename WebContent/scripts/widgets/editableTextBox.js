@@ -32,6 +32,7 @@ function buildTextBox(container){
 	var textBox = document.createElement("input");
 	textBox.setAttribute("name", name);
 	textBox.setAttribute("type", type);
+	textBox.style.fontStyle = "inherit";
 	if(isPassword == "true"){
 		textBox.type = "password";
 		textBox.id = "editablePasswordTextBox";

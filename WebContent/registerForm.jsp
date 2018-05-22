@@ -59,8 +59,6 @@
 					<option class="selectionOption" value="male">male</option>
 					<option class="selectionOption" value="female">female</option>
 				</select>
-				<%--<input type="text" required="false" name="txtGender" id="genderInput" placeholder="Insert your Gender"
-					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Gender is required" class="textBox"/> --%>
 			</div>
 			<div class="registerRow">
 				<span valign="top">Nationality:</span>
@@ -71,6 +69,27 @@
 				<span valign="top">Age:</span>
 				<input type="text" required="false" name="txtAge" id="ageInput" placeholder="Insert your Age"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Age is required" class="textBox"/>
+			</div>
+			<div class="registerRow">
+				<span valign="top">Education:</span>
+				<select name="txtEducation" id="educationInput" class="selection textBox">
+					<option class="selectionOption" value="noDegree">No Degree</option>
+					<option class="selectionOption" value="highSchoolDegree">High School Degree</option>
+					<option class="selectionOption" value="bachelorDegree">Bachelor's Degree</option>
+					<option class="selectionOption" value="masterDegree">Master's Degree</option>
+					<option class="selectionOption" value="phd">Phd</option>
+				</select>
+			</div>
+				<div class="registerRow">
+				<span valign="top">Profession:</span>
+				<select name="txtProfession" id="professionInput" class="selection textBox">
+					<option class="selectionOption" value="unemployed">Unemployed</option>
+					<option class="selectionOption" value="student">Student</option>
+					<option class="selectionOption" value="employee">Employee</option>
+					<option class="selectionOption" value="selfEmployed">Self Employed</option>
+					<option class="selectionOption" value="homemaker">Homemaker</option>
+					<option class="selectionOption" value="retired">Retired</option>
+				</select>
 			</div>
 			<div class="registerRow">
 				<span valign="top">e-mail:</span><%--obbligatorio--%>

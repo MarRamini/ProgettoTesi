@@ -30,7 +30,9 @@
 }
 
 .submitButtons{
-	padding-top: 20px;
+	padding-top: 8px;
+	display: table;
+	margin: auto;
 }
 
 .submitButtons .dijitButton .dijitButtonNode{

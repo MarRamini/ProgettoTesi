@@ -17,11 +17,14 @@ public class User {
 	private String nationality;
 	private String name;
 	private String surname;
+	private String education;
+	private String profession;
 	private String email;
 	private List<Integer> friends;
 	private List<Checkin> checkins;
 	private double[] weigths;
 	private byte[] avatar;
+	private String defaultMap;
 	
 	public User() {
 		this.checkins = new ArrayList<Checkin>();
@@ -176,6 +179,30 @@ public class User {
 		}finally{
 			avatarStream.close();
 		}
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getProfession() {
+		return profession;
+	}
+
+	public void setProfession(String profession) {
+		this.profession = profession;
+	}
+
+	public String getDefaultMap() {
+		return defaultMap;
+	}
+
+	public void setDefaultMap(String defaultMap) {
+		this.defaultMap = defaultMap;
 	}
 
 }
