@@ -1,0 +1,48 @@
+@import url("../default.css");
+@import url("../templates/dojo/claro.css");
+
+body{
+	background: #f2f2f2;
+	display: flex;
+}
+
+.contentContainer{
+	width: 450px;
+	height: 500px;
+	margin: auto;
+	background-color: white;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+	display: flex;
+	align-items: center;
+}
+
+.formContainer{
+	margin: 20px;
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+}
+
+.messageContainer{
+	word-wrap: break-word;
+    word-break: break-word;
+    margin:20px;
+}
+
+.basemapChoices{
+	margin:20px;
+}
+
+.basemapSelection{
+	padding: 5px;
+    border: none;
+    outline: none;
+    border-bottom: 1px dotted lightgray;
+    color: dimgray;
+}
+
+.basemapPreview{
+	height: 75px;
+	width: 75px;
+	display: inline-flex;
+	padding: 5px;
+}

@@ -63,6 +63,7 @@ public class Register extends HttpServlet {
 				String gender = request.getParameter("txtGender");
 				String education = request.getParameter("txtEducation");
 				String profession = request.getParameter("txtProfession");
+				//controllo sull'input dell'età
 				int age = Integer.parseInt(request.getParameter("txtAge"));
 				String name = request.getParameter("txtName");
 				String surname = request.getParameter("txtSurname");
@@ -99,8 +100,8 @@ public class Register extends HttpServlet {
 				
 				//user.setId(retrieveMostSmilarUser(user));
 				
-				UserPostgres.persistUser(user);
-				prossimaPagina = "/login.jsp";
+				//UserPostgres.persistUser(user);
+				prossimaPagina = "/basemapChoice.jsp";
 				session = request.getSession();
 				session.setAttribute("user", user);
 				request.setAttribute("username", username);
