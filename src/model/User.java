@@ -25,6 +25,7 @@ public class User {
 	private double[] weigths;
 	private byte[] avatar;
 	private String defaultMap;
+	private String basemap;
 	
 	public User() {
 		this.checkins = new ArrayList<Checkin>();
@@ -203,6 +204,14 @@ public class User {
 
 	public void setDefaultMap(String defaultMap) {
 		this.defaultMap = defaultMap;
+	}
+
+	public String getBasemap() {
+		return basemap;
+	}
+
+	public void setBasemap(String basemap) {
+		this.basemap = basemap;
 	}
 
 }

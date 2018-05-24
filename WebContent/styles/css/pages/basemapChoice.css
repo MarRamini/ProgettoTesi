@@ -45,4 +45,21 @@ body{
 	width: 75px;
 	display: inline-flex;
 	padding: 5px;
+	margin-left: 75px;
+}
+
+.submitButtons{
+	width: fit-content;
+	margin: auto;
+}
+
+.submitButtons .dijitButton .dijitButtonNode{
+	border: none;
+	color: white;
+	background-color: #4285f4;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin:	auto;
 }

@@ -55,16 +55,15 @@ public class Register extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		try {
-			if (UserPostgres.RetrieveUserById(id) != null) { 
-				prossimaPagina = "/register.jsp";
+			if (UserPostgres.RetrieveUserById(id) != null) {		
+				System.out.println("caso questo");
 				request.setAttribute("error", "User already exists");
+				prossimaPagina = "/register.jsp";
 			}
 			else {
 				String gender = request.getParameter("txtGender");
 				String education = request.getParameter("txtEducation");
 				String profession = request.getParameter("txtProfession");
-				//controllo sull'input dell'età
-				int age = Integer.parseInt(request.getParameter("txtAge"));
 				String name = request.getParameter("txtName");
 				String surname = request.getParameter("txtSurname");
 				String email = request.getParameter("txtEmail");
@@ -72,48 +71,63 @@ public class Register extends HttpServlet {
 				Part filePart = request.getPart("avatar"); // Retrieves <input type="file" name="avatar">
 			    InputStream fileContent = filePart.getInputStream();
 				
-				User user = new User();
-				user.setId(username.hashCode());
-				user.setUsername(username);
-				user.setPassword(password);
-				user.setGender(gender);
-				user.setAge(age);
-				user.setName(name);
-				user.setEmail(email);
-				user.setSurname(surname);
-				user.setNationality(nationality);
-				user.setAvatar(fileContent);
-				user.setEducation(education);
-				user.setProfession(profession);
+			    String txtAge = request.getParameter("txtAge"); //retrieve age input
 				
-				/*user.setWeight(1, Double.valueOf(request.getParameter("txtArts")));
-				user.setWeight(2, Double.valueOf(request.getParameter("txtEntertainment")));
-				user.setWeight(3, Double.valueOf(request.getParameter("txtMuseum")));
-				user.setWeight(4, Double.valueOf(request.getParameter("txtHistory")));				
-				user.setWeight(5, Double.valueOf(request.getParameter("txtFood")));
-				user.setWeight(6, Double.valueOf(request.getParameter("txtNightlife")));
-				user.setWeight(7, Double.valueOf(request.getParameter("txtOutdoors")));
-				user.setWeight(8, Double.valueOf(request.getParameter("txtAthletics")));
-				user.setWeight(9, Double.valueOf(request.getParameter("txtChurch")));
-				user.setWeight(10, Double.valueOf(request.getParameter("txtShop")));*/
-				
-				
-				//user.setId(retrieveMostSmilarUser(user));
-				
-				//UserPostgres.persistUser(user);
-				prossimaPagina = "/basemapChoice.jsp";
-				session = request.getSession();
-				session.setAttribute("user", user);
-				request.setAttribute("username", username);
-				request.setAttribute("name", name);
-				request.setAttribute("surname", surname);
-				request.setAttribute("gender", gender);
-				request.setAttribute("nationality", nationality);
-				request.setAttribute("age", age);
-				request.setAttribute("email", email);
-				request.setAttribute("avatar", fileContent);
-				request.setAttribute("registerSucceded", "true");
-			}
+			    int age = this.checkNumberInput(txtAge); //check if age input is a valid number
+			    
+				if(age == -1){
+			    	request.setAttribute("ageInputError", "Input is not valid");
+			    	prossimaPagina = "/register.jsp";
+			    }
+				else{
+					request.setAttribute("ageInputError", null);
+					User user = new User();
+					user.setId(username.hashCode());
+					user.setUsername(username);
+					user.setPassword(password);
+					user.setGender(gender);
+					if(age > 0){
+						user.setAge(age);
+					}
+					user.setName(name);
+					user.setEmail(email);
+					user.setSurname(surname);
+					user.setNationality(nationality);
+					user.setAvatar(fileContent);
+					user.setEducation(education);
+					user.setProfession(profession);
+					
+					
+					
+					/*user.setWeight(1, Double.valueOf(request.getParameter("txtArts")));
+					user.setWeight(2, Double.valueOf(request.getParameter("txtEntertainment")));
+					user.setWeight(3, Double.valueOf(request.getParameter("txtMuseum")));
+					user.setWeight(4, Double.valueOf(request.getParameter("txtHistory")));				
+					user.setWeight(5, Double.valueOf(request.getParameter("txtFood")));
+					user.setWeight(6, Double.valueOf(request.getParameter("txtNightlife")));
+					user.setWeight(7, Double.valueOf(request.getParameter("txtOutdoors")));
+					user.setWeight(8, Double.valueOf(request.getParameter("txtAthletics")));
+					user.setWeight(9, Double.valueOf(request.getParameter("txtChurch")));
+					user.setWeight(10, Double.valueOf(request.getParameter("txtShop")));*/
+					
+					
+					//user.setId(retrieveMostSmilarUser(user));
+					
+					UserPostgres.persistUser(user);
+					prossimaPagina = "/basemapChoice.jsp";
+					session = request.getSession();
+					session.setAttribute("user", user);
+					request.setAttribute("username", username);
+					request.setAttribute("name", name);
+					request.setAttribute("surname", surname);
+					request.setAttribute("gender", gender);
+					request.setAttribute("nationality", nationality);
+					request.setAttribute("age", age);
+					request.setAttribute("email", email);
+					request.setAttribute("avatar", fileContent);
+					request.setAttribute("registerSucceded", "true");		
+				}	    		
+			}		
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 		}	
@@ -175,5 +189,36 @@ public class Register extends HttpServlet {
 	    }
 	    return null;
 	}*/
+	
+	private boolean isInteger(String string){
+		boolean isInteger;
+		try{
+			Integer.parseInt(string);
+			isInteger = true;
+		}
+		catch(NumberFormatException e){
+			isInteger = false;
+		}
+		return isInteger;
+	}
+	
+	/*@@
+	 * returns 0 if input string is empty (accepted into database) 
+	 * returns -1 if input string is non valid (e.g. non-numeric characters or negative numbers)
+	 */
+	private int checkNumberInput(String input){
+		int check = 0;
+		if(input != null && !input.isEmpty()){
+			 if(this.isInteger(input)){
+				 check = Integer.parseInt(input);
+				 if(check < 0)
+					 check = -1;
+			 }
+			 else{
+				 check = -1;
+			 }
+		}
+		return check;
+	}
 
 }

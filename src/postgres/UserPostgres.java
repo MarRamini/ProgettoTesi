@@ -554,7 +554,7 @@ public class UserPostgres {
 		PreparedStatement statement = null;
 		try {
 			connection = datasource.getConnection();
-			String insert = "insert into users (id, username, password, gender, age, role, nationality, name, surname, education, profession, email, friends, weights, avatar) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String insert = "insert into users (id, username, password, gender, age, role, nationality, name, surname, education, profession, email, friends, weights, avatar, basemap) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			statement = connection.prepareStatement(insert);
 			statement.setInt(1, user.getId());
 			statement.setString(2, user.getUsername());
@@ -575,6 +575,7 @@ public class UserPostgres {
 			Array weightsArray = connection.createArrayOf("NUMERIC", weights);
 			statement.setArray(14, weightsArray);
 			statement.setBytes(15, user.getAvatar());
+			statement.setString(16, "");
 			/*statement.setFloat(6, (float)user.getWeigth(1));
 			statement.setFloat(7, (float)user.getWeigth(2));
 			statement.setFloat(8, (float)user.getWeigth(3));
@@ -688,6 +689,34 @@ public class UserPostgres {
 			String update = "update users set id_padre = ? where id = ?";
 			statement = connection.prepareStatement(update);
 			statement.setInt(1, idPadre);
+			statement.setInt(2, user.getId());
+			statement.executeUpdate();						
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} catch (PersistenceException e) {
+			throw e;
+		} finally {
+			try {
+				if (statement != null) 
+					statement.close();
+				if (connection!= null)
+					connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
+	
+	public static void persistBasemap(User user, String basemap) throws PersistenceException{
+		DataSource datasource = new DataSource();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = datasource.getConnection();
+			String update = "update users set basemap = ? where id = ?";
+			statement = connection.prepareStatement(update);
+			statement.setString(1, basemap);
 			statement.setInt(2, user.getId());
 			statement.executeUpdate();						
 		} catch (SQLException e) {

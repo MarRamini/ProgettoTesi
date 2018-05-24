@@ -16,14 +16,22 @@
 	<form data-dojo-type="dijit/form/Form" method="post" id="registerForm" class="registerForm" action="Register" enctype="multipart/form-data">
 		<script type="dojo/method" event="onSubmit">
 			if(!this.validate()){
-				var error = "one or more mandatory fields are empty";
+				var error = "One or more mandatory fields are empty";
 				document.getElementById("validationFailure").innerHTML = error;
+				<%request.setAttribute("error", null);%>
 				return false;
 			}
 			return true;
 		</script>
 		<div class="errorContainer">
 			<span class="validationError" id="validationFailure"></span>
+			<script>
+				var error = "<%= request.getAttribute("error") %>";
+				console.log(error)
+				if(error != "null"){
+					document.getElementById("validationFailure").innerHTML = error;
+				}
+			</script>
 		</div>
 		<div class="registerContainer">
 			<div class="registerRow">
@@ -69,6 +77,13 @@
 				<span valign="top">Age:</span>
 				<input type="text" required="false" name="txtAge" id="ageInput" placeholder="Insert your Age"
 					   data-dojo-type="dijit/form/ValidationTextBox" missingMessage="Age is required" class="textBox"/>
+				 <% if (request.getAttribute("ageInputError") != null) { %>
+					<script>
+						var input = document.getElementById("ageInput")
+						input.className += " dijitTextBoxError";
+						input.placeholder = "<%=request.getAttribute("ageInputError")%>";
+					</script>
+				<% } %>
 			</div>
 			<div class="registerRow">
 				<span valign="top">Education:</span>

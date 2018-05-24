@@ -4,14 +4,18 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async: false, parseOnLoad: true"></script>
 		<title>Choose your basemap</title>
 		<link rel="stylesheet" href="styles/css/pages/basemapChoice.css">
 	</head>
 	<body class="claro">
 		<div class="contentContainer">
-			<form class="formContainer">
+			<form class="formContainer" data-dojo-type="dijit/form/Form" method="get" action="persistBasemap">
 				<div class="messageContainer">
-					<span class="message">Please choose your preferred basemap type. This choice will affect the initial visualization of the map, but you can always change it later.</span>
+					<span class="message">What is your preferred basemap style?</span>
+					<br>
+					<br>
+					<span class="message">Your choice will only affect the initial map's visualization. You can always change it later</span>
 				</div>
 				<div class="basemapChoices">
 					<script>
@@ -20,7 +24,7 @@
 						}
 					</script>
 					<div class="basemapRow">
-						<select class="basemapSelection" onchange="previewImage(this)">
+						<select name="txtBasemap" class="basemapSelection" onchange="previewImage(this)">
 							<option value="streets" selected="true">streets</option>
 							<option value="satellite">satellite</option>
 							<option value="hybrid">hybrid</option>
@@ -43,7 +47,10 @@
 						</script>
 					</div>
 				</div>
-				<div class="submitButtons">Save Basemap</div>
+				<div class="submitButtons">
+					<input type="submit" value="Save Basemap" name="btnSaveMap" label="Save Basemap" id="saveButton" data-dojo-type="dijit/form/Button"/>
+					
+				</div>
 			</form>
 		</div>
 	</body>
