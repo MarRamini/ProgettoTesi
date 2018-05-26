@@ -1,0 +1,25 @@
+.basemapPersonalization{
+	padding: 5px 0px 15px 5px;
+}
+
+.basemapPreview{
+	width: 50px;
+    height: 50px;
+    display: inline-flex;
+    border-radius: 100%;
+    border: 1px solid lightgray;
+}
+
+.basemapPersonalization select{
+	position: relative;
+	top: -20px;
+	border: none;
+	border-bottom: 1px solid lightgray;
+	margin-right: 5px;
+	outline: none;
+}
+
+.basemapPersonalization select:focus{
+	border-color: #58aef3;
+}
+

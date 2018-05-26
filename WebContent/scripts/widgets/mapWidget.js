@@ -1,3 +1,5 @@
+var basemap = document.currentScript.getAttribute("basemap");
+
 require([
 	"esri/Map",
 	"esri/views/SceneView",
@@ -6,9 +8,13 @@ require([
 ],
 	function(Map, SceneView, GraphicsLayer){
 	  routeLayer = new GraphicsLayer();  
-	
+	  
+	  if(basemap == "null"){
+		  basemap = "topo";
+	  }
+	  
 	  map = new Map({
-	    basemap: "topo",
+	    basemap: basemap,
 	    layers: [routeLayer]
 	  });
 	  

@@ -18,14 +18,14 @@ import postgres.UserPostgres;
 /**
  * Servlet implementation class persistBasemap
  */
-@WebServlet("/persistBasemap")
-public class persistBasemap extends HttpServlet {
+@WebServlet("/PersistBasemap")
+public class PersistBasemap extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public persistBasemap() {
+    public PersistBasemap() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class persistBasemap extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		String prossimaPagina = null;
 		String basemap = request.getParameter("txtBasemap");
-		
+		System.out.println(basemap);
 		try{
 			
 			UserPostgres.persistBasemap(user, basemap);

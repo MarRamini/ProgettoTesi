@@ -6,7 +6,8 @@ require([
 		
 		var basemapToggle = new BasemapToggle({
 			view: this.view,  
-			nextBasemap: "satellite"  // Allows for toggling to the "satellite" basemap
+			nextBasemap: "satellite",  // Allows for toggling to the "satellite" basemap
+			titleVisible: true
 		});
 		
 		view.ui.add(basemapToggle, "bottom-left");

@@ -10,7 +10,7 @@
 	</head>
 	<body class="claro">
 		<div class="contentContainer">
-			<form class="formContainer" data-dojo-type="dijit/form/Form" method="get" action="persistBasemap">
+			<form class="formContainer" data-dojo-type="dijit/form/Form" method="get" action="PersistBasemap">
 				<div class="messageContainer">
 					<span class="message">What is your preferred basemap style?</span>
 					<br>
@@ -49,7 +49,6 @@
 				</div>
 				<div class="submitButtons">
 					<input type="submit" value="Save Basemap" name="btnSaveMap" label="Save Basemap" id="saveButton" data-dojo-type="dijit/form/Button"/>
-					
 				</div>
 			</form>
 		</div>

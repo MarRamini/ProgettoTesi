@@ -14,8 +14,12 @@
 		<script type="text/javascript" src="scripts/utilities/queryProcessing.js"></script>
 	</head>
 	<body class="claro">
-		<div id="mapPlaceHolder" class="mapContainer">			   
-			<script type="text/javascript" src="scripts/widgets/mapWidget.js"></script>
+		<div id="mapPlaceHolder" class="mapContainer">
+			<%if(session.getAttribute("user") == null){ %>			   
+				<script type="text/javascript" src="scripts/widgets/mapWidget.js"></script>
+			<%}else{ %>
+				<script type="text/javascript" src="scripts/widgets/mapWidget.js" basemap="<%=((User)session.getAttribute("user")).getBasemap() %>"></script>	
+			<%} %>
 			<script type="text/javascript" src="scripts/widgets/basemapToggleWidget.js"></script>
 			<script type="text/javascript" src="scripts/widgets/trackWidget.js"></script>			
 		</div>

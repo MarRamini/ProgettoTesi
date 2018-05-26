@@ -3,7 +3,6 @@ function getAvatar(){
 }
 
 function modifyAvatar(){
-	console.log("called");
 	return "url('ImageChangeHandler')";
 }
 

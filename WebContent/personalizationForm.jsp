@@ -8,7 +8,15 @@
 	 	</span>
 	 </div>
 	 <div class="menuVoice" id="uiPersonalization">
-	 	<span>Interface</span>
+	 	<span onclick="showBasemapPersonalization(this)">Interface</span>
+	 	<jsp:include page="basemapPersonalization.jsp"/>
+	 	<script>
+	 		function showBasemapPersonalization(elem){
+	 			var basemapChoiceDiv = document.getElementById("basemapChoice");
+	 			basemapChoiceDiv.style.display == "none" ? basemapChoiceDiv.style.display = "block" : basemapChoiceDiv.style.display = "none";
+	 			elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+	 		}
+	 	</script>
 	 </div>
 	 <div class="menuVoice" id="revenuesPersonalization">
 	 	<span>Revenues</span>

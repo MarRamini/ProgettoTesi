@@ -71,6 +71,7 @@
 		</script>
 		<div class="filters">
 			<span>What categories are you interested in?</span>
+			<br>
 			<input type="checkbox" name="cbCategories" value="1" onchange="filterPois(this)"/> Museum <br>
 			<input type="checkbox" name="cbCategories" value="2" onchange="filterPois(this)"/> History &amp; Monuments <br>
 			<input type="checkbox" name="cbCategories" value="3" onchange="filterPois(this)"/> Church <br>
