@@ -28,11 +28,15 @@
 			<script type="text/javascript" src="scripts/utilities/retrieveAvatarImage.js"></script>
 			<script>
 				var userSpan = document.getElementById("userType");
-				var username = "<%= ((User)session.getAttribute("user")).getUsername() %>";
-				var isAvatarSaved = "<%= ((User)session.getAttribute("user")).getAvatar().length > 0 %>";
-				userSpan.textContent = "Welcome " + username;
+				userSpan.textContent = "Welcome " + "<%= ((User)session.getAttribute("user")).getUsername() %>";
 				
-				if(username != "guest" && isAvatarSaved == "true"){
+				var isAvatarSaved = false;
+				<% byte[] avatar = ((User)session.getAttribute("user")).getAvatar();
+				   if(avatar != null && avatar.length > 0){
+				%>
+						isAvatarSaved = true;
+				<%}%>
+				if(isAvatarSaved){
 					document.getElementById("userAvatar").style.backgroundImage = getAvatar();
 				}
 			</script>

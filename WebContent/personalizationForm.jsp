@@ -18,9 +18,11 @@
 	 		}
 	 	</script>
 	 </div>
+	 <%-- 
 	 <div class="menuVoice" id="revenuesPersonalization">
 	 	<span>Revenues</span>
 	 </div>
+	 --%>
  </div>
     <%-- 
 		voci di personalizzazione:

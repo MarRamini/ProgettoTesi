@@ -56,22 +56,30 @@ public class RetrievePreferredSearches extends HttpServlet {
 		if(!user.getUsername().equals("guest")){
 			try {
 				searches = SearchPostgres.retrieveSearchesByUser(user);
-				Iterator<Search> iter = searches.iterator();
-				while(iter.hasNext()){
-					int positiveCounter = 0;
-					Search currentSearch = iter.next();	
-					if(!location2weight.containsKey(currentSearch.getAddress())){
-						for(Search search : searches){
-							if(search.equals(currentSearch))
-								positiveCounter ++;
+				if(!searches.isEmpty()){
+					Iterator<Search> iter = searches.iterator();
+					while(iter.hasNext()){
+						int positiveCounter = 0;
+						Search currentSearch = iter.next();	
+						if(!location2weight.containsKey(currentSearch.getAddress())){
+							for(Search search : searches){
+								if(search.equals(currentSearch))
+									positiveCounter ++;
+							}
+							double weight = (double)positiveCounter / (double)searches.size();
+							location2weight.put(currentSearch.getAddress(), weight);
 						}
-						double weight = (double)positiveCounter / (double)searches.size();
-						location2weight.put(currentSearch.getAddress(), weight);
 					}
+					String jsonString = this.encodeJson(location2weight);
+					response.setContentType("application/json");
+					response.getWriter().write(jsonString);
 				}
-				String jsonString = this.encodeJson(location2weight);
-				response.setContentType("application/json");
-				response.getWriter().write(jsonString);
+				else{
+					location2weight.put("noSearchesError", 1.0);
+					String jsonString = this.encodeJson(location2weight);
+					response.setContentType("application/json");
+					response.getWriter().write(jsonString);
+				}
 				
 			} catch (PersistenceException e) {
 				// TODO Auto-generated catch block

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="model.User" %>
 <script type="text/javascript" src="scripts/utilities/route.js"></script>
 <div id="menuChoices" class="menuContent">
 	<script>
@@ -28,6 +29,7 @@
 			}
 		</script>
 	</div>
+	<% if(!((User)session.getAttribute("user")).getUsername().equals("guest")){ %>
 	<div class="menuVoice">
 		<span onclick="showPersonalizationForm(this)">Personalization</span>
 		<jsp:include page="personalizationForm.jsp"/>
@@ -39,9 +41,11 @@
 			}
 		</script>
 	</div>
+	<%} %>
+	<%-- 
 	<div class="menuVoice">
 		<span>Options</span>
-	</div>
+	</div>--%>
 	
 	
 			<%-- <table>

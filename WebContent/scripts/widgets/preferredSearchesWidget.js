@@ -25,7 +25,6 @@ function buildErrorRow(container){
 
 function buildRows(response, container){
 	var arrayResults = toArrayResults(response);
-	console.log(arrayResults);
 	for(var i=0 ; i<arrayResults.length && i<10 ; i++){
 		var search = arrayResults[i];
 		var div = document.createElement("div");
@@ -39,13 +38,16 @@ function buildRows(response, container){
 function appendRowText(address){
 	var addressSpan = document.createElement("span");
 	addressSpan.className = "preferredVoiceText";
-	if(address != "error"){
+	if(address != "error" && address != "noSearchesError"){
 		addressSpan.innerHTML = address;
 		addressSpan.onclick = function(event){
 			searchWidget.searchTerm = event.srcElement.textContent;
 		}
-	}else{
+	}else if(address == "error"){
 		addressSpan.innerHTML = "preferred searches functionality is not available for user guest";
+	}
+	else{
+		addressSpan.innerHTML = "no searches have been found";
 	}
 	
 	return addressSpan;
