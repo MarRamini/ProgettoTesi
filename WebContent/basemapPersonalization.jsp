@@ -5,6 +5,8 @@
 <div class="basemapPersonalization" id="basemapChoice" style="display: none">
 	Basemap
 	<script>
+		var basemapSelected;
+		
 		function previewImage(option){
 			document.getElementById("basemapImagePreview").style.backgroundImage = "url('styles/images/" + option.value + ".jpg')";
 			basemapSelected = option.value;
@@ -31,7 +33,7 @@
 		}
 	</script>
 	<div class="submitButtons">
-		<input type="submit" value="Save Basemap" name="btnSaveMap" label="Save Basemap" id="saveButton" data-dojo-type="dijit/form/Button" onclick="persistBasemap()"/>
+		<input type="submit" value="Save Basemap" name="btnSaveMap" label="Save Basemap" id="saveButton" data-dojo-type="dijit/form/Button" onclick="persistBasemap(basemapSelected)"/>
 		<script type="text/javascript" src="scripts/utilities/persistBasemap.js"></script>
 	</div>
 </div>

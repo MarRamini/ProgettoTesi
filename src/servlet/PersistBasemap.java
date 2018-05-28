@@ -34,11 +34,20 @@ public class PersistBasemap extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		String prossimaPagina = null;
 		String basemap = request.getParameter("txtBasemap");
-		System.out.println(basemap);
+		
 		try{
 			
 			UserPostgres.persistBasemap(user, basemap);
@@ -52,14 +61,6 @@ public class PersistBasemap extends HttpServlet {
 		ServletContext application  = getServletContext();
 		RequestDispatcher rd = application.getRequestDispatcher(prossimaPagina);
 		rd.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
