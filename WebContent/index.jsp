@@ -29,10 +29,10 @@
 			<script>
 				var userSpan = document.getElementById("userType");
 				var username = "<%= ((User)session.getAttribute("user")).getUsername() %>";
-				
+				var isAvatarSaved = "<%= ((User)session.getAttribute("user")).getAvatar().length > 0 %>";
 				userSpan.textContent = "Welcome " + username;
 				
-				if(username != "guest"){
+				if(username != "guest" && isAvatarSaved == "true"){
 					document.getElementById("userAvatar").style.backgroundImage = getAvatar();
 				}
 			</script>

@@ -33,7 +33,7 @@ public class ImageHandler extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
 		
-		if(!user.getUsername().equals("guest")){
+		if(user.getAvatar().length > 0){
 			response.setContentType("image/jpeg");
 			
 			response.setContentLength(user.getAvatar().length);
