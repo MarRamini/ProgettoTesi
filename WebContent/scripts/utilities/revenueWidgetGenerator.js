@@ -29,7 +29,18 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 		for(var i= 0 ; i<nodes.length ; i++){
 					
 			var node = nodes[i];
-			var attributes = {class: node.class.value, obj: node.obj.value, label: node.label.value, type: class2flag(node.type.value)};			
+			console.log(node)
+			var attributes = {
+				class: node.class.value, 
+				obj: node.obj.value, 
+				label: node.label.value, 
+				type: class2flag(node.type.value), 
+				note: node.note != undefined? node.note.value : null, 
+				feature: node.feature != undefined? node.feature.value : null, 
+				cuisine: node.cuisine != undefined? node.cuisine.value : null,
+				source: node.source != undefined? node.source.value : null
+			};			
+		
 			var point = new Point({
 				latitude: parseFloat(node.lat.value),
 				longitude: parseFloat(node.long.value)
@@ -212,11 +223,26 @@ function createFeatureLayer(revenues){
 				 alias: "type",
 				 type: "string"
 			 }),
-			 /*new Field({
+			 new Field({
 				 name: "feature",
 				 alias: "feature",
 				 type: "string"
-			 })*/
+			 }),
+			 new Field({
+				 name: "note",
+				 alias: "note",
+				 type: "string"
+			 }),
+			 new Field({
+				 name: "cuisine",
+				 alias: "cuisine",
+				 type: "string"
+			 }),
+			 new Field({
+				 name: "source",
+				 alias: "source",
+				 type: "string"
+			 })
 		 ];
 		 
 		 var popupTemplate = new PopupTemplate({ // autocasts as new PopupTemplate()
@@ -230,9 +256,15 @@ function createFeatureLayer(revenues){
                     fieldName: "obj"
                 },{
                     fieldName: "type"
-                },/*{
+                },{
                 	fieldName: "feature"
-                }*/]
+                },{
+                	fieldName: "note"
+                },{
+                	fieldName: "cuisine"
+                },{
+                	fieldName: "source"
+                }]
 			}],
 			actions: []
 		 });
