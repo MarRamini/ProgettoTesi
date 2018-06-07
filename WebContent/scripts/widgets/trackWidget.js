@@ -10,7 +10,7 @@ require([
 	    goToLocationEnabled: true
 	  });
  
-	  view.ui.add(track, "top-left");
+	  view.ui.add(track, "top-right");
   
 	  // The sample will start tracking your location
 	  // once the view becomes ready

@@ -23,5 +23,14 @@ require([
 	    container: "mapPlaceHolder",
 	    id: "mapView"
 	  });
+	  
+	  view.ui.components.forEach(function(component){
+		  if(component != "attribution"){
+			  view.ui.move(component, "top-right");
+		  }
+		  
+	  })
+	 
+	  
 	}
 );

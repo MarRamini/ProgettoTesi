@@ -10,7 +10,7 @@ require([
 			titleVisible: true
 		});
 		
-		view.ui.add(basemapToggle, "bottom-left");
+		view.ui.add(basemapToggle, "bottom-right");
 	}
 );
 

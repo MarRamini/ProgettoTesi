@@ -1,5 +1,5 @@
 @keyframes menuSlideIn{
-	from {left: -260px;}
+	from {left: -280px;}
 	to {left: 0px;}
 }
 
@@ -7,9 +7,9 @@
 	position: absolute;
 	top: 0px;
 	height: 100%;
-	width: 260px;
+	width: 280px;
 	position: absolute;
-	left: -260px;
+	left: -280px;
 	z-index: 9999;
 	background-color: #fff;
 	box-sizing: border-box;
