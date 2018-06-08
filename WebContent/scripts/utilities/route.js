@@ -15,7 +15,7 @@ function calculateRoute(startPoint, endPoint, pois){
 	    "dojo/domReady!"
 	], function(Map, SceneView, RouteTask, RouteParameters, FeatureSet, urlUtils, on){
 		
-		 console.log(map.layers.items[0])
+		 console.log("calcolo")
 		 //Point the URL to a valid route service
 	     var routeTask = new RouteTask({
 	       url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"

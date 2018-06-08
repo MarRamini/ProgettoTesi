@@ -12,7 +12,7 @@ var backupPois = []; //backup variable that stores all pois found in order to ba
  * @returns void
  * create esri/Graphic widgets from Json formatted revenues in the XMLHttpResponse
  */
-function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
+function createPoiWidget(XMLHttpResponse){
 	//costruisce gli oggetti graphic, mettendoci i dati restituiti dalla query
 	var nodes = XMLHttpResponse.results.bindings;
 	var pois = [];
@@ -29,7 +29,6 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 		for(var i= 0 ; i<nodes.length ; i++){
 					
 			var node = nodes[i];
-			console.log(node)
 			var attributes = {
 				class: node.class.value, 
 				obj: node.obj.value, 
@@ -109,9 +108,6 @@ function createPoiWidget(XMLHttpResponse, startPoint, endPoint, routeFlag){
 		}
 	);
 	createFeatureLayer(pois);
-	if(routeFlag){
-		calculateRoute(startPoint, endPoint, pois)
-	}
 }
 
 /**
@@ -313,6 +309,12 @@ function createFeatureLayer(revenues){
 		 });
 		
 		 map.add(layer);
+		 
+		 if(routeFlag){
+			 if(startPoint != undefined && stopPoint != undefined){
+				 calculateRoute(startPoint, stopPoint, revenues);
+			 }
+		 }
 	   }
 	);
 }

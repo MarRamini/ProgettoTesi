@@ -66,7 +66,7 @@ function searchRevenues(position, filters, maxVenues){
 	}		
 				
 	var url = createURL(query);	
-	var routeFlag = false;
+	routeFlag = false;
 	queryRequest(url);
 }
 
@@ -107,8 +107,8 @@ function searchRouteRevenues(startPoint, endPoint, filters){
 				"} " ;
 				
 	var url = createURL(query);
-	var routeFlag = true;
-	queryRequest(url, startPoint, endPoint, routeFlag);
+	routeFlag = true;
+	queryRequest(url);
 }
 
 /**
@@ -139,7 +139,7 @@ function createURL(query){
  * @returns void
  * send a XMLHttpRequest to given url
  */
-function queryRequest(url, startPoint, endPoint, routeFlag){
+function queryRequest(url){
 	//get query preprocessata
 	if (window.XMLHttpRequest) {
 	  	var xmlHttp = new XMLHttpRequest();
@@ -151,7 +151,7 @@ function queryRequest(url, startPoint, endPoint, routeFlag){
 	 xmlHttp.onreadystatechange = function() { 
 	     if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
 	    	var xmlHttpResponse = JSON.parse(this.responseText);
-	    	createPoiWidget(xmlHttpResponse, startPoint, endPoint, routeFlag);
+	    	createPoiWidget(xmlHttpResponse);
 	     }
 	 };
 	 
