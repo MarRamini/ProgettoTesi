@@ -20,7 +20,7 @@
 	font-style: normal
 }
 
-.popupActionThumbUp, .popupActionThumbDown {
+.popupActionThumbUp, .popupActionThumbDown, .popupActionGoogleSearch {
 	display: inline-block;
 	font: normal normal normal 14px/1 FontAwesome;
 	font-size: 16px;
@@ -35,4 +35,8 @@
 
 .popupActionThumbDown:before{
 	content: "\f088";
+}
+
+.popupActionGoogleSearch:before{
+	content: "\f1a0";
 }

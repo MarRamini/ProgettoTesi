@@ -37,7 +37,10 @@ function createPoiWidget(XMLHttpResponse){
 				note: node.note != undefined? node.note.value : null, 
 				feature: node.feature != undefined? node.feature.value : null, 
 				cuisine: node.cuisine != undefined? node.cuisine.value : null,
-				source: node.source != undefined? node.source.value : null
+				source: node.source != undefined? node.source.value : null,
+				street: node.street != undefined? node.street.value : null,
+				housenumber: node.streetNum != undefined? node.streetNum.value : null,
+				city: node.city != undefined? node.city.value : null,
 			};			
 		
 			var point = new Point({
@@ -278,9 +281,34 @@ function createFeatureLayer(revenues){
 				 className: "popupActionThumbDown"
 		 };
 		 popupTemplate.actions.push(thumbDownAction);
+		 
+		 var googleSearch = {
+				 title: "Search Google" ,
+				 id: "google_search",
+				 className: "popupActionGoogleSearch"
+		 }
+		 
+		 popupTemplate.actions.push(googleSearch);
 		
 		 view.popup.on("trigger-action", function(event){
-			  // If the thumb_down action is clicked, the following code executes
+			 switch(event.action.id){
+			 	case "thumb_down" :
+			 		filterSingleRevenue(event.target.content.graphic, revenues);
+				    if(typeof routeCalculated != "undefined" && routeCalculated){
+					  calculateRoute(startPoint, stopPoint, revenues)
+				    }
+				    persistLikeAction(event);
+				    break;			 	
+			 	case "thumb_up" : 
+			 		 persistLikeAction(event);
+			 		 break;			 	
+			 	case "google_search" :
+			 		searchGoogleAction(event);
+			 		break;
+			 }
+			 
+			 //if google_search action is clicked, the following code executes 
+			 // If the thumb_down action is clicked, the following code executes
 			  if(event.action.id === "thumb_down"){
 				  filterSingleRevenue(event.target.content.graphic, revenues);
 				  if(typeof routeCalculated != "undefined" && routeCalculated){
@@ -289,7 +317,6 @@ function createFeatureLayer(revenues){
 			  }
 			  persistLikeAction(event);
 		 });
-		 
 		 
 		 var olderRevenuesLayer = map.findLayerById("revenuesLayer");
 		 map.remove(olderRevenuesLayer);
@@ -346,3 +373,31 @@ function persistLikeAction(actionEvent){
 	}
 }
 
+function searchGoogleAction(actionEvent){
+	var obj = actionEvent.target.features[0];
+	var url = "https://www.google.it/search?q=";
+	var name = obj.attributes.label != null? obj.attributes.label : "";
+	var address = "";
+	
+	if(obj.attributes.street != null){
+		address = address.concat(obj.attributes.street).concat(" ");
+		console.log(address)
+		if(obj.attributes.housenumber != null){
+			address = address.concat(obj.attributes.housenumber).concat(" ");
+		}
+	}
+	if(obj.attributes.city != null){
+		address = address.concat(obj.attributes.city);
+	}
+	
+	if(name != ""){
+		url = url + encodeURIComponent(name);
+		if(address != ""){
+			url = url + "&" + encodeURIComponent(address);
+		}
+		window.open(url);
+	}
+	else{
+		alert("sorry, google search is not possible because this revenue doesn't have a label property, therefore we do not know what to search")
+	}
+}

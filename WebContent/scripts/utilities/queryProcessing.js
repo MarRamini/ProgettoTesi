@@ -45,7 +45,7 @@ function searchRevenues(position, filters, maxVenues){
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
 				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
-				"Select distinct ?obj ?class ?type ?label ?lat ?long ?feature ?note ?cuisine ?source " +
+				"Select distinct ?obj ?class ?type ?label ?lat ?long ?feature ?note ?cuisine ?source ?street ?streetNum ?city " +
 				"where { " +
 				"values(?class){" + defineClasses() + "} " +
 				"?obj a ?class. " +
@@ -57,6 +57,9 @@ function searchRevenues(position, filters, maxVenues){
 				"OPTIONAL{?obj lgdo:note ?note}. " +
 				"OPTIONAL{?obj lgdo:cuisine ?cuisine}. " +
 				"OPTIONAL{?obj lgdo:source ?source}. " +
+				"OPTIONAL{?obj <http://linkedgeodata.org/ontology/addr%3Astreet> ?street}. " +
+				"OPTIONAL{?obj <http://linkedgeodata.org/ontology/addr%3Ahousenumber> ?streetNum}. " +
+				"OPTIONAL{?obj <http://linkedgeodata.org/ontology/addr%3Acity> ?city}. " +
 				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
 				"FILTER(LANG(?label) = 'it' || LANG(?label) = '')" +
 				"} " ;
@@ -90,7 +93,7 @@ function searchRouteRevenues(startPoint, endPoint, filters){
 	var query = "Prefix lgdr:<http://linkedgeodata.org/triplify/> " + //query per tutti gli oggetti di classe HistoricThing nei dintorni di Roma
 				"Prefix lgdo:<http://linkedgeodata.org/ontology/> " +
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
-				"Select distinct ?obj ?class ?type ?label ?lat ?long ?feature ?note ?cuisine ?source " +
+				"Select distinct ?obj ?class ?type ?label ?lat ?long ?feature ?note ?cuisine ?source ?street ?streetNum ?city " +
 				"where { " +
 				"values(?class){" + defineClasses() + "} " +
 				"?obj a ?class. " +
@@ -102,6 +105,9 @@ function searchRouteRevenues(startPoint, endPoint, filters){
 				"OPTIONAL{?obj lgdo:note ?note}. " +
 				"OPTIONAL{?obj lgdo:cuisine ?cuisine}. " +
 				"OPTIONAL{?obj lgdo:source ?source}. " +
+				"OPTIONAL{?obj <http://linkedgeodata.org/ontology/addr%3Astreet> ?street}. " +
+				"OPTIONAL{?obj <http://linkedgeodata.org/ontology/addr%3Ahousenumber> ?streetNum}. " +
+				"OPTIONAL{?obj <http://linkedgeodata.org/ontology/addr%3Acity> ?city}. " +
 				"FILTER(?lat <= " + maximumLatitude + " && ?lat >= " + minimumLatitude + " && ?long <= " + maximumLongitude + " && ?long >= " + minimumLongitude + ") " +
 				"FILTER(LANG(?label) = 'it' || LANG(?label) = '')" +
 				"} " ;
