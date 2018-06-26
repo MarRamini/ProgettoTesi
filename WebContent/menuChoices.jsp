@@ -6,21 +6,7 @@
 	<script>
 		var container = getContentContainer();
 		container.appendChild(document.getElementById("menuChoices"));
-	</script>
-	<div class="menuVoice">
-		<div onclick="showRoutingForm(this)">Routing
-			<div class="accordionArrow"></div>
-		</div>
-		<jsp:include page="routingForm.jsp"/>
-		<script>
-			function showRoutingForm(elem){
-				var form = document.getElementById("routingForm");
-				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
-				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
-			}
-		</script>
-		
-	</div>
+	</script>	
 	<div class="menuVoice">
 		<div onclick="showFiltersForm(this)">Set Filters
 			<div class="accordionArrow"></div>
@@ -33,7 +19,19 @@
 				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
 		</script>
-		
+	</div>
+	<div class="menuVoice">
+		<div onclick="showRoutingForm(this)">Routing
+			<div class="accordionArrow"></div>
+		</div>
+		<jsp:include page="routingForm.jsp"/>
+		<script>
+			function showRoutingForm(elem){
+				var form = document.getElementById("routingForm");
+				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
+				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+			}
+		</script>		
 	</div>
 	<% if(!((User)session.getAttribute("user")).getUsername().equals("guest")){ %>
 	<div class="menuVoice">
@@ -47,8 +45,7 @@
 				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
 				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
-		</script>
-		
+		</script>		
 	</div>
 	<%} %>
 	<%-- 
