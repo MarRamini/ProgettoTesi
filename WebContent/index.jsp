@@ -23,7 +23,7 @@
 			<script type="text/javascript" src="scripts/widgets/basemapToggleWidget.js"></script>
 			<script type="text/javascript" src="scripts/widgets/trackWidget.js"></script>			
 		</div>
-		<div id="primaryMenu" class="menuBar">
+		<div id="primaryMenu" class="menuBar opened">
 			<script type="text/javascript" src="scripts/widgets/menuWidget.js" rootId="primaryMenu" userPanel="true"></script>
 			<script type="text/javascript" src="scripts/utilities/retrieveAvatarImage.js"></script>
 			<script>
