@@ -106,3 +106,16 @@ div.addressBar:focus{
 	text-decoration: none;
 	color: black;
 }
+
+.accordionArrow{
+	position: relative;
+	width: 16px;
+	height: 16px;
+	float: right;
+	background-image: url("../../icons/sprites/accordion_expand_arrows.png");
+	background-position-x: -16px;
+}
+
+.focused .accordionArrow{
+	background-position-x: 0px;
+}

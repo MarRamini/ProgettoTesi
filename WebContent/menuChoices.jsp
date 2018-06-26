@@ -8,7 +8,9 @@
 		container.appendChild(document.getElementById("menuChoices"));
 	</script>
 	<div class="menuVoice">
-		<span onclick="showRoutingForm(this)">Routing</span>
+		<div onclick="showRoutingForm(this)">Routing
+			<div class="accordionArrow"></div>
+		</div>
 		<jsp:include page="routingForm.jsp"/>
 		<script>
 			function showRoutingForm(elem){
@@ -17,9 +19,12 @@
 				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
 		</script>
+		
 	</div>
 	<div class="menuVoice">
-		<span onclick="showFiltersForm(this)">Set Filters</span>
+		<div onclick="showFiltersForm(this)">Set Filters
+			<div class="accordionArrow"></div>
+		</div>
 		<jsp:include page="filtersOptions.jsp"/>
 		<script>
 			function showFiltersForm(elem){
@@ -28,10 +33,13 @@
 				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
 		</script>
+		
 	</div>
 	<% if(!((User)session.getAttribute("user")).getUsername().equals("guest")){ %>
 	<div class="menuVoice">
-		<span onclick="showPersonalizationForm(this)">Personalization</span>
+		<div onclick="showPersonalizationForm(this)">Personalization
+			<div class="accordionArrow"></div>
+		</div>
 		<jsp:include page="personalizationForm.jsp"/>
 		<script>
 			function showPersonalizationForm(elem){
@@ -40,6 +48,7 @@
 				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
 		</script>
+		
 	</div>
 	<%} %>
 	<%-- 
