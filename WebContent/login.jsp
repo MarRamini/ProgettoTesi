@@ -8,7 +8,11 @@
 <link rel="stylesheet" type="text/css" href="styles/css/pages/login.css"/>
 </head>
 <body class="claro">
-	<jsp:include page="loginForm.jsp" />
+	<%if(session.getAttribute("user") == null){ %>		
+		<jsp:include page="loginForm.jsp" />
+	<%}else{%>
+		<jsp:include page="index.jsp" />
+	<%} %>
 	<%--<jsp:include page="menu.jsp" />	
 		<br><br>
 	
