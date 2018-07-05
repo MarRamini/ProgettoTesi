@@ -8,7 +8,9 @@
 	 	</span>
 	 </div>
 	 <div class="menuVoice" id="uiPersonalization">
-	 	<span onclick="showBasemapPersonalization(this)">Interface</span>
+	 	<div onclick="showBasemapPersonalization(this)">Interface
+	 		<div class="accordionArrow"></div>
+	 	</div>
 	 	<jsp:include page="basemapPersonalization.jsp"/>
 	 	<script>
 	 		function showBasemapPersonalization(elem){

@@ -1,5 +1,9 @@
 @import url("../widgets/menuWidget.css");
 
+.body{
+	font-size: .668em !important;
+}
+
 .formContainer{
     display: block;
 }
@@ -54,6 +58,10 @@
 .submitButtons{
 	width: fit-content;
 	margin: auto;
+}
+
+.submitButtons .dijitButton{
+	padding: 0 10px 0 10px;
 }
 
 .personalizationRow .textBox{

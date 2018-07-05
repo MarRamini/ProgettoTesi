@@ -6,20 +6,11 @@
 	<script>
 		var container = getContentContainer();
 		container.appendChild(document.getElementById("menuChoices"));
-	</script>
+	</script>	
 	<div class="menuVoice">
-		<span onclick="showRoutingForm(this)">Routing</span>
-		<jsp:include page="routingForm.jsp"/>
-		<script>
-			function showRoutingForm(elem){
-				var form = document.getElementById("routingForm");
-				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
-				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
-			}
-		</script>
-	</div>
-	<div class="menuVoice">
-		<span onclick="showFiltersForm(this)">Set Filters</span>
+		<div onclick="showFiltersForm(this)">Set Filters
+			<div class="accordionArrow"></div>
+		</div>
 		<jsp:include page="filtersOptions.jsp"/>
 		<script>
 			function showFiltersForm(elem){
@@ -29,9 +20,24 @@
 			}
 		</script>
 	</div>
+	<div class="menuVoice">
+		<div onclick="showRoutingForm(this)">Routing
+			<div class="accordionArrow"></div>
+		</div>
+		<jsp:include page="routingForm.jsp"/>
+		<script>
+			function showRoutingForm(elem){
+				var form = document.getElementById("routingForm");
+				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
+				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+			}
+		</script>		
+	</div>
 	<% if(!((User)session.getAttribute("user")).getUsername().equals("guest")){ %>
 	<div class="menuVoice">
-		<span onclick="showPersonalizationForm(this)">Personalization</span>
+		<div onclick="showPersonalizationForm(this)">Personalization
+			<div class="accordionArrow"></div>
+		</div>
 		<jsp:include page="personalizationForm.jsp"/>
 		<script>
 			function showPersonalizationForm(elem){
@@ -39,7 +45,7 @@
 				form.style.display == "none"? form.style.display = "block" : form.style.display = "none";
 				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
 			}
-		</script>
+		</script>		
 	</div>
 	<%} %>
 	<%-- 

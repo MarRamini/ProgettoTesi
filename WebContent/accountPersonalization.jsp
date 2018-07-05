@@ -153,7 +153,8 @@
 					</script>
 				</div>	
 				<div class="submitButtons">
-					<button type="submit" value="Update" name="Update" label="Update" id="submitButton" data-dojo-type="dijit/form/Button"/>
+					<button type="submit" value="Update" name="btnUpdate" label="Update" id="submitButton" data-dojo-type="dijit/form/Button"/>
+					<button type="submit" value="Back" name="btnUpdate" label="Back" id="backButton" data-dojo-type="dijit/form/Button"/>
 				</div>	
 			</form>	
 		</div>
