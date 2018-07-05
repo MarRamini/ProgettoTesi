@@ -29,6 +29,7 @@ function createPoiWidget(XMLHttpResponse){
 		for(var i= 0 ; i<nodes.length ; i++){
 					
 			var node = nodes[i];
+			
 			var attributes = {
 				class: node.class.value, 
 				obj: node.obj.value, 
@@ -41,8 +42,13 @@ function createPoiWidget(XMLHttpResponse){
 				street: node.street != undefined? node.street.value : null,
 				housenumber: node.streetNum != undefined? node.streetNum.value : null,
 				city: node.city != undefined? node.city.value : null,
-			};			
-		
+				address: getAddress(node)
+			};	
+			
+			if(attributes.label === "Superciccio"){
+				console.log(attributes.address)
+			}
+			
 			var point = new Point({
 				latitude: parseFloat(node.lat.value),
 				longitude: parseFloat(node.long.value)
@@ -113,6 +119,22 @@ function createPoiWidget(XMLHttpResponse){
 	createFeatureLayer(pois);
 }
 
+function getAddress(node){
+	var street = node.street != undefined? node.street.value : null;
+	var housenumber = node.streetNum != undefined? node.streetNum.value : null;
+	var address = "not available";
+	
+	if(street != null){
+		address = street;
+		
+		if(housenumber != null){
+			address = address.concat(", ", housenumber);
+		}
+	}
+	return address;
+}
+
+
 /**
  * @param poiClass
  * @param color
@@ -128,20 +150,20 @@ function getUniqueValueSymbol(poiClass, color) {
 		symbolLayers: [{
 			type: "icon", // autocasts as new IconSymbol3DLayer()
 			resource: {
-				href: "styles/icons/poi/" + poiClass + ".png"
+				href: "styles/icons/poi/position_64.png"
 			},
-			size: 20,
-			outline: {
+			size: 30
+			/*outline: {
 				color: color,
 				size: 2
-			}
+			}*/
 		}],
 		
-		verticalOffset: {
+		/*verticalOffset: {
 			screenLength: 40,
 	        maxWorldLength: 200,
 	        minWorldLength: 35
-		},
+		},*/
 
 		callout: {
 			type: "line", // autocasts as new LineCallout3D()
@@ -241,6 +263,11 @@ function createFeatureLayer(revenues){
 				 name: "source",
 				 alias: "source",
 				 type: "string"
+			 }),
+			 new Field({
+				 name: "address",
+				 alias: "address",
+				 type: "string"
 			 })
 		 ];
 		 
@@ -249,13 +276,14 @@ function createFeatureLayer(revenues){
 			//definire le informazioni da visualizzare nel content.
 			content: [{
 				type: "fields",
-				fieldInfos: [{
-                    fieldName: "class"
-                },{
+				fieldInfos: [
+				{
+                    fieldName: "address"
+                },/*{
                     fieldName: "obj"
-                },{
+                },*/{
                     fieldName: "type"
-                },{
+                },/*{
                 	fieldName: "feature"
                 },{
                 	fieldName: "note"
@@ -263,7 +291,7 @@ function createFeatureLayer(revenues){
                 	fieldName: "cuisine"
                 },{
                 	fieldName: "source"
-                }]
+                }*/]
 			}],
 			actions: []
 		 });
@@ -306,16 +334,6 @@ function createFeatureLayer(revenues){
 			 		searchGoogleAction(event);
 			 		break;
 			 }
-			 
-			 //if google_search action is clicked, the following code executes 
-			 // If the thumb_down action is clicked, the following code executes
-			  if(event.action.id === "thumb_down"){
-				  filterSingleRevenue(event.target.content.graphic, revenues);
-				  if(typeof routeCalculated != "undefined" && routeCalculated){
-					calculateRoute(startPoint, stopPoint, revenues)
-			      }
-			  }
-			  persistLikeAction(event);
 		 });
 		 
 		 var olderRevenuesLayer = map.findLayerById("revenuesLayer");
@@ -379,13 +397,17 @@ function searchGoogleAction(actionEvent){
 	var name = obj.attributes.label != null? obj.attributes.label : "";
 	var address = "";
 	
+	console.log("name", name)
+	
 	if(obj.attributes.street != null){
 		address = address.concat(obj.attributes.street).concat(" ");
-		console.log(address)
 		if(obj.attributes.housenumber != null){
 			address = address.concat(obj.attributes.housenumber).concat(" ");
 		}
 	}
+	
+	console.log("address", address)
+	
 	if(obj.attributes.city != null){
 		address = address.concat(obj.attributes.city);
 	}
@@ -395,6 +417,7 @@ function searchGoogleAction(actionEvent){
 		if(address != ""){
 			url = url + "&" + encodeURIComponent(address);
 		}
+		console.log(url)
 		window.open(url);
 	}
 	else{
