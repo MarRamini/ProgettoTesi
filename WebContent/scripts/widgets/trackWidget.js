@@ -39,12 +39,19 @@ require([
         
         if(!geolocalizationActive){
         	var position = {latitude: 41.90322000000004, longitude: 12.495650000000069}
+        	var location = {
+        		latitude: position.latitude,
+        		longitude: position.longitude
+        	};
+        	
         	view.goTo({
-        	  center: location,
+        	  center: [position.longitude, position.latitude],
   	          tilt: 60,
   	          scale: 2500,
   	          zoom: 18
         	});
+        	
+        	searchRevenues(position, filters);
         }
       });
    }
