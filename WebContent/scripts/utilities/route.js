@@ -14,8 +14,6 @@ function calculateRoute(startPoint, endPoint, pois){
 	    "dojo/on",
 	    "dojo/domReady!"
 	], function(Map, SceneView, RouteTask, RouteParameters, FeatureSet, urlUtils, on){
-		
-		 console.log("calcolo")
 		 //Point the URL to a valid route service
 	     var routeTask = new RouteTask({
 	       url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
@@ -54,6 +52,50 @@ function calculateRoute(startPoint, endPoint, pois){
 	  	    routeResult.id = "routeResult";
 	  	    map.layers.items[0].add(routeResult);
 	      });
-	      routeCalculated = true;
+	      routeCalculated = true;	     
 	});
+	 routeRating();
+}
+
+function routeRating(){
+	var body = document.getElementsByTagName("body")[0];
+	var rateRouteContainer = document.createElement("div");
+	rateRouteContainer.className = "rateRouteContainer";
+	body.appendChild(rateRouteContainer);
+	
+	var routeRatingDiv = document.createElement("div");
+	routeRatingDiv.className = "routeRating";
+	rateRouteContainer.appendChild(routeRatingDiv);
+	
+	var textDiv = document.createElement("div");
+	textDiv.className = "textRatingDiv";
+	textDiv.textContent = "How much do you like the route found?"
+	routeRatingDiv.appendChild(textDiv);
+	
+	var ratingDiv = document.createElement("div");
+	ratingDiv.className = "ratingDiv";
+	routeRatingDiv.appendChild(ratingDiv);
+	
+	for(i=0 ; i<5 ; i++){
+		var div = document.createElement("div");
+		div.className = "ratingStarDiv";
+		div.id = "ratingStarDiv" + i;
+		div.onmouseover = function(event){
+			var target = event.target;
+			var targetId = target.id;
+			var stars = document.getElementsByClassName("ratingStarDiv");
+			console.log(stars.length)
+			for(y=0 ; y<stars.length ; y++){
+				stars[y].style.backgroundPositionX = "0px";
+			}
+			var targetNumber = targetId.slice(13,14);
+			console.log(targetNumber)
+			for(j=0 ; j<=targetNumber ; j++){
+				document.getElementById("ratingStarDiv" + j).style.backgroundPositionX = "14px";
+			}
+		}
+		ratingDiv.appendChild(div);
+	}
+	
+	//todo: appendere bottone con salvataggio oppure onclick sulla stella
 }

@@ -30,7 +30,10 @@ require([
 		  }
 		  
 	  })
-	 
+	  
+	  map.on("load", function(){
+		  map.graphics.enableMouseEvents();
+	  })
 	  
 	}
 );

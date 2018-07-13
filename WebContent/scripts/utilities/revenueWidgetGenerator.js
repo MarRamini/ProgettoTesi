@@ -45,10 +45,6 @@ function createPoiWidget(XMLHttpResponse){
 				address: getAddress(node)
 			};	
 			
-			if(attributes.label === "Superciccio"){
-				console.log(attributes.address)
-			}
-			
 			var point = new Point({
 				latitude: parseFloat(node.lat.value),
 				longitude: parseFloat(node.long.value)
@@ -109,6 +105,10 @@ function createPoiWidget(XMLHttpResponse){
 					geometry: point,
 					symbol: markerSymbol
 				});
+				
+				poi.onmouseover = function(event){
+					console.log(event)
+				}
 				
 				pois.push(poi);
 				backupPois.push(poi);
@@ -352,6 +352,8 @@ function createFeatureLayer(revenues){
 			 },
 			 popupTemplate: popupTemplate
 		 });
+		 
+		
 		
 		 map.add(layer);
 		 
@@ -397,16 +399,12 @@ function searchGoogleAction(actionEvent){
 	var name = obj.attributes.label != null? obj.attributes.label : "";
 	var address = "";
 	
-	console.log("name", name)
-	
 	if(obj.attributes.street != null){
 		address = address.concat(obj.attributes.street).concat(" ");
 		if(obj.attributes.housenumber != null){
 			address = address.concat(obj.attributes.housenumber).concat(" ");
 		}
 	}
-	
-	console.log("address", address)
 	
 	if(obj.attributes.city != null){
 		address = address.concat(obj.attributes.city);
@@ -417,7 +415,7 @@ function searchGoogleAction(actionEvent){
 		if(address != ""){
 			url = url + "&" + encodeURIComponent(address);
 		}
-		console.log(url)
+		
 		window.open(url);
 	}
 	else{
