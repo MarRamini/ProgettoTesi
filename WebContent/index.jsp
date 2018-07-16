@@ -1,4 +1,4 @@
-<!DOCTYPE html>
++<!DOCTYPE html>
 <%@ page import="model.User" %>
 <html>
 	<head>
@@ -49,8 +49,5 @@
 			<jsp:include page="quickSearchBar.jsp"/>
 		</div>
 		<script type="text/javascript" src="scripts/utilities/route.js"></script>
-		<script>
-			routeRating();
-		</script>
 	</body>
 </html>

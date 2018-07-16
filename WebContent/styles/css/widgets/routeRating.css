@@ -1,18 +1,44 @@
-.rateRouteContainer{
+@keyframes ratingSlideIn{
+	from {bottom: -80px;}
+	to {bottom: 5px;}
+}
+
+@keyframes ratingSlideOut{
+	from {bottom: 5px;}
+	to {bottom: -80px;}
+}
+
+.rateRouteContainer {
 	width: 100%;
 	position: absolute;
 	z-index: 999;
+}
+
+.rateRouteContainer.opened{
 	bottom: 5px;
+	animation-name: ratingSlideIn;
+	animation-duration: 0.8s;
+}
+
+.rateRouteContainer.closed{
+	bottom: -80px;
+	animation-name: ratingSlideOut;
+	animation-duration: 0.8s;
 }
 
 .routeRating{
-	width: 40%;
-	height: 100px;
+	width: 25%;
+	height: 80px;
 	background-color: #fff;
     box-sizing: border-box;
     margin: auto;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    display: flex;
+}
+
+.routeRatingRow{
+	width: 100%;
+	margin: 5px 5px 0 10px;
+	height: 25px;
 }
 
 .textRatingDiv {
@@ -21,6 +47,7 @@
 	top: 5px;
 	left: 10px;
 	display: inline-flex;
+	height: 20px;
 }
 
 .ratingDiv {
@@ -43,3 +70,9 @@
 	cursor: pointer;
 }
   
+.valutationResetButton, .valutationSubmitButton{
+    height: 100%;
+    width: fit-content;
+    position: relative;
+    margin-left: 10px;
+}

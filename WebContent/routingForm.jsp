@@ -1,6 +1,11 @@
+<%@page import="model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <div id="routingForm" class="routingForm" style="display: none;">
+	<%User user = (User) session.getAttribute("user"); %>
+	<script>
+		username = "<%=user.getUsername()%>";
+	</script>
 	<div class="routingRow">
 		<span>Start:</span>
 		<div id="startAddress" class="addressBar">		
