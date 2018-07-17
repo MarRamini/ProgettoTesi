@@ -150,7 +150,7 @@ function getUniqueValueSymbol(poiClass, color) {
 		symbolLayers: [{
 			type: "icon", // autocasts as new IconSymbol3DLayer()
 			resource: {
-				href: "styles/icons/poi/position_64.png"
+				href: "styles/icons/poi/" + poiClass + ".png"
 			},
 			size: 30
 			/*outline: {
