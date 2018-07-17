@@ -1,4 +1,4 @@
-+<!DOCTYPE html>
+<!DOCTYPE html>
 <%@ page import="model.User" %>
 <html>
 	<head>
