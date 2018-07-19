@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <link rel="stylesheet" href="styles/css/pages/basemapPersonalization.css">
+<script type="text/javascript" src="scripts/utilities/persistBasemap.js"></script>
 <div class="basemapPersonalization" id="basemapChoice" style="display: none">
 	<span class="textSpan">Map</span>
 	<script>
@@ -10,6 +11,7 @@
 		function previewImage(option){
 			document.getElementById("basemapImagePreview").style.backgroundImage = "url('styles/images/" + option.value + ".jpg')";
 			basemapSelected = option.value;
+			persistBasemap(basemapSelected);
 		}
 	</script>
 	<div class="basemapChange">
@@ -34,8 +36,9 @@
 			}
 		</script>
 	</div>
+	<%-- 
 	<div class="submitButtons">
-		<input type="submit" value="Save Map" name="btnSaveMap" label="Save Map" id="saveButton" data-dojo-type="dijit/form/Button" onclick="persistBasemap(basemapSelected)"/>
-		<script type="text/javascript" src="scripts/utilities/persistBasemap.js"></script>
+		<input type="submit" value="Save Map" name="btnSaveMap" label="Save Map" id="saveButton" data-dojo-type="dijit/form/Button" onclick="persistBasemap(basemapSelected)"/>	
 	</div>
+	--%>
 </div>
