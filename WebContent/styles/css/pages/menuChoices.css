@@ -30,6 +30,10 @@ div.addressBar:focus{
 	cursor: text !important;
 }
 
+.addressBar.missingAddress input{
+	border-bottom: 1px solid red !important;
+}
+
 .addressBar input:focus{
 	outline: none;
 	border-color: #58aef3 !important;

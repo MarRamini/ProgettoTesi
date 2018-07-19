@@ -24,9 +24,22 @@
 				          container: "startAddress"
 				      });
 				      
+				      searchWidget.on("search-clear", function(){
+				    	  if(typeof startPoint != "undefined"){
+				    		  startPoint = null;
+				    	  }
+				      });
+				      
 				      view.then(function(){
 				    	  searchWidget.on("select-result", function(){						    		  
 				    		  startPoint = searchWidget.resultGraphic;
+				    		  var parentNode = dojo.byId("startAddress");
+				    		  if(parentNode.classList.contains("missingAddress")){
+				    			  parentNode.classList.remove("missingAddress");
+				    			  if(typeof stopPoint != "undefined" && stopPoint != null){
+				    				  searchRouteRevenues(startPoint, stopPoint, filters);
+				    			  }
+				    		  }
 				    	  })
 				      });
 				 });  
@@ -49,16 +62,30 @@
 				      var searchWidget = new Search({
 				          view: view,
 				          container: "destinationAddress"
-				      });	
+				      });
+				      
+				      searchWidget.on("search-clear", function(){
+				    	  if(typeof stopPoint != "undefined"){
+				    		  stopPoint = null;
+				    	  }
+				      });
 				      
 				      view.then(function(){
 				    	  searchWidget.on("select-result", function(){	
-				    		  stopPoint = searchWidget.resultGraphic;	
+				    		  stopPoint = searchWidget.resultGraphic;
+				    		  if(typeof startPoint != "undefined" && startPoint != null){
+				    			  searchRouteRevenues(startPoint, stopPoint, filters);
+				    		  }
+				    		  else{
+				    			 dojo.byId("startAddress").classList.add("missingAddress");
+				    		  }
 				    	  });						    	  
 				      });
 				 });  
 			</script>
 		</div>
 	</div>
+	<%-- 
 	<input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calculate Route">
+	--%>
 </div>
