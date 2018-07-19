@@ -3,14 +3,27 @@
     <script type="text/javascript" src="scripts/utilities/filters.js"></script>
 <div id="filtersForm" class="searchParameters" style="display: none;">
 	<div class="paramRow">
-		<span>Max N° of Venues:</span>
-		<input id="txtMaxWayPoints" name="txtMaxWayPoints" type="text" size="3" oninput="setMaxVenues()">
-		<script>
-			var maxVenues;
-			function setMaxVenues(){				
-				maxVenues = document.getElementById("txtMaxWayPoints").value;
-			}			
-		</script>
+		<div onclick="showMaxVenuesFilter(this)"> Filter number of venues
+			<div class="accordionArrow"></div>
+		</div>
+		<div id="maxVenuesFilter" class="menuVoice" style="display: none">
+			<span>N° of Venues:</span>
+			<input id="txtMaxWayPoints" name="txtMaxWayPoints" type="text" size="3" oninput="setMaxVenues()">
+			<script>
+				var maxVenues;
+				function setMaxVenues(){				
+					maxVenues = document.getElementById("txtMaxWayPoints").value;
+					applyFilters(filters, maxVenues);
+					console.log("oninput fired")
+				}		
+				
+				function showMaxVenuesFilter(elem){
+					var maxVenuesFilter = document.getElementById("maxVenuesFilter");
+					maxVenuesFilter.style.display == "none" ? maxVenuesFilter.style.display = "block" : maxVenuesFilter.style.display = "none";
+					elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+				}
+			</script>
+		</div>
 	</div>
 	<div class="paramRow">
 		<script>
@@ -67,9 +80,20 @@
 						break;
 				    default : console.log("error");
 				}
+				applyFilters(filters, maxVenues);
 			}
 		</script>
-		<div class="filters">
+		<div onclick="showCategoryFilter(this)"> Filter category
+			<div class="accordionArrow"></div>
+		</div>
+		<script>
+			function showCategoryFilter(elem){
+				var categoryFilter = document.getElementById("categoryFilter");
+				categoryFilter.style.display == "none" ? categoryFilter.style.display = "block" : categoryFilter.style.display = "none";
+				elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+			}
+		</script>
+		<div id="categoryFilter" class="filters menuVoice" style="display: none">
 			<span>What categories are you interested in?</span>
 			<br>
 			<input type="checkbox" name="cbCategories" value="1" onchange="filterPois(this)"/> Museum <br>
@@ -83,6 +107,8 @@
 			<input type="checkbox" name="cbCategories" value="9" onchange="filterPois(this)"/> Shop &amp; Service <br>
 			<input type="checkbox" name="cbCategories" value="10" onchange="filterPois(this)"/> Athletics &amp; Sports <br>
 		</div>
+		<%-- 
 		<input type="button" id="btnSearch" onclick="applyFilters(filters, maxVenues)" value="Filter Results">
+		--%>
 	</div>
 </div>

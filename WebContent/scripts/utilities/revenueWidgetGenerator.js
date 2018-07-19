@@ -65,7 +65,7 @@ function createPoiWidget(XMLHttpResponse){
 					color = "#d35400";
 					break;
 				case "nightlife" :
-					poiClass = "NightLife";
+					poiClass = "Nightlife";
 					color = "#9b59b6";
 					break;
 				case "food" :

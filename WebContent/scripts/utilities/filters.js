@@ -3,7 +3,7 @@
  */
 
 function applyFilters(filters, maxVenues){
-	
+	console.log("apply filters fired")
 	if(!backupPois){
 		alert("sorry, no point of interest has been searched")
 	}
@@ -30,6 +30,7 @@ function applyFilters(filters, maxVenues){
 		}
 		else if(!filters || filters.length == 0){ //se non esistono filtri
 			var limit;
+			console.log(maxVenues)
 			maxVenues ? limit = Math.min(maxVenues, revenues.length) : limit = revenues.length; //se presente limite lo applico
 			for(var i=0 ; i<limit ; i++){				
 				newRevenues.push(revenues[i]);

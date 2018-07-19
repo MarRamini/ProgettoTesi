@@ -56,8 +56,12 @@ div.addressBar:focus{
 	margin-right: 5px;
 }
 
-.routingRow, .paramRow{
+.routingRow{
 	padding: 5px 0px 15px 5px;
+}
+
+.paramRow{
+	padding: 5px 0px 5px 5px;
 }
 
 .routingForm input{
