@@ -3,6 +3,7 @@
     pageEncoding="ISO-8859-1"%>
 <script type="text/javascript" src="scripts/utilities/route.js"></script>
 <script type="text/javascript" src="scripts/widgets/routeRatingWidget.js"></script>
+<script type="text/javascript" src="scripts/widgets/integratedDirectionsWidget.js"></script>
 <div id="routingForm" class="routingForm" style="display: none;">
 	<%User user = (User) session.getAttribute("user"); %>
 	<script>

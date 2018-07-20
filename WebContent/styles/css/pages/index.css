@@ -6,6 +6,7 @@
 @import url("../widgets/quickSearchBar.css");
 @import url("../widgets/menuBar.css");
 @import url("../widgets/routeRating.css");
+@import url("../widgets/integratedDirectionsWidget.css");
 
 @font-face {
 	font-family: 'FontAwesome';

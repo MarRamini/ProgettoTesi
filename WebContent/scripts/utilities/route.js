@@ -26,6 +26,8 @@ function calculateRoute(startPoint, endPoint, pois){
 	        preserveFirstStop: true,
 	        preserveLastStop: true,
 	        returnStops: true,
+	        returnDirections: true,
+	        directionsLengthUnits: "meters",
 	        outSpatialReference: { // autocasts as new SpatialReference()
 	          wkid: 3857
 	        }
@@ -48,6 +50,8 @@ function calculateRoute(startPoint, endPoint, pois){
 	      routeTask.solve(routePoints).then(function(data){
 	    	map.layers.items[0].removeAll() 
 	  		var routeResult = data.routeResults[0].route;
+	    	var directions = data.routeResults[0].directions;
+	    	buildDirectionsWidget(directions);
 	  	    routeResult.symbol = routeSymbol;
 	  	    routeResult.id = "routeResult";
 	  	    map.layers.items[0].add(routeResult);
