@@ -4,5 +4,7 @@ function persistBasemap(basemapSelected){
 	xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlHttpRequest.send("txtBasemap=" + encodeURIComponent(basemapSelected));
 		
-	map.basemap = basemapSelected;
+	if(typeof map != "undefined"){
+		map.basemap = basemapSelected;
+	}	
 }

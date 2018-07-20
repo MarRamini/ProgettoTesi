@@ -11,7 +11,7 @@
 .rateRouteContainer {
 	width: 100%;
 	position: absolute;
-	z-index: 999;
+	z-index: 1000;
 }
 
 .rateRouteContainer.opened{
@@ -28,16 +28,30 @@
 
 .routeRating{
 	width: 30%;
-	height: 80px;
+	height: auto;
 	background-color: #fff;
     box-sizing: border-box;
     margin: auto;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    min-width: 410px;
+}
+
+.routeRating .closeButton{
+	position: relative;
+	float: right;
+	width: 16px;
+	height: 16px;
+	background-image: url("../../icons/close_16.png");
+	cursor: pointer;
+}
+
+.closeButton:hover{
+	background-color: #f2f2f2;
 }
 
 .routeRatingRow{
 	width: 100%;
-	margin: 5px 5px 0 10px;
+	padding: 16px 5px 16px 5px;
 	height: 25px;
 }
 
