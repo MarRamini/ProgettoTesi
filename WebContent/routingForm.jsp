@@ -88,6 +88,32 @@
 			</script>
 		</div>
 	</div>
+	<div id="directionsVoice" class="menuVoice routingRow" onclick="showDirections(this)">
+		<span>Directions:</span>
+		<div class="accordionArrow"></div>
+		<script>
+			function showDirections(elem){
+				var container = document.getElementById("directionsWidgetContainer");
+				if(container){
+					container.style.display == "none"? container.style.display = "block" : container.style.display = "none";
+					elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+				}
+				else{
+					container = document.getElementById("dummyDiv");
+					if(container){
+						container.style.display == "none"? container.style.display = "block" : container.style.display = "none";
+					}
+					else{
+						container = document.createElement("div");
+						container.id = "dummyDiv"
+						container.className = "dummyDiv";
+						elem.appendChild(container);
+					}
+					elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+				}
+			}
+		</script>	
+	</div>
 	<%-- 
 	<input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calculate Route">
 	--%>
