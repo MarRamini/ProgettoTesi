@@ -33,8 +33,6 @@ function calculateRoute(startPoint, endPoint, pois){
 	        }
 	      });
 	     
-	     console.log(routePoints.directionsTimeAttribute)
-	     
 	      var routeSymbol = {
 	        type: "simple-line", // autocasts as SimpleLineSymbol()
 	        color: [0, 0, 255, 0.5],
@@ -57,6 +55,12 @@ function calculateRoute(startPoint, endPoint, pois){
 	  	    routeResult.symbol = routeSymbol;
 	  	    routeResult.id = "routeResult";
 	  	    map.layers.items[0].add(routeResult);
+	  	    view.goTo({
+	  	    	center: startPoint.geometry,
+	            speedFactor: 0.1,
+	            easing: "linear",
+	            zoom: 15
+	  	    });
 	      });
 	      routeCalculated = true;	
 	     
@@ -72,6 +76,9 @@ function calculateRoute(startPoint, endPoint, pois){
 	});	
 }
 
+/**
+ * add a proxy rule for routing
+ */
 require(["esri/core/urlUtils"], function(urlUtils) {
 	  urlUtils.addProxyRule({
 	    urlPrefix: "route.arcgis.com",
