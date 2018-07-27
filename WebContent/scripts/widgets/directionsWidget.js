@@ -8,13 +8,24 @@ require([
 	
 		  directionsWidget = new Directions({
 		    view: view,
-		    id: "directionsWidget"
+		    id: "directionsWidget",
+		    container: "routingForm",
+		    routeServiceUrl: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
 		  });
 		  
-		  view.ui.add(directionsWidget, "bottom-left");
+		  console.log(directionsWidget)
+		 // view.ui.add(directionsWidget, "bottom-left");
 		  
 		  directionsWidget.viewModel.stops.on("after-add", function(event){
-			  var stops = directionsWidget.viewModel.stops;			  
+			  var stops = directionsWidget.viewModel.stops;		
+			  if(stops.length == 1){	
+				  directionsWidget.view.goTo({
+	    	          center: stops.getItemAt(0).geometry,
+	    	          tilt: 60,
+	    	          scale: 2500,
+	    	          zoom: 18
+	    	      });
+			  }
 			  if(stops.length == 2){
 				  startPoint = stops.getItemAt(0);
 				  stopPoint = stops.getItemAt(1);
@@ -23,6 +34,13 @@ require([
 		  });
 	}
 );
-/*
- 
+
+/**
+ * add a proxy rule for routing
  */
+require(["esri/core/urlUtils"], function(urlUtils) {
+	  urlUtils.addProxyRule({
+	    urlPrefix: "route.arcgis.com",
+	    proxyUrl: "http://localhost:8080/ProgettoTesi/proxy.jsp"
+	  });
+});

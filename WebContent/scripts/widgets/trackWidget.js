@@ -14,7 +14,7 @@ require([
   
 	  // The sample will start tracking your location
 	  // once the view becomes ready
-	  view.then(function() {
+	  view.when(function() {
 		var geolocalizationActive = false;
 		track.on("track", function(){
 			
