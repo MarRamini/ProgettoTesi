@@ -4,11 +4,14 @@
 <script type="text/javascript" src="scripts/utilities/route.js"></script>
 <script type="text/javascript" src="scripts/widgets/routeRatingWidget.js"></script>
 <script type="text/javascript" src="scripts/widgets/integratedDirectionsWidget.js"></script>
+
 <div id="routingForm" class="routingForm" style="display: none;">
 	<%User user = (User) session.getAttribute("user"); %>
 	<script>
 		username = "<%=user.getUsername()%>";
 	</script>
+	<script type="text/javascript" src="scripts/widgets/directionsWidget.js"></script>
+	<%-- 
 	<div class="routingRow">
 		<span>Start:</span>
 		<div id="startAddress" class="addressBar">		
@@ -88,6 +91,25 @@
 			</script>
 		</div>
 	</div>
+	<div id="travelModeVoice" class="menuVoice routingRow" onclick="showTravelMode(this)">
+		<span>Travel Mode:</span>
+		<div class="accordionArrow"></div>
+		<script>
+			function showTravelMode(elem){
+				var travelModeRow = document.getElementById("travelModeRow");
+				if(travelModeRow){
+					travelModeRow.style.display == "none" ? travelModeRow.style.display = "block": travelModeRow.style.display = "none";
+					elem.classList.contains("focused") ? elem.classList.remove("focused") : elem.classList.add("focused");
+				}
+				else{
+					travelModeRow = document.createElement("div");
+					travelModeRow.id = "travelModeRow";
+					travelModeRow.className = "travelModeRow";
+					elem.appendChild(travelModeRow);
+				}
+			}
+		</script>	
+	</div>
 	<div id="directionsVoice" class="menuVoice routingRow" onclick="showDirections(this)">
 		<span>Directions:</span>
 		<div class="accordionArrow"></div>
@@ -113,7 +135,7 @@
 				}
 			}
 		</script>	
-	</div>
+	</div>--%>
 	<%-- 
 	<input type="button" id="btnSearch" onclick="searchRouteRevenues(startPoint, stopPoint, filters)" value="Calculate Route">
 	--%>
