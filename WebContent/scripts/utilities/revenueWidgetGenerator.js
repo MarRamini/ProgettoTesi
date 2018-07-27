@@ -105,11 +105,6 @@ function createPoiWidget(XMLHttpResponse){
 					geometry: point,
 					symbol: markerSymbol
 				});
-				
-				poi.onmouseover = function(event){
-					console.log(event)
-				}
-				
 				pois.push(poi);
 				backupPois.push(poi);
 			}				
@@ -352,14 +347,12 @@ function createFeatureLayer(revenues){
 			 },
 			 popupTemplate: popupTemplate
 		 });
-		 
-		
 		
 		 map.add(layer);
-		 
+	
 		 if(routeFlag){
 			 if(startPoint != undefined && stopPoint != undefined){
-				 calculateRoute(startPoint, stopPoint, revenues);
+				calculateRoute(startPoint, stopPoint, revenues);
 			 }
 		 }
 	   }
