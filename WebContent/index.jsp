@@ -5,9 +5,9 @@
 		<meta charset="ISO-8859-1">
 		<title>Home</title>
 		<link rel="stylesheet" type="text/css" href="styles/css/pages/index.css"/>
-		<link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
+		<link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="https://js.arcgis.com/4.6/"></script>
+		<script src="https://js.arcgis.com/4.5/"></script>
 		<script type="text/javascript" src="scripts/utilities/revenueWidgetGenerator.js"></script>
 		<script type="text/javascript" src="scripts/utilities/categoriesDefinition.js"></script>
 		<script type="text/javascript" src="scripts/utilities/categoryFlagger.js"></script>
