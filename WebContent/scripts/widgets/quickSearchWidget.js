@@ -10,7 +10,7 @@ require([
           container: "searchBox"
       });
       
-      view.when(function(){
+      view.then(function(){
     	  searchWidget.on("select-result", function(){						    		  
     		  var location = searchWidget.resultGraphic.geometry;
     		  
