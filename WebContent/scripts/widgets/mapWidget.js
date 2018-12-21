@@ -4,9 +4,10 @@ require([
 	"esri/Map",
 	"esri/views/SceneView",
 	"esri/layers/GraphicsLayer",
+	"esri/layers/SceneLayer",
 	"dojo/domReady!"
 ],
-	function(Map, SceneView, GraphicsLayer){
+	function(Map, SceneView, GraphicsLayer, SceneLayer){
 	  routeLayer = new GraphicsLayer();  
 	  
 	  if(basemap == "null"){
