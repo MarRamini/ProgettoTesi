@@ -46,7 +46,7 @@ require([
 function persistSearch(searchObj){
 	var jsonObj = JSON.stringify(searchObj);
 	var xmlHttpRequest = new XMLHttpRequest();
-	xmlHttpRequest.open("POST", "http://localhost:8080/ProgettoTesi/PersistSearch");
+	xmlHttpRequest.open("POST", "http://193.204.161.250:8080/ProgettoTesi/PersistSearch");
 	xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlHttpRequest.send("search=" + encodeURIComponent(jsonObj));
 }

@@ -1,51 +1,54 @@
 function routeRating(){
 	var body = document.getElementsByTagName("body")[0];
-	var rateRouteContainer = document.createElement("div");
-	rateRouteContainer.id = "routeRatingContainer"
-	rateRouteContainer.className = "rateRouteContainer";
-	rateRouteContainer.classList.add("opened");
-	body.appendChild(rateRouteContainer);
-	
-	var routeRatingDiv = document.createElement("div");
-	routeRatingDiv.className = "routeRating";
-	rateRouteContainer.appendChild(routeRatingDiv);
-	
-	var closeButton = document.createElement("div");
-	closeButton.className = "closeButton";
-	routeRatingDiv.appendChild(closeButton);
-	
-	body.onclick = function(event){
-		if(event.target != routeRatingDiv){
-			console.log("match")
-		}
-	}
-	
-	var firstRowDiv = document.createElement("div");
-	firstRowDiv.className = "routeRatingRow";
-	routeRatingDiv.appendChild(firstRowDiv)
-	
-	var textDiv = document.createElement("div");
-	textDiv.className = "textRatingDiv";
-	textDiv.textContent = "How much do you like the route found?"
-		firstRowDiv.appendChild(textDiv);
-	
-	var ratingDiv = document.createElement("div");
-	ratingDiv.className = "ratingDiv";
-	firstRowDiv.appendChild(ratingDiv);
-	
-	for(i=0 ; i<5 ; i++){
-		var div = document.createElement("div");
-		div.className = "ratingStarDiv";
-		div.id = "ratingStarDiv" + i;
+	var rateRouteContainer = document.getElementById("routeRatingContainer");
+	if(typeof rateRouteContainer == undefined || rateRouteContainer == null){
+		var rateRouteContainer = document.createElement("div");
+		rateRouteContainer.id = "routeRatingContainer"
+		rateRouteContainer.className = "rateRouteContainer";
+		rateRouteContainer.classList.add("opened");
+		body.appendChild(rateRouteContainer);
 		
-		enableMouseEvents(div, null);		
+		var routeRatingDiv = document.createElement("div");
+		routeRatingDiv.className = "routeRating";
+		rateRouteContainer.appendChild(routeRatingDiv);
 		
-		div.onclick = function(event){
-			submitValutation(event.target);
+		var closeButton = document.createElement("div");
+		closeButton.className = "closeButton";
+		routeRatingDiv.appendChild(closeButton);
+		closeButton.onclick = function(event){
+			body.removeChild(rateRouteContainer);
 		}
 		
-		ratingDiv.appendChild(div);
+		var firstRowDiv = document.createElement("div");
+		firstRowDiv.className = "routeRatingRow";
+		routeRatingDiv.appendChild(firstRowDiv)
+		
+		var textDiv = document.createElement("div");
+		textDiv.className = "textRatingDiv";
+		textDiv.textContent = "How much do you like the route found?"
+			firstRowDiv.appendChild(textDiv);
+		
+		var ratingDiv = document.createElement("div");
+		ratingDiv.className = "ratingDiv";
+		firstRowDiv.appendChild(ratingDiv);
+		
+		for(i=0 ; i<5 ; i++){
+			var div = document.createElement("div");
+			div.className = "ratingStarDiv";
+			div.id = "ratingStarDiv" + i;
+			
+			enableMouseEvents(div, null);		
+			
+			div.onclick = function(event){
+				submitValutation(event.target);
+			}
+			
+			ratingDiv.appendChild(div);
+		}
 	}
+	else{
+		body.appendChild(rateRouteContainer);
+	}	
 }
 
 function enableMouseEvents(div, oldValutation){
@@ -126,7 +129,7 @@ function persistRoute(routePoints, valutation){
 	var jsonString = JSON.stringify(jsonRoutePoints);
 	
 	var xmlHttpRequest = new XMLHttpRequest();
-	xmlHttpRequest.open("POST", "http://localhost:8080/ProgettoTesi/PersistRoute");
+	xmlHttpRequest.open("POST", "http://193.204.161.250:8080/ProgettoTesi/PersistRoute");
 	xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlHttpRequest.send("txtJsonRoute=" + encodeURIComponent(jsonString) + "&txtRouteValutation=" + encodeURIComponent(valutation));
 }
