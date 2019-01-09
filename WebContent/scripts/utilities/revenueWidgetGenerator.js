@@ -379,7 +379,7 @@ function persistLikeAction(actionEvent){
 		};
 		var jsonObj = JSON.stringify(revenueObj);
 		var xmlHttpRequest = new XMLHttpRequest();
-		xmlHttpRequest.open("POST", "http://localhost:8080/ProgettoTesi/PersistRevenue");
+		xmlHttpRequest.open("POST", "http://193.204.161.250:8080/ProgettoTesi/PersistRevenue");
 		xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlHttpRequest.send("venue=" + encodeURIComponent(jsonObj));
 		
