@@ -129,7 +129,7 @@ function persistRoute(routePoints, valutation){
 	var jsonString = JSON.stringify(jsonRoutePoints);
 	
 	var xmlHttpRequest = new XMLHttpRequest();
-	xmlHttpRequest.open("POST", "http://193.204.161.250:8080/ProgettoTesi/PersistRoute");
+	xmlHttpRequest.open("POST", "http://localhost:8080/ProgettoTesi/PersistRoute");
 	xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlHttpRequest.send("txtJsonRoute=" + encodeURIComponent(jsonString) + "&txtRouteValutation=" + encodeURIComponent(valutation));
 }

@@ -83,6 +83,6 @@ function calculateRoute(startPoint, endPoint, pois){
 require(["esri/core/urlUtils"], function(urlUtils) {
 	  urlUtils.addProxyRule({
 	    urlPrefix: "route.arcgis.com",
-	    proxyUrl: "http://193.204.161.250:8080/ProgettoTesi/proxy.jsp"
+	    proxyUrl: "http://localhost:8080/ProgettoTesi/proxy.jsp"
 	  });
 });*/
