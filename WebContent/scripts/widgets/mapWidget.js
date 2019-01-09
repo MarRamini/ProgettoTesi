@@ -16,6 +16,7 @@ require([
 	  
 	  map = new Map({
 	    basemap: basemap,
+	    ground: "world-elevation",
 	    layers: [routeLayer]
 	  });
 	  
@@ -31,8 +32,8 @@ require([
               id: "2342ab7928834076a1240fb93c60e978"
           },
           elevationInfo: {
-            //mode: "absolute-height",
-            //offset: 6
+            mode: "absolute-height",
+            offset: 6
           }
       });
       
